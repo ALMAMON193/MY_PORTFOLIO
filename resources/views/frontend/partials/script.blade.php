@@ -1,0 +1,10 @@
+  <!-- JS here -->
+  <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+  <script src="{{ asset('frontend/js/wow.js') }}"></script>
+  <script src="{{ asset('frontend/js/waypoints.js') }}"></script>
+  <script src="{{ asset('frontend/js/backtotop.js') }}"></script>
+  <script src="{{ asset('frontend/js/counterup.js') }}"></script>
+  <script src="{{ asset('frontend/js/ajax-form.js') }}"></script>
+  <script src="{{ asset('frontend/js/typer.js') }}"></script>
+  <script src="{{ asset('frontend/js/swiper-bundle.js') }}"></script>
+  <script src="{{ asset('frontend/js/main.js') }}"></script>
