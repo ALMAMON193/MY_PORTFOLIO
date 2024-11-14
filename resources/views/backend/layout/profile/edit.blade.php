@@ -42,13 +42,12 @@
                                     @csrf
                                     <div class="form-field-wrapper">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
+
                                             <input class="form-control" type="text" name="name"
                                                 placeholder="First Name" value="{{ Auth::user()->name ?? '' }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="email">Email Address <span class="required">*</span></label>
-                                            <input class="form-control" type="email" name="email"
+                                                <input class="form-control" type="email" name="email"
                                                 placeholder="Email Address" value="{{ Auth::user()->email ?? '' }}">
                                         </div>
                                     </div>
@@ -64,7 +63,7 @@
                                     @csrf
                                     <div class="form-field-wrapper">
                                         <div class="form-group">
-                                            <label for="old-password">Current Password</label>
+
                                             <input class="form-control @error('old_password') is-invalid @enderror"
                                                 type="password" name="old_password" placeholder="Current Password"
                                                 id="old-password">
@@ -75,7 +74,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="new-password">New Password</label>
+
                                             <input class="form-control @error('password') is-invalid @enderror"
                                                 type="password" name="password" placeholder="New Password"
                                                 id="new-password">
@@ -86,7 +85,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="password-confirm">Confirm New Password</label>
+
                                             <input class="form-control @error('password_confirmation') is-invalid @enderror"
                                                 type="password" name="password_confirmation"
                                                 placeholder="Confirm New Password" id="password-confirm">
