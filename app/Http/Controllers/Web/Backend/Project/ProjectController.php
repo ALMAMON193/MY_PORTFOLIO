@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Web\Backend\Project;
 
+use Exception;
 use App\Helpers\Helper;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -56,31 +58,37 @@ class ProjectController extends Controller
 
         ]);
 
-        // File upload handling
-        $imagePath = null;
-        $videoPath = null;
+        try{
+            // File upload handling
+            $imagePath = null;
+            $videoPath = null;
 
-        if ($request->hasFile('image')) {
-            $randomString = Str::random(10);
-            $imagePath = Helper::fileUpload($request->file('image'), 'project/image', $randomString);
-        }
-        if ($request->hasFile('video')) {
-            $randomString = Str::random(10);
-            $videoPath = Helper::fileUpload($request->file('video'), 'project/video', $randomString);
-        }
-        $project = new Project();
-        $project->name = $request->name;
-        $project->image = $imagePath;
-        $project->description = $request->description;
-        $project->github_link = $request->github_link;
-        $project->live_link = $request->live_link;
-        $project->start_date = $request->start_date;
-        $project->end_date = $request->end_date;
-        $project->video = $videoPath;
-        $project->save();
+            if ($request->hasFile('image')) {
+                $randomString = Str::random(10);
+                $imagePath = Helper::fileUpload($request->file('image'), 'project/image', $randomString);
+            }
+            if ($request->hasFile('video')) {
+                $randomString = Str::random(10);
+                $videoPath = Helper::fileUpload($request->file('video'), 'project/video', $randomString);
+            }
+            $project = new Project();
+            $project->name = $request->name;
+            $project->image = $imagePath;
+            $project->description = $request->description;
+            $project->github_link = $request->github_link;
+            $project->live_link = $request->live_link;
+            $project->start_date = $request->start_date;
+            $project->end_date = $request->end_date;
+            $project->video = $videoPath;
+            $project->save();
 
-        return redirect()->route('admin.project.index')->with('t-success', 'Project created successfully.');
-    }
+            return redirect()->route('admin.project.index')->with('t-success', 'Project created successfully.');
+
+             }catch(Exception $e){
+            Log::error($e->getMessage());
+            return redirect()->back()->with('t-error', 'Something went wrong. Please try again.');
+           }
+        }
 
     public function edit($id)
     {
