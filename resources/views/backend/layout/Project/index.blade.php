@@ -1,237 +1,184 @@
 @extends('backend.app')
 
-@section('title', 'Projects')
+@section('title', 'Data')
+
+@section('styles')
+
+@endsection
+
 @section('content')
-    <main class="main-content">
-        <div class="position-relative iq-banner">
-            <!--Nav Start-->
-            @include('backend.partials.header')
-            <!--Nav End-->
-        </div>
-        <div class="conatiner-fluid content-inner mt-n5 py-0">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title mb-0">Projects</h4>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
+                                <h5 class="card-title mb-0">Project Lists</h5>
+                                <a href="{{ route('admin.project.create') }}" class="btn btn-primary btn-sm">Add New
+                                    Project</a>
                             </div>
-                            <div class="">
-                                <a href="{{route('admin.project.create')}}" class=" text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3">
-                                    <i class="btn-inner">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                        </svg>
-                                    </i>
-                                    <span>Add Project</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5">
-                                    <div class="table-responsive border-bottom my-3">
-                                        <table id="datatable" class="table table-striped" role="grid"
-                                            data-bs-toggle="data-table">
-                                            <thead>
-                                                <tr class="ligth">
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Image</th>
-
-                                                    <th>Status</th>
-                                                    <th>Created At</th>
-                                                    <th style="min-width: 100px">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-
+                            <div class="card-body">
+                                <div id="alternative-pagination_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="alternative-pagination_length"><label>Show
+                                                    <select id="per_page" name="alternative-pagination_length"
+                                                        aria-controls="alternative-pagination"
+                                                        class="form-select form-select-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select> entries</label></div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="alternative-pagination_filter" class="dataTables_filter">
+                                                <label>Search:<input type="search" class="form-control form-control-sm"
+                                                        placeholder="" id="search"
+                                                        aria-controls="alternative-pagination"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="data-table" class="table table-bordered align-middle"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Project Name</th>
+                                                        <th>Image</th>
+                                                        <th>Description</th>
+                                                        <th>Github Link</th>
+                                                        <th>Live Link</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($data as $item)
+                                                        <tr>
+                                                            <td class="text-center">{{ $item->id }}</td>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td>
+                                                                <img src="{{ asset($item->image) ?? 'backend/images/mac-img.png' }}"
+                                                                    class="img-thumbnail" width="100" height="100">
+                                                            </td>
+                                                            <td>{{ $item->description }}</td>
+                                                            <td class="text-center">
+                                                                <button class="btn btn-sm btn-soft-primary"
+                                                                    onclick="openLink('{{ $item->github_link }}')">Github
+                                                                    Link</button>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button class="btn btn-sm btn-soft-primary"
+                                                                    onclick="openLink('{{ $item->live_link }}')">Live
+                                                                    Link</button>
+                                                            </td>
+                                                            <td class="text-center">{{ $item->start_date }}</td>
+                                                            <td class="text-center">{{ $item->end_date }}</td>
+                                                            <td class="text-center">
+                                                                <span
+                                                                    class="btn btn-sm {{ $item->status == 'Active' ? 'btn-soft-success' : 'btn-soft-danger' }}">{{ $item->status }}</span>
+                                                            </td>
+                                                            <td>
+                                                                <a href=""
+                                                                    class="btn btn-sm btn-soft-primary">View</a>
+                                                                <a href=""
+                                                                    class="btn btn-sm btn-soft-success">Edit</a>
+                                                                <button class="btn btn-sm btn-soft-danger"
+                                                                    onclick="deleteData({{ $item->id }})">Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            <script>
+                                                function openLink(link) {
+                                                    window.open(link, '_blank');
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="alternative-pagination_info" role="status"
+                                                aria-live="polite">Showing {{ $data->firstItem() }} to
+                                                {{ $data->lastItem() }} of {{ $data->total() }} entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_full_numbers"
+                                                id="alternative-pagination_paginate">
+                                                <ul class="pagination">
+                                                    <li
+                                                        class="paginate_button page-item {{ $data->onFirstPage() ? 'disabled' : '' }}">
+                                                        <a href="{{ $data->previousPageUrl() }}"
+                                                            aria-controls="alternative-pagination" data-dt-idx="0"
+                                                            tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    @for ($i = 1; $i <= $data->lastPage(); $i++)
+                                                        <li
+                                                            class="paginate_button page-item {{ $data->currentPage() == $i ? 'active' : '' }}">
+                                                            <a href="{{ $data->url($i) }}"
+                                                                aria-controls="alternative-pagination" data-dt-idx="2"
+                                                                tabindex="0" class="page-link">{{ $i }}</a>
+                                                        </li>
+                                                    @endfor
+                                                    <li
+                                                        class="paginate_button page-item {{ $data->hasMorePages() ? '' : 'disabled' }}">
+                                                        <a href="{{ $data->nextPageUrl() }}"
+                                                            aria-controls="alternative-pagination" data-dt-idx="5"
+                                                            tabindex="0" class="page-link">Next</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!--end col-->
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
     <script>
         $(document).ready(function() {
-            if (!$.fn.DataTable.isDataTable('#datatable')) {
-                let dTable = $('#datatable').DataTable({
-                    order: [],
-                    lengthMenu: [
-                        [25, 50, 100, 200, 500, -1],
-                        [25, 50, 100, 200, 500, "All"]
-                    ],
-                    processing: true,
-                    responsive: true,
-                    serverSide: true,
-                    searching: true,
-                    language: {
-                        processing: `<div class="text-center">
-                                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                 </div>`,
-                        search: "" // Remove the default search label text
+            let debounceTimer;
+
+            function fetchData() {
+                let searchQuery = $('#search').val();
+                let perPage = $('#per_page').val();
+
+                $.ajax({
+                    url: "{{ route('admin.project.index') }}",
+                    method: "GET",
+                    data: {
+                        search: searchQuery,
+                        per_page: perPage,
                     },
-                    ajax: {
-                        url: "{{ route('admin.project.index') }}",
-                        type: "GET",
-                    },
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            orderable: true,
-                            searchable: false
-                        },
-                        {
-                            data: 'name',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'image',
-                            orderable: true,
-                            searchable: true
-                        },
-
-                        {
-                            data: 'status',
-                            orderable: true,
-                            searchable: false
-                        },
-                        {
-                            data: 'created_at',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'action',
-                            orderable: false,
-                            searchable: false
-                        }
-                    ],
-                    // Custom DOM structure without label text
-                    dom: `<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>
-                      <'row'<'col-sm-12'tr>>
-                      <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>`,
-
-                    initComplete: function() {
-
-                        $('#datatable_filter input[type="search"]').attr("placeholder", "Search");
+                    success: function(response) {
+                        $('#alternative-pagination_wrapper').html(response.html);
                     }
                 });
-
-                // Remove label text for length menu
-                $('.dataTables_length label').contents().filter(function() {
-                    return this.nodeType === 3;
-                }).remove();
             }
+
+            // Handle per-page change
+            $('#per_page').on('change', function() {
+                fetchData();
+            });
+
+            // Handle search with debounce
+            $('#search').on('keyup', function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(fetchData, 500);
+            });
         });
-        // delete Confirm
-        function showDeleteConfirm(id) {
-            event.preventDefault();
-            Swal.fire({
-                title: 'Are you sure you want to delete this record?',
-                text: 'If you delete this, it will be gone forever.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    deleteItem(id);
-                }
-            });
-        };
-        // Delete Button
-        function deleteItem(id) {
-            var url = '{{ route('admin.project.destroy', ':id') }}';
-            var csrfToken = '{{ csrf_token() }}';
-            $.ajax({
-                type: "DELETE",
-                url: url.replace(':id', id),
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(resp) {
-                    console.log(resp);
-                    // Reloade DataTable
-                    $('#datatable').DataTable().ajax.reload();
-                    if (resp.success === true) {
-                        // show toast message
-                        toastr.success(resp.message);
-
-                    } else if (resp.errors) {
-                        toastr.error(resp.errors[0]);
-                    } else {
-                        toastr.error(resp.message);
-                    }
-                }, // success end
-                error: function(error) {
-                    // location.reload();
-                } // Error
-            })
-        }
-
-         // Status Change Confirm Alert
-         function showStatusChangeAlert(event, id, newStatus) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You want to update the status to ' + newStatus + '?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-                customClass: {
-                    confirmButton: 'custom-confirm-button',
-                    cancelButton: 'custom-cancel-button'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    statusChange(id, newStatus);
-                }
-            });
-        }
-
-        // Status Change Function
-        function statusChange(id, newStatus) {
-            var url = '{{ route('admin.project.status', ':id') }}';
-            $.ajax({
-                type: "PATCH",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                url: url.replace(':id', id),
-                data: {
-                    status: newStatus
-                },
-                success: function(resp) {
-                    console.log(resp);
-
-                    $('#datatable').DataTable().ajax.reload();
-
-                    if (resp.success) {
-                        toastr.success(resp.message);
-                    } else {
-                        toastr.error(resp.message);
-                    }
-                },
-                error: function(error) {
-                    toastr.error('Something went wrong!');
-                }
-            });
-        }
     </script>
-@endpush
+@endsection

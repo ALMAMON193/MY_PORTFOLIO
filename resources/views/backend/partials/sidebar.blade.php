@@ -1,139 +1,133 @@
-<aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
-    <div class="sidebar-header d-flex align-items-center justify-content-start">
-        <a href="{{route('dashboard')}}" class="navbar-brand w-100">
-            <!--Logo start-->
-            <!--logo End-->
-            <!--Logo start-->
-            <div class="logo-main d-flex justify-content-center" style="width:100%">
-                <div class="logo-normal" style="height: 30px; max-width: 100px; overflow:hidden">
-                    <img src="{{asset('backend/images/logo-header.svg')}}" alt="" style="width: 100%; height:100%; object-fit:contain;">
-                 </div>
-
-            </div>
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="index.html" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-dark.png" alt="" height="17">
+            </span>
         </a>
-        <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-            <i class="icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"
-                          stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor" stroke-width="1.5"
-                          stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </i>
+        <!-- Light Logo-->
+        <a href="index.html" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="assets/images/logo-sm.png" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="assets/images/logo-light.png" alt="" height="17">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div class="dropdown sidebar-user m-1 rounded">
+        <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="d-flex align-items-center gap-2">
+                <img class="rounded header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                <span class="text-start">
+                    <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
+                    <span class="d-block fs-14 sidebar-user-name-sub-text"><i
+                            class="ri ri-circle-fill fs-10 text-success align-baseline"></i> <span
+                            class="align-middle">Online</span></span>
+                </span>
+            </span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end">
+            <!-- item-->
+            <h6 class="dropdown-header">Welcome Anna!</h6>
+            <a class="dropdown-item" href="pages-profile.html"><i
+                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                    class="align-middle">Profile</span></a>
+            <a class="dropdown-item" href="apps-chat.html"><i
+                    class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
+                    class="align-middle">Messages</span></a>
+            <a class="dropdown-item" href="apps-tasks-kanban.html"><i
+                    class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
+                    class="align-middle">Taskboard</span></a>
+            <a class="dropdown-item" href="pages-faqs.html"><i
+                    class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
+                    class="align-middle">Help</span></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="pages-profile.html"><i
+                    class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance :
+                    <b>$5971.67</b></span></a>
+            <a class="dropdown-item" href="pages-profile-settings.html"><span
+                    class="badge bg-success-subtle text-success mt-1 float-end">New</span><i
+                    class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
+                    class="align-middle">Settings</span></a>
+            <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
+                    class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock
+                    screen</span></a>
+            <a class="dropdown-item" href="auth-logout-basic.html"><i
+                    class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle"
+                    data-key="t-logout">Logout</span></a>
         </div>
     </div>
-    <div class="sidebar-body pt-0 data-scrollbar">
-        <div class="sidebar-list">
-            <!-- Sidebar Menu Start -->
-            <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
-                <li class="nav-item static-item">
-                    <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                        <span class="default-icon">Home</span>
-                        <span class="mini-icon">-</span>
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
+                                    Analytics </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> CRM </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-crypto.html" class="nav-link" data-key="t-crypto"> Crypto
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-projects.html" class="nav-link" data-key="t-projects">
+                                    Projects </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-nft.html" class="nav-link" data-key="t-nft"> NFT</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-job.html" class="nav-link" data-key="t-job">Job</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-blog.html" class="nav-link"><span data-key="t-blog">Blog</span>
+                                    <span class="badge bg-success" data-key="t-new">New</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> <!-- end Dashboard Menu -->
+
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">
-                        <i class="icon">
-                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                 class="icon-20">
-                                <path opacity="0.4"
-                                      d="M16.0756 2H19.4616C20.8639 2 22.0001 3.14585 22.0001 4.55996V7.97452C22.0001 9.38864 20.8639 10.5345 19.4616 10.5345H16.0756C14.6734 10.5345 13.5371 9.38864 13.5371 7.97452V4.55996C13.5371 3.14585 14.6734 2 16.0756 2Z"
-                                      fill="currentColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M4.53852 2H7.92449C9.32676 2 10.463 3.14585 10.463 4.55996V7.97452C10.463 9.38864 9.32676 10.5345 7.92449 10.5345H4.53852C3.13626 10.5345 2 9.38864 2 7.97452V4.55996C2 3.14585 3.13626 2 4.53852 2ZM4.53852 13.4655H7.92449C9.32676 13.4655 10.463 14.6114 10.463 16.0255V19.44C10.463 20.8532 9.32676 22 7.92449 22H4.53852C3.13626 22 2 20.8532 2 19.44V16.0255C2 14.6114 3.13626 13.4655 4.53852 13.4655ZM19.4615 13.4655H16.0755C14.6732 13.4655 13.537 14.6114 13.537 16.0255V19.44C13.537 20.8532 14.6732 22 16.0755 22H19.4615C20.8637 22 22 20.8532 22 19.44V16.0255C22 14.6114 20.8637 13.4655 19.4615 13.4655Z"
-                                      fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Dashboard</span>
+                    <a class="nav-link menu-link {{ request()->routeIs('admin.project.index') ? 'active' : '' }}"
+                        href="{{ route('admin.project.index') }}">
+                        <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Projects</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('admin.project.index')}}">
-                        <i class="icon">
-                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                 class="icon-20">
-                                <path opacity="0.4"
-                                      d="M16.0756 2H19.4616C20.8639 2 22.0001 3.14585 22.0001 4.55996V7.97452C22.0001 9.38864 20.8639 10.5345 19.4616 10.5345H16.0756C14.6734 10.5345 13.5371 9.38864 13.5371 7.97452V4.55996C13.5371 3.14585 14.6734 2 16.0756 2Z"
-                                      fill="currentColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M4.53852 2H7.92449C9.32676 2 10.463 3.14585 10.463 4.55996V7.97452C10.463 9.38864 9.32676 10.5345 7.92449 10.5345H4.53852C3.13626 10.5345 2 9.38864 2 7.97452V4.55996C2 3.14585 3.13626 2 4.53852 2ZM4.53852 13.4655H7.92449C9.32676 13.4655 10.463 14.6114 10.463 16.0255V19.44C10.463 20.8532 9.32676 22 7.92449 22H4.53852C3.13626 22 2 20.8532 2 19.44V16.0255C2 14.6114 3.13626 13.4655 4.53852 13.4655ZM19.4615 13.4655H16.0755C14.6732 13.4655 13.537 14.6114 13.537 16.0255V19.44C13.537 20.8532 14.6732 22 16.0755 22H19.4615C20.8637 22 22 20.8532 22 19.44V16.0255C22 14.6114 20.8637 13.4655 19.4615 13.4655Z"
-                                      fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Project</span>
-                    </a>
-                </li>
-                <li class="nav-item static-item">
-                    <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                        <span class="default-icon">Settings</span>
-                        <span class="mini-icon">-</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#sidebar-widget" role="button" aria-expanded="false" aria-controls="sidebar-widget">
-                        <i class="icon">
-                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path opacity="0.4" d="M21.25 13.4764C20.429 13.4764 19.761 12.8145 19.761 12.001C19.761 11.1865 20.429 10.5246 21.25 10.5246C21.449 10.5246 21.64 10.4463 21.78 10.3076C21.921 10.1679 22 9.97864 22 9.78146L21.999 7.10415C21.999 4.84102 20.14 3 17.856 3H6.144C3.86 3 2.001 4.84102 2.001 7.10415L2 9.86766C2 10.0648 2.079 10.2541 2.22 10.3938C2.36 10.5325 2.551 10.6108 2.75 10.6108C3.599 10.6108 4.239 11.2083 4.239 12.001C4.239 12.8145 3.571 13.4764 2.75 13.4764C2.336 13.4764 2 13.8093 2 14.2195V16.8949C2 19.158 3.858 21 6.143 21H17.857C20.142 21 22 19.158 22 16.8949V14.2195C22 13.8093 21.664 13.4764 21.25 13.4764Z" fill="currentColor"></path>
-                                <path d="M15.4303 11.5887L14.2513 12.7367L14.5303 14.3597C14.5783 14.6407 14.4653 14.9177 14.2343 15.0837C14.0053 15.2517 13.7063 15.2727 13.4543 15.1387L11.9993 14.3737L10.5413 15.1397C10.4333 15.1967 10.3153 15.2267 10.1983 15.2267C10.0453 15.2267 9.89434 15.1787 9.76434 15.0847C9.53434 14.9177 9.42134 14.6407 9.46934 14.3597L9.74734 12.7367L8.56834 11.5887C8.36434 11.3907 8.29334 11.0997 8.38134 10.8287C8.47034 10.5587 8.70034 10.3667 8.98134 10.3267L10.6073 10.0897L11.3363 8.61268C11.4633 8.35868 11.7173 8.20068 11.9993 8.20068H12.0013C12.2843 8.20168 12.5383 8.35968 12.6633 8.61368L13.3923 10.0897L15.0213 10.3277C15.2993 10.3667 15.5293 10.5587 15.6173 10.8287C15.7063 11.0997 15.6353 11.3907 15.4303 11.5887Z" fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Settings</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </i>
-                    </a>
-                    <ul class="sub-nav collapse" id="sidebar-widget" data-bs-parent="#sidebar-menu" style="">
-                        <li class="nav-item">
-                            <a class="nav-link " href="">
-                                <i class="icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> W </i>
-                                <span class="item-name">Syatem Setting</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="sub-nav collapse" id="sidebar-widget" data-bs-parent="#sidebar-menu" style="">
-                        <li class="nav-item">
-                            <a class="nav-link " href="">
-                                <i class="icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> W </i>
-                                <span class="item-name">Mail Setting</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="sub-nav collapse" id="sidebar-widget" data-bs-parent="#sidebar-menu" style="">
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{route('profile.settings.index')}}">
-                                <i class="icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> W </i>
-                                <span class="item-name">Profile Setting</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
-            <!-- Sidebar Menu End -->
         </div>
+        <!-- Sidebar -->
     </div>
-    <div class="sidebar-footer"></div>
-</aside>
+    <div class="sidebar-background"></div>
+</div>

@@ -1,44 +1,48 @@
-    <!-- Library Bundle Script -->
-    <script src="{{asset('backend/js/core/libs.min.js')}}"></script>
+   <!-- JAVASCRIPT -->
+   <script src="{{ asset('backend/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+   <script src="{{ asset('backend/libs/simplebar/simplebar.min.js') }}"></script>
+   <script src="{{ asset('backend/libs/node-waves/waves.min.js') }}"></script>
+   <script src="{{ asset('backend/libs/feather-icons/feather.min.js') }}"></script>
+   <script src="{{ asset('backend/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+   <script src="{{ asset('backend/js/plugins.js') }}"></script>
+   <!-- apexcharts -->
+   <script src="{{ asset('backend/libs/apexcharts/apexcharts.min.js') }}"></script>
+   <!-- Vector map-->
+   <script src="{{ asset('backend/libs/jsvectormap/jsvectormap.min.js') }}"></script>
+   <script src="{{ asset('backend/libs/jsvectormap/maps/world-merc.js') }}"></script>
+   <!--Swiper slider js-->
+   <script src="{{ asset('backend/libs/swiper/swiper-bundle.min.js') }}"></script>
+   <!-- Dashboard init -->
+   <script src="{{ asset('backend/js/pages/dashboard-ecommerce.init.js') }}"></script>
+   <!-- App js -->
+   <script src="{{ asset('backend/js/app.js') }}"></script>
 
-    <!-- External Library Bundle Script -->
-    <script src="{{asset('backend/js/core/external.min.js')}}"></script>
+   <!--login script-->
+   <script src="{{ asset('backend/js/pages/password-addon.init.js') }}"></script>
 
-    <!-- Widgetchart Script -->
-    <script src="{{asset('backend/js/charts/widgetcharts.js')}}"></script>
+     <!--datatable js-->
+     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
-    <!-- mapchart Script -->
-    <script src="{{asset('backend/js/charts/vectore-chart.js')}}"></script>
-    <script src="{{asset('backend/js/charts/dashboard.js')}}" ></script>
 
-    <!-- fslightbox Script -->
-    <script src="{{asset('backend/js/plugins/fslightbox.js')}}"></script>
+{{-- sweetalert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Settings Script -->
-    <script src="{{asset('backend/js/plugins/setting.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <!-- Slider-tab Script -->
-    <script src="{{asset('backend/js/plugins/slider-tabs.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        toastr.options.timeOut = 10000;
+        toastr.options.positionClass = 'toast-top-right';
 
-    <!-- Form Wizard Script -->
-    <script src="{{asset('backend/js/plugins/form-wizard.js')}}"></script>
-
-    <!-- AOS Animation Plugin-->
-    <script src="{{asset('backend/vendor/aos/dist/aos.js')}}"></script>
-
-    <!-- App Script -->
-    <script src="{{asset('backend/js/hope-ui.js')}}" defer></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Set Toastr options
+        @if (Session::has('t-success'))
             toastr.options = {
                 'closeButton': true,
                 'debug': false,
@@ -55,28 +59,87 @@
                 'showMethod': 'fadeIn',
                 'hideMethod': 'fadeOut',
             };
+            toastr.success("{{ session('t-success') }}");
+        @endif
 
-            // Display success message
-            @if (Session::has('t-success'))
-                toastr.success("{{ session('t-success') }}");
-            @endif
+        @if (Session::has('t-error'))
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': true,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'showDuration': '1000',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+            };
+            toastr.error("{{ session('t-error') }}");
+        @endif
 
-            // Display error message
-            @if (Session::has('t-error'))
-                toastr.error("{{ session('t-error') }}");
-            @endif
+        @if (Session::has('t-info'))
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': true,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'showDuration': '1000',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+            };
+            toastr.info("{{ session('t-info') }}");
+        @endif
 
-            // Display info message
-            @if (Session::has('t-info'))
-                toastr.info("{{ session('t-info') }}");
-            @endif
+        @if (Session::has('t-warning'))
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': true,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'showDuration': '1000',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+            };
+            toastr.warning("{{ session('t-warning') }}");
+        @endif
+    });
+</script>
 
-            // Display warning message
-            @if (Session::has('t-warning'))
-                toastr.warning("{{ session('t-warning') }}");
-            @endif
-        });
+
+<!-- CSRF -->
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
         $('.dropify').dropify();
-    </script>
+    });
+</script>
 
-    @stack('scripts')
+
+
+   @stack('js')

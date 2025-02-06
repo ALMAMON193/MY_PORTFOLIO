@@ -1,95 +1,178 @@
-<div class="position-relative iq-banner">
-    <!--Nav Start-->
-    <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
-        <div class="container-fluid navbar-inner">
-            <a href="{{route('dashboard')}}" class="navbar-brand">
-                <!--Logo start-->
-                <div class="logo-main">
-                    <div class="logo-normal" style="max-height: 30px; max-width: 100px; overflow:hidden">
-                       <img src="{{asset( $settings->logo ?? 'backend/images/logo-header.svg')}}" alt="" style="width: 100%; height:100%; object-fit:cover;">
-                    </div>
+<header id="page-topbar">
+    <div class="layout-width">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box horizontal-logo">
+                    <a href="index.html" class="logo logo-dark">
+                        <span class="logo-sm">
+                            <img src="{{ asset('backend/images/logo-sm.png') }}" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="{{ asset('backend/images/logo-dark.png') }}" alt="" height="17">
+                        </span>
+                    </a>
 
+                    <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="{{ asset('backend/images/logo-sm.png') }}" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="{{ asset('backend/images/logo-light.png') }}" alt="" height="17">
+                        </span>
+                    </a>
                 </div>
 
-            </a>
-            <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-                <i class="icon">
-                    <svg width="20px" class="icon-20" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
-                    </svg>
-                </i>
-            </div>
-            <div class="input-group search-input">
-                <span class="input-group-text" id="search-input">
-                    <svg class="icon-18" width="18" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
-                        <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-                <input type="search" class="form-control" placeholder="Search...">
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
-                    <span class="mt-2 navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{asset(Auth::user()->avatar ??  'backend/images/avatars/01.png')}}" alt="User-Profile"
-                                class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
+                <button type="button"
+                    class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none"
+                    id="topnav-hamburger-icon">
+                    <span class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
 
-                            <div class="caption ms-3 d-none d-md-block ">
-                                <h6 class="mb-0 caption-title">Austin</h6>
+                <!-- App Search-->
+                <form class="app-search d-none d-md-block">
+                    <div class="position-relative">
+                        <input type="text" class="form-control" placeholder="Search..." autocomplete="off"
+                            id="search-options" value="">
+                        <span class="mdi mdi-magnify search-widget-icon"></span>
+                        <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
+                            id="search-close-options"></span>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
+                        <div data-simplebar style="max-height: 320px;">
+                            <!-- item-->
+                            <div class="dropdown-header">
+                                <h6 class="text-overflow text-muted mb-0 text-uppercase">Recent Searches</h6>
                             </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{route('profile.settings.index')}}">Profile</a>
-                            </li>
-                            <li><a class="dropdown-item" href="">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+
+                            <div class="dropdown-item bg-transparent text-wrap">
+                                <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill">how to
+                                    setup <i class="mdi mdi-magnify ms-1"></i></a>
+                                <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill">buttons
+                                    <i class="mdi mdi-magnify ms-1"></i></a>
+                            </div>
+                            <!-- item-->
+                            <div class="dropdown-header mt-2">
+                                <h6 class="text-overflow text-muted mb-1 text-uppercase">Pages</h6>
+                            </div>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
+                                <span>Analytics Dashboard</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
+                                <span>Help Center</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
+                                <span>My account settings</span>
+                            </a>
+
+                            <!-- item-->
+                            <div class="dropdown-header mt-2">
+                                <h6 class="text-overflow text-muted mb-2 text-uppercase">Members</h6>
+                            </div>
+
+                            <div class="notification-list">
+                                <!-- item -->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
+                                    <div class="d-flex">
+                                        <img src="{{ asset('backend/images/users/avatar-2.jpg') }}"
+                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                        <div class="flex-grow-1">
+                                            <h6 class="m-0">Angela Bernier</h6>
+                                            <span class="fs-11 mb-0 text-muted">Manager</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- item -->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
+                                    <div class="d-flex">
+                                        <img src="{{ asset('backend/images/users/avatar-3.jpg') }}"
+                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                        <div class="flex-grow-1">
+                                            <h6 class="m-0">David Grasso</h6>
+                                            <span class="fs-11 mb-0 text-muted">Web Designer</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- item -->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
+                                    <div class="d-flex">
+                                        <img src="{{ asset('backend/images/users/avatar-5.jpg') }}"
+                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                        <div class="flex-grow-1">
+                                            <h6 class="m-0">Mike Bunch</h6>
+                                            <span class="fs-11 mb-0 text-muted">React Developer</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-3 pb-1">
+                            <a href="pages-search-results.html" class="btn btn-primary btn-sm">View All
+                                Results <i class="ri-arrow-right-line ms-1"></i></a>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-    </nav>
-</div>
-<div class="iq-navbar-header" style="height: 215px;">
-    <div class="container-fluid iq-container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="flex-wrap d-flex justify-content-between align-items-center">
-                    <div>
-                        <h1>Hello Devs!</h1>
-                        <p>We are on a mission to help developers like you build successful projects for
-                            FREE.</p>
+
+            <div class="d-flex align-items-center">
+                <div class="ms-1 header-item d-none d-sm-flex">
+                    <button type="button"
+                        class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle light-dark-mode">
+                        <i class='bx bx-moon fs-22'></i>
+                    </button>
+                </div>
+                <div class="dropdown ms-sm-3 header-item topbar-user">
+                    <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-flex align-items-center">
+                            <img class="rounded-circle header-profile-user"
+                                src="{{ asset('backend/images/users/avatar-1.jpg') }}" alt="Header Avatar">
+                            <span class="text-start ms-xl-2">
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
+                                    Adame</span>
+                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
+                            </span>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <!-- item-->
+                        <h6 class="dropdown-header">Welcome Anna!</h6>
+                        <a class="dropdown-item" href="pages-profile.html"><i
+                                class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                                class="align-middle">Profile</span></a>
+                        <a class="dropdown-item" href="pages-profile.html"><i
+                                class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
+                                class="align-middle">Balance : <b>$5971.67</b></span></a>
+                        <a class="dropdown-item" href="pages-profile-settings.html"><span
+                                class="badge bg-success-subtle text-success mt-1 float-end">New</span><i
+                                class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
+                                class="align-middle">Settings</span></a>
+
+                        <a class="dropdown-item" href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="iq-header-img">
-        <img src="{{asset('backend/images/dashboard/top-header.png')}}" alt="header"
-            class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-        <img src="{{asset('backend/images/dashboard/top-header1.png')}}" alt="header"
-            class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-        <img src="{{asset('backend/images/dashboard/top-header2.png')}}" alt="header"
-            class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-        <img src="{{asset('backend/images/dashboard/top-header3.png')}}" alt="header"
-            class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-        <img src="{{ASSET('backend/images/dashboard/top-header4.png')}}" alt="header"
-            class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-        <img src="{{ASSET('backend/images/dashboard/top-header5.png')}}" alt="header"
-            class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
-    </div>
-</div>
+</header>

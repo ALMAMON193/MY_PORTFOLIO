@@ -1,25 +1,28 @@
-  <!-- Library / Plugin Css Build -->
-  <link rel="stylesheet" href="{{ asset('backend/css/core/libs.min.css') }}" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="{{ asset('backend/images/favicon.ico') }}">
 
-  <!-- Aos Animation Css -->
-  <link rel="stylesheet" href="{{ asset('backend/vendor/aos/dist/aos.css') }}" />
+<!-- jsvectormap css -->
+<link href="{{ asset('backend/libs/jsvectormap/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Hope Ui Design System Css -->
-  <link rel="stylesheet" href="{{ asset('backend/css/hope-ui.min.css?v=2.0.0') }}" />
+<!--Swiper slider css-->
+<link href="{{ asset('backend/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Custom Css -->
-  <link rel="stylesheet" href="{{ asset('backend/css/custom.min.css?v=2.0.0') }}" />
+<!-- Layout config Js -->
+<script src="{{ asset('backend/js/layout.js') }}"></script>
+<!-- Bootstrap Css -->
+<link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="{{ asset('backend/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="{{ asset('backend/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- custom Css-->
+<link href="{{ asset('backend/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Dark Css -->
-  <link rel="stylesheet" href="{{ asset('backend/css/dark.min.css') }}" />
+<!--datatable css-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+<!--datatable responsive css-->
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
-  <!-- Customizer Css -->
-  <link rel="stylesheet" href="{{ asset('backend/css/customizer.min.css') }}" />
 
-  <!-- RTL Css -->
-  <link rel="stylesheet" href="{{ asset('backend/css/rtl.min.css') }}" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
-
-  @stack('styles')
+@stack('styles')

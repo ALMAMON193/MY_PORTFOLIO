@@ -16,10 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('description');
+            $table->string('video')->nullable();
             $table->string('github_link')->nullable();
             $table->string('live_link')->nullable();
-            $table->softDeletes();
+            $table->string('start_date');
+            $table->string('end_date');
             $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
