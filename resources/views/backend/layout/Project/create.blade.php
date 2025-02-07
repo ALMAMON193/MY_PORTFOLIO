@@ -11,6 +11,7 @@
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Project Create</h4>
+
                         </div><!-- end card header -->
                         <div class="card-body">
                             <form method="POST" action="{{ route('admin.project.store') }}" enctype="multipart/form-data">
@@ -38,12 +39,20 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="inputImage" name="image">
+                                            id="imageInput" multiple name="image[]" accept="image/*">
                                         @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
+                                        @else
+                                            <span class="text-warning">Only png, jpg, jpeg files are allowed</span>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-9">
+                                        <div id="previewContainer"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -67,13 +76,20 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <input type="file" class="form-control @error('video') is-invalid @enderror"
-                                            id="videoInput" name="video" value="{{ old('video') }}"
-                                            placeholder="Enter your project video link">
+                                            id="videoInput" multiple name="video[]" accept="video/*">
                                         @error('video')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
+                                        @else
+                                            <small class="text-warning">Only mp4, mov, avi, wmv files are allowed.</small>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-9">
+                                        <div id="videoPreviewContainer"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -113,7 +129,8 @@
                                                 class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control @error('start_date') is-invalid @enderror"
+                                        <input type="text"
+                                            class="form-control @error('start_date') is-invalid @enderror"
                                             id="startDateInput" name="start_date" value="{{ old('start_date') }}"
                                             placeholder="Enter your project start date">
                                         @error('start_date')
@@ -155,3 +172,111 @@
 
     </div>
 @endsection
+
+@push('js')
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            handleFileSelection(event, 'image');
+        });
+
+        document.getElementById('videoInput').addEventListener('change', function(event) {
+            handleFileSelection(event, 'video');
+        });
+
+        function handleFileSelection(event, type) {
+            const inputElement = event.target;
+            const previewContainer = type === 'image' ? document.getElementById('previewContainer') : document
+                .getElementById('videoPreviewContainer');
+
+            const maxImageSize = 50 * 1024 * 1024; // 50MB in bytes
+            const maxVideoSize = 500 * 1024 * 1024; // 500MB in bytes
+
+            previewContainer.innerHTML = ''; // Clear previous preview
+            const newFileList = new DataTransfer();
+
+            Array.from(inputElement.files).forEach((file, index) => {
+                const isImage = type === 'image' && file.type.startsWith('image/');
+                const isVideo = type === 'video' && file.type.startsWith('video/');
+                const isValidSize = (isImage && file.size <= maxImageSize) || (isVideo && file.size <=
+                    maxVideoSize);
+
+                if (!isValidSize) {
+                    alert(`"${file.name}" exceeds the size limit (${isImage ? '50MB' : '500MB'}).`);
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'mb-2', 'bg-light', 'border-success', 'hover-shadow');
+                    card.style.padding = '10px';
+                    card.dataset.index = index;
+
+                    const previewCard = document.createElement('div');
+                    previewCard.classList.add('d-flex', 'align-items-center');
+                    previewCard.style.height = '80px';
+                    previewCard.style.width = '100%';
+                    previewCard.style.padding = '7px';
+
+                    let mediaElement;
+                    if (isImage) {
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = e.target.result;
+                        mediaElement.style.height = '100%';
+                        mediaElement.style.flexShrink = '0';
+                    } else {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = e.target.result;
+                        mediaElement.controls = true;
+                        mediaElement.style.height = '100%';
+                        mediaElement.style.flexShrink = '0';
+                    }
+
+                    const textContainer = document.createElement('div');
+                    textContainer.classList.add('d-flex', 'flex-column', 'ms-3');
+
+                    const fileName = document.createElement('div');
+                    fileName.classList.add('fw-bold');
+                    fileName.innerText = file.name;
+
+                    const fileSize = document.createElement('div');
+                    fileSize.classList.add('text-muted');
+                    fileSize.innerText = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+                    textContainer.appendChild(fileName);
+                    textContainer.appendChild(fileSize);
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.innerText = 'Remove';
+                    removeBtn.classList.add('btn', 'btn-danger', 'ms-auto', 'btn-sm');
+                    removeBtn.addEventListener('click', function() {
+                        card.remove();
+                        removeFileFromInput(file.name, type);
+                    });
+
+                    previewCard.appendChild(mediaElement);
+                    previewCard.appendChild(textContainer);
+                    previewCard.appendChild(removeBtn);
+                    card.appendChild(previewCard);
+                    previewContainer.appendChild(card);
+                };
+                reader.readAsDataURL(file);
+
+                newFileList.items.add(file);
+            });
+
+            inputElement.files = newFileList.files; 
+        }
+
+        function removeFileFromInput(fileName, type) {
+            const inputElement = type === 'image' ? document.getElementById('imageInput') : document.getElementById(
+                'videoInput');
+            const fileList = Array.from(inputElement.files).filter(file => file.name !== fileName);
+
+            const newFileList = new DataTransfer();
+            fileList.forEach(file => newFileList.items.add(file));
+
+            inputElement.files = newFileList.files;
+        }
+    </script>
+@endpush

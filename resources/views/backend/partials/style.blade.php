@@ -24,5 +24,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
+{{-- dropify --}}
+<script src="https://cdn.jsdelivr.net/npm/dropify/dist/js/dropify.min.js"></script>
 
 @stack('styles')

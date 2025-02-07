@@ -6,6 +6,8 @@ use Exception;
 use App\Helpers\Helper;
 use App\Models\Project;
 use Illuminate\Support\Str;
+use App\Models\ProjectImage;
+use App\Models\ProjectVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -15,8 +17,7 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Project::orderBy('id', 'desc');
-
+        $query = Project::orderBy('id', 'asc');
         // Handle search functionality
         if ($request->has('search') && !empty($request->search)) {
             $query->where('name', 'LIKE', "%{$request->search}%")
@@ -47,48 +48,54 @@ class ProjectController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required|array',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',
             'github_link' => 'nullable|url',
             'live_link' => 'nullable|url',
             'start_date' => 'required|string',
-            'end_date' => 'required|string',
-            'video' => 'nullable|mimes:mp4,ogg,webm',
-
-
+            'end_date' => 'required|string|after_or_equal:start_date',
+            'video.*' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:512000',
         ]);
 
-        try{
-            // File upload handling
-            $imagePath = null;
-            $videoPath = null;
-
-            if ($request->hasFile('image')) {
-                $randomString = Str::random(10);
-                $imagePath = Helper::fileUpload($request->file('image'), 'project/image', $randomString);
-            }
-            if ($request->hasFile('video')) {
-                $randomString = Str::random(10);
-                $videoPath = Helper::fileUpload($request->file('video'), 'project/video', $randomString);
-            }
+        try {
+            // Create project
             $project = new Project();
             $project->name = $request->name;
-            $project->image = $imagePath;
             $project->description = $request->description;
             $project->github_link = $request->github_link;
             $project->live_link = $request->live_link;
             $project->start_date = $request->start_date;
             $project->end_date = $request->end_date;
-            $project->video = $videoPath;
             $project->save();
 
+            // Handle image uploads
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $image) {
+                    $imagePath = Helper::fileUpload($image, 'projects/images', $image->getClientOriginalName());
+                    ProjectImage::create([
+                        'project_id' => $project->id,
+                        'image' => $imagePath,
+                    ]);
+                }
+            }
+            // Handle video uploads
+            if ($request->hasFile('video')) {
+                foreach ($request->file('video') as $video) {
+                    $videoPath = Helper::fileUpload($video, 'projects/videos', $video->getClientOriginalName());
+                    ProjectVideo::create([
+                        'project_id' => $project->id,
+                        'video' => $videoPath,
+                    ]);
+                }
+            }
             return redirect()->route('admin.project.index')->with('t-success', 'Project created successfully.');
-
-             }catch(Exception $e){
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('t-error', 'Something went wrong. Please try again.');
-           }
         }
+    }
+
 
     public function edit($id)
     {

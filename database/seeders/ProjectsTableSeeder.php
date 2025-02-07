@@ -16,7 +16,6 @@ class ProjectsTableSeeder extends Seeder
         DB::table('projects')->insert([
             [
                 'name' => 'Project One',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the first project.',
                 'github_link' => 'https://github.com/user/project1',
                 'live_link' => 'https://project1.example.com',
@@ -25,11 +24,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-01-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video1.mp4',
+                
             ],
             [
                 'name' => 'Project Two',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the second project.',
                 'github_link' => 'https://github.com/user/project2',
                 'live_link' => 'https://project2.example.com',
@@ -38,11 +36,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-02-28',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video2.mp4',
+                
             ],
             [
                 'name' => 'Project Three',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the third project.',
                 'github_link' => 'https://github.com/user/project3',
                 'live_link' => 'https://project3.example.com',
@@ -51,11 +48,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-03-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video3.mp4',
+               
             ],
             [
                 'name' => 'Project Four',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the fourth project.',
                 'github_link' => 'https://github.com/user/project4',
                 'live_link' => 'https://project4.example.com',
@@ -64,11 +60,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-04-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video4.mp4',
+              
             ],
             [
                 'name' => 'Project Five',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the fifth project.',
                 'github_link' => 'https://github.com/user/project5',
                 'live_link' => 'https://project5.example.com',
@@ -77,11 +72,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-05-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video5.mp4',
+                
             ],
             [
                 'name' => 'Project Six',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the sixth project.',
                 'github_link' => 'https://github.com/user/project6',
                 'live_link' => 'https://project6.example.com',
@@ -90,11 +84,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-06-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video6.mp4',
+               
             ],
             [
                 'name' => 'Project Seven',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the seventh project.',
                 'github_link' => 'https://github.com/user/project7',
                 'live_link' => 'https://project7.example.com',
@@ -103,11 +96,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-07-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video7.mp4',
+          
             ],
             [
                 'name' => 'Project Eight',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the eighth project.',
                 'github_link' => 'https://github.com/user/project8',
                 'live_link' => 'https://project8.example.com',
@@ -116,11 +108,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-08-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video8.mp4',
+               
             ],
             [
                 'name' => 'Project Nine',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the ninth project.',
                 'github_link' => 'https://github.com/user/project9',
                 'live_link' => 'https://project9.example.com',
@@ -129,11 +120,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-09-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video9.mp4',
+               
             ],
             [
                 'name' => 'Project Ten',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the tenth project.',
                 'github_link' => 'https://github.com/user/project10',
                 'live_link' => 'https://project10.example.com',
@@ -142,11 +132,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-10-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video10.mp4',
+               
             ],
             [
                 'name' => 'Project Eleven',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the eleventh project.',
                 'github_link' => 'https://github.com/user/project11',
                 'live_link' => 'https://project11.example.com',
@@ -155,11 +144,10 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-11-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video11.mp4',
+                
             ],
             [
                 'name' => 'Project Twelve',
-                'image' => 'backend/images/mac-img.png',
                 'description' => 'This is the twelfth project.',
                 'github_link' => 'https://github.com/user/project12',
                 'live_link' => 'https://project12.example.com',
@@ -168,7 +156,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-12-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'video' => 'https://www.example.com/videos/video12.mp4',
+              
             ],
         ]);
     }

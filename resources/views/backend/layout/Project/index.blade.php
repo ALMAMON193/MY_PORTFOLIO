@@ -48,7 +48,6 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Project Name</th>
-                                                        <th>Image</th>
                                                         <th>Description</th>
                                                         <th>Github Link</th>
                                                         <th>Live Link</th>
@@ -63,10 +62,6 @@
                                                         <tr>
                                                             <td class="text-center">{{ $item->id }}</td>
                                                             <td>{{ $item->name }}</td>
-                                                            <td>
-                                                                <img src="{{ asset($item->image) ?? 'backend/images/mac-img.png' }}"
-                                                                    class="img-thumbnail" width="100" height="100">
-                                                            </td>
                                                             <td>{{ $item->description }}</td>
                                                             <td class="text-center">
                                                                 <button class="btn btn-sm btn-soft-primary"
@@ -87,7 +82,7 @@
                                                             <td>
                                                                 <a href=""
                                                                     class="btn btn-sm btn-soft-primary">View</a>
-                                                                <a href=""
+                                                                <a href="{{ route('admin.project.edit', $item->id) }}"
                                                                     class="btn btn-sm btn-soft-success">Edit</a>
                                                                 <button class="btn btn-sm btn-soft-danger"
                                                                     onclick="deleteData({{ $item->id }})">Delete</button>
