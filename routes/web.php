@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Web\Backend\EducationalQualificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\Profile\ProfileController;
 use App\Http\Controllers\Web\Backend\Project\ProjectController;
+use App\Http\Controllers\Web\Backend\PersonalInformationController;
+use App\Http\Controllers\Web\Backend\WorkingExperienceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //drill all route
-Route::middleware(['auth'])->prefix('admin/project')->name('admin.project.')->group(function () {
+Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('index');
     Route::get('/create', [ProjectController::class, 'create'])->name('create');
     Route::post('/store', [ProjectController::class, 'store'])->name('store');
@@ -40,4 +43,33 @@ Route::middleware(['auth'])->prefix('admin/project')->name('admin.project.')->gr
     Route::patch('/status/{id}', [ProjectController::class, 'status'])->name('status');
 });
 
-require __DIR__.'/auth.php';
+//drill all route
+Route::middleware(['guest'])->prefix('admin/personal-info')->name('admin.personal.info.')->group(function () {
+    Route::get('/create', [PersonalInformationController::class, 'create'])->name('create');
+    Route::post('/store', [PersonalInformationController::class, 'store'])->name('store');
+    Route::patch('/status/{id}', [PersonalInformationController::class, 'status'])->name('status');
+});
+
+//drill all route
+Route::middleware(['guest'])->prefix('admin/working-experience')->name('admin.working.experience.')->group(function () {
+    Route::get('/', [WorkingExperienceController::class, 'index'])->name('index');
+    Route::get('/create', [WorkingExperienceController::class, 'create'])->name('create');
+    Route::post('/store', [WorkingExperienceController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [WorkingExperienceController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [WorkingExperienceController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [WorkingExperienceController::class, 'destroy'])->name('destroy');
+    Route::patch('/status/{id}', [WorkingExperienceController::class, 'status'])->name('status');
+});
+
+Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('admin.educational.qualification.')->group(function () {
+    Route::get('/', [EducationalQualificationController::class, 'index'])->name('index');
+    Route::get('/create', [EducationalQualificationController::class, 'create'])->name('create');
+    Route::post('/store', [EducationalQualificationController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [EducationalQualificationController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [EducationalQualificationController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [EducationalQualificationController::class, 'destroy'])->name('destroy');
+    Route::patch('/status/{id}', [EducationalQualificationController::class, 'status'])->name('status');
+});
+
+
+require __DIR__ . '/auth.php';

@@ -85,38 +85,32 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                    Analytics </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> CRM </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="dashboard-crypto.html" class="nav-link" data-key="t-crypto"> Crypto
+                                <a href="{{ route('admin.personal.info.create') }}" class="nav-link"
+                                    data-key="t-personal-info" id="sidebar-personal-info">
+                                    Personal Information
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-projects.html" class="nav-link" data-key="t-projects">
-                                    Projects </a>
+                                <a href="{{ route('admin.working.experience.index') }}" class="nav-link"
+                                    data-key="t-working-experience" id="sidebar-working-experience">
+                                    Working Experience
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-nft.html" class="nav-link" data-key="t-nft"> NFT</a>
+                                <a href="{{ route('admin.educational.qualification.index') }}" class="nav-link"
+                                    data-key="t-educational-qualifications" id="sidebar-educational-qualifications">
+                                    Educational Qualifications
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-job.html" class="nav-link" data-key="t-job">Job</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="dashboard-blog.html" class="nav-link"><span data-key="t-blog">Blog</span>
-                                    <span class="badge bg-success" data-key="t-new">New</span></a>
+                                <a href="dashboard-crypto.html" class="nav-link" data-key="t-my-skills"
+                                    id="sidebar-my-skills">
+                                    My Skills
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
-
-
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span>
                 </li>
                 <li class="nav-item">

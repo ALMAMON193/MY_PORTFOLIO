@@ -101,7 +101,9 @@ class ProjectController extends Controller
     {
 
         $data = Project::find($id);
-        return view('backend.layout.Project.edit', compact('data'));
+        $projectImages = ProjectImage::where('project_id', $id)->get();
+        $projectVideos = ProjectVideo::where('project_id', $id)->get();
+        return view('backend.layout.Project.edit', compact('data', 'projectImages', 'projectVideos'));
     }
 
     public function update(Request $request, $id)
@@ -116,7 +118,7 @@ class ProjectController extends Controller
         $projects->name = $request->name;
         if ($request->hasFile('image')) {
             $randomString = Str::random(10);
-            $imagePath = Helper::fileUpload($request->file('image'), 'adventure/type', $randomString);
+            $imagePath = Helper::fileUpload($request->file('image'), 'projects/videos', $randomString);
             if ($projects->image) {
                 $oldImagePath = public_path($projects->image);
                 if (file_exists($oldImagePath)) {
@@ -167,5 +169,32 @@ class ProjectController extends Controller
                 'data' => $data,
             ]);
         }
+    }
+
+    public function deleteImage($id)
+    {
+        // Find the image by ID
+        $image = ProjectImage::findOrFail($id);
+
+        if ($image) {
+            Helper::fileDelete(public_path($image->image));
+        }
+        // Delete the image record from the database
+        $image->delete();
+
+        // Return a success response
+        return response()->json(['success' => true]);
+    }
+
+    public function deleteVideo($id)
+    {
+        // Find the video by ID
+        $video = ProjectVideo::findOrFail($id);
+        if ($video) {
+            Helper::fileDelete(public_path($video->video));
+        }
+        $video->delete();
+        // Return a success response
+        return response()->json(['success' => true]);
     }
 }

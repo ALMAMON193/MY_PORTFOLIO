@@ -13,4 +13,6 @@ Route::controller(ProjectController::class)->prefix('admin/project')->name('admi
     Route::get('{id}/edit', 'edit')->name('edit');
     Route::put('{id}/update', 'update')->name('update');
     Route::delete('{id}/delete', 'destroy')->name('destroy');
+    Route::delete('/image/{id}', 'deleteImage')->name('deleteImage');
+    Route::delete('/video/{id}',  'deleteVideo')->name('deleteVideo');
 });
