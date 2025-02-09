@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\Backend\EducationalQualificationController;
+use App\Http\Controllers\Web\Backend\MySkillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\Profile\ProfileController;
 use App\Http\Controllers\Web\Backend\Project\ProjectController;
@@ -69,6 +70,16 @@ Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('a
     Route::put('/update/{id}', [EducationalQualificationController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [EducationalQualificationController::class, 'destroy'])->name('destroy');
     Route::patch('/status/{id}', [EducationalQualificationController::class, 'status'])->name('status');
+});
+
+Route::middleware(['guest'])->prefix('admin/my-skill')->name('admin.my.skill.')->group(function () {
+    Route::get('/', [MySkillController::class, 'index'])->name('index');
+    Route::get('/create', [MySkillController::class, 'create'])->name('create');
+    Route::post('/store', [MySkillController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [MySkillController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [MySkillController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [MySkillController::class, 'destroy'])->name('destroy');
+    Route::patch('/status/{id}', [MySkillController::class, 'status'])->name('status');
 });
 
 

@@ -63,7 +63,7 @@
                                     <div class="col-lg-9">
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                             id="emailInput" name="email" value="{{ old('email', $data->email ?? '') }}"
-                                            placeholder="Enter your email" required>
+                                            placeholder="Enter your email">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

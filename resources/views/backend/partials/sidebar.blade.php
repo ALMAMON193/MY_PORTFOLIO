@@ -78,39 +78,35 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                    <a href="{{ route('admin.personal.info.create') }}"
+                        class="nav-link {{ request()->routeIs('admin.personal.info.create') ? 'active' : '' }}"
+                        data-key="t-personal-info" id="sidebar-personal-info">
+                        <i class="ri-user-2-line"></i> <span data-key="t-personal-info">Personal Information</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.personal.info.create') }}" class="nav-link"
-                                    data-key="t-personal-info" id="sidebar-personal-info">
-                                    Personal Information
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.working.experience.index') }}" class="nav-link"
-                                    data-key="t-working-experience" id="sidebar-working-experience">
-                                    Working Experience
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.educational.qualification.index') }}" class="nav-link"
-                                    data-key="t-educational-qualifications" id="sidebar-educational-qualifications">
-                                    Educational Qualifications
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="dashboard-crypto.html" class="nav-link" data-key="t-my-skills"
-                                    id="sidebar-my-skills">
-                                    My Skills
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> <!-- end Dashboard Menu -->
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.working.experience.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.working.experience.index') ? 'active' : '' }}"
+                        data-key="t-working-experience" id="sidebar-working-experience">
+                        <i class="ri-briefcase-2-line"></i> <span data-key="t-working-experience">Working
+                            Experience</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.educational.qualification.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.educational.qualification.index') ? 'active' : '' }}"
+                        data-key="t-educational-qualifications" id="sidebar-educational-qualifications">
+                        <i class="ri-book-2-line"></i> <span data-key="t-educational-qualifications">Educational
+                            Qualifications</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.my.skill.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.my.skill.index') ? 'active' : '' }}"
+                        data-key="t-my-skills" id="sidebar-my-skills">
+                        <i class="ri-skull-2-line"></i> <span data-key="t-my-skills">My Skills</span>
+                    </a>
+                </li>
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span>
                 </li>
                 <li class="nav-item">

@@ -16,7 +16,6 @@
                             <form method="POST" action="{{ route('admin.working.experience.update', $experiences->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
                                 <div class="row mb-3">
                                     <div class="col-lg-3">
                                         <label for="job_title" class="form-label">Job Title<span
