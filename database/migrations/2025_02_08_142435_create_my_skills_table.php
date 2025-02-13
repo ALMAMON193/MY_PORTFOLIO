@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->text('description')->nullable();
             $table->integer('percentage')->nullable();
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
