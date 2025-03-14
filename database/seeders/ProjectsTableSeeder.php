@@ -15,7 +15,7 @@ class ProjectsTableSeeder extends Seeder
     {
         DB::table('projects')->insert([
             [
-                'name' => 'Project One',
+                'name' => 'Project One Project One Project One Project One Project One  ',
                 'description' => 'This is the first project.',
                 'github_link' => 'https://github.com/user/project1',
                 'live_link' => 'https://project1.example.com',
@@ -24,7 +24,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-01-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                
+
             ],
             [
                 'name' => 'Project Two',
@@ -36,7 +36,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-02-28',
                 'created_at' => now(),
                 'updated_at' => now(),
-                
+
             ],
             [
                 'name' => 'Project Three',
@@ -48,7 +48,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-03-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-               
+
             ],
             [
                 'name' => 'Project Four',
@@ -60,7 +60,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-04-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-              
+
             ],
             [
                 'name' => 'Project Five',
@@ -72,7 +72,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-05-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-                
+
             ],
             [
                 'name' => 'Project Six',
@@ -84,7 +84,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-06-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-               
+
             ],
             [
                 'name' => 'Project Seven',
@@ -96,7 +96,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-07-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-          
+
             ],
             [
                 'name' => 'Project Eight',
@@ -108,7 +108,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-08-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-               
+
             ],
             [
                 'name' => 'Project Nine',
@@ -120,7 +120,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-09-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-               
+
             ],
             [
                 'name' => 'Project Ten',
@@ -132,7 +132,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-10-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-               
+
             ],
             [
                 'name' => 'Project Eleven',
@@ -144,7 +144,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-11-30',
                 'created_at' => now(),
                 'updated_at' => now(),
-                
+
             ],
             [
                 'name' => 'Project Twelve',
@@ -156,7 +156,7 @@ class ProjectsTableSeeder extends Seeder
                 'end_date' => '2022-12-31',
                 'created_at' => now(),
                 'updated_at' => now(),
-              
+
             ],
         ]);
     }

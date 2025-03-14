@@ -3,7 +3,8 @@
 
 @push('style')
     <style>
-        .preview-img {
+        .preview-img,
+        .preview-video {
             width: 100%;
             height: auto;
             border-radius: 5px;
@@ -18,7 +19,8 @@
             white-space: nowrap;
         }
 
-        .image-preview-container {
+        .image-preview-container,
+        .video-preview-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -145,34 +147,37 @@
                                             @enderror
                                         </div>
                                     </div>
-
-
+                                    <!-- Image Upload -->
                                     <div class="mb-3">
-                                        <label for="imageInput" class="form-label">Upload Images (JPEG, PNG,
-                                            JPG, GIF,
+                                        <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
                                             SVG)</label>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
+                                            id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg"
+                                            value="{{ old('image' ?? '') }}">
 
-                                        @error('image_path')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="imageInput" class="form-label">Video</label>
-                                        <input type="file" class="form-control @error('video') is-invalid @enderror"
-                                            id="imageInput" multiple name="video[][]" accept=".jpeg,.png,.jpg,.gif,.svg">
-
-                                        @error('image_path')
+                                        @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="image-preview-container" id="previewContainer"></div>
+
+                                    <!-- Video Upload -->
+                                    <div class="mb-3">
+                                        <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV,
+                                            MKV)</label>
+                                        <input type="file" class="form-control @error('video') is-invalid @enderror"
+                                            id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv"
+                                            value="{{ old('video' ?? '') }}">
+
+                                        @error('video')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="video-preview-container" id="videoPreviewContainer"></div>
                                     <button type="submit" class="mt-3 btn btn-primary">Upload Files</button>
                                 </form>
                             </div>
@@ -186,23 +191,23 @@
 
 @push('script')
     <script>
-        document.getElementById('imageInput').addEventListener('change', function(event) {
-            const input = event.target;
-            const previewContainer = document.getElementById('previewContainer');
+        function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
+            const input = document.getElementById(inputId);
+            const previewContainer = document.getElementById(previewContainerId);
             const newFileList = new DataTransfer();
             const existingFiles = new Set();
 
-            // Preserve existing images
+            // Preserve existing previews
             Array.from(previewContainer.children).forEach(card => {
                 const fileName = card.querySelector('.text-muted').textContent.split(' ')[0];
-                newFileList.items.add(new File([card.querySelector('.preview-img').src], fileName));
                 existingFiles.add(fileName);
             });
 
-            // Add new images
+            // Process new files
             Array.from(input.files).forEach((file, index) => {
-                if (!file.type.startsWith('image/')) {
-                    alert(`"${file.name}" is not an image file.`);
+                const fileType = isImage ? 'image/' : 'video/';
+                if (!file.type.startsWith(fileType)) {
+                    alert(`"${file.name}" is not a valid ${isImage ? 'image' : 'video'} file.`);
                     return;
                 }
                 if (existingFiles.has(file.name)) {
@@ -218,9 +223,16 @@
                     card.classList.add('preview-card');
                     card.dataset.index = index;
 
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.classList.add('preview-img');
+                    let mediaElement;
+                    if (isImage) {
+                        mediaElement = document.createElement('img');
+                        mediaElement.classList.add('preview-img');
+                    } else {
+                        mediaElement = document.createElement('video');
+                        mediaElement.classList.add('preview-video');
+                        mediaElement.controls = true;
+                    }
+                    mediaElement.src = e.target.result;
 
                     const fileInfo = document.createElement('div');
                     fileInfo.classList.add('text-muted');
@@ -232,10 +244,10 @@
                     removeBtn.classList.add('remove-btn');
                     removeBtn.addEventListener('click', function() {
                         card.remove();
-                        removeFileFromInput(file.name);
+                        removeFileFromInput(file.name, inputId);
                     });
 
-                    card.appendChild(img);
+                    card.appendChild(mediaElement);
                     card.appendChild(fileInfo);
                     card.appendChild(removeBtn);
                     previewContainer.appendChild(card);
@@ -243,22 +255,28 @@
                 reader.readAsDataURL(file);
             });
 
-            if (newFileList.files.length + existingFiles.size < 1) {
-                alert('You must upload at least 1 image.');
+            if (newFileList.files.length < 1) {
+                alert(`You must upload at least 1 ${isImage ? 'image' : 'video'}.`);
                 return;
             }
 
             input.files = newFileList.files;
-        });
+        }
 
-        function removeFileFromInput(fileName) {
-            const input = document.getElementById('imageInput');
+        function removeFileFromInput(fileName, inputId) {
+            const input = document.getElementById(inputId);
             const fileList = Array.from(input.files).filter(file => file.name !== fileName);
-
             const newFileList = new DataTransfer();
             fileList.forEach(file => newFileList.items.add(file));
-
             input.files = newFileList.files;
         }
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            handleFileSelect(event, 'imageInput', 'previewContainer', true);
+        });
+
+        document.getElementById('videoInput').addEventListener('change', function(event) {
+            handleFileSelect(event, 'videoInput', 'videoPreviewContainer', false);
+        });
     </script>
 @endpush

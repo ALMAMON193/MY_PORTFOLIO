@@ -41,7 +41,10 @@ Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->g
     Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [ProjectController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [ProjectController::class, 'destroy'])->name('destroy');
-    Route::patch('/status/{id}', [ProjectController::class, 'status'])->name('status');
+    Route::patch('/status/{id}', action: [ProjectController::class, 'status'])->name('status');
+    Route::delete('/image/{id}', [ProjectController::class, 'deleteImage'])->name('deleteImage');
+    Route::delete('/video/{id}', [ProjectController::class, 'deleteVideo'])->name('deleteVideo');
+    Route::get('/view/{id}', [ProjectController::class, 'view'])->name('view');
 });
 
 //drill all route
@@ -59,7 +62,8 @@ Route::middleware(['guest'])->prefix('admin/working-experience')->name('admin.wo
     Route::get('/edit/{id}', [WorkingExperienceController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [WorkingExperienceController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [WorkingExperienceController::class, 'destroy'])->name('destroy');
-    Route::patch('/status/{id}', [WorkingExperienceController::class, 'status'])->name('status');
+    Route::post('/status/{id}', [WorkingExperienceController::class, 'status'])->name('status');
+    Route::get('{id}/view', [WorkingExperienceController::class, 'view'])->name('view');
 });
 
 Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('admin.educational.qualification.')->group(function () {
@@ -69,7 +73,8 @@ Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('a
     Route::get('/edit/{id}', [EducationalQualificationController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [EducationalQualificationController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [EducationalQualificationController::class, 'destroy'])->name('destroy');
-    Route::patch('/status/{id}', [EducationalQualificationController::class, 'status'])->name('status');
+    Route::post('/status/{id}', [EducationalQualificationController::class, 'status'])->name('status');
+    Route::get('/view/{id}', [EducationalQualificationController::class, 'view'])->name('view');
 });
 
 Route::middleware(['guest'])->prefix('admin/my-skill')->name('admin.my.skill.')->group(function () {

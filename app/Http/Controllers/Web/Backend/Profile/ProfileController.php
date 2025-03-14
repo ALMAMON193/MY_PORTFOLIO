@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Web\Backend\Profile;
+
 use Exception;
 use App\Models\User;
 use App\Helpers\Helper;
@@ -41,7 +42,8 @@ class ProfileController extends Controller
         return redirect()->back()->with('t-success', 'Profile updated successfully');
     }
 
-    public function uploadAvatar(Request $request){
+    public function uploadAvatar(Request $request)
+    {
         $request->validate([
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif',
         ]);

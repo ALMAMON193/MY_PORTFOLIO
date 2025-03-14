@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
+use Exception;
 use App\Helpers\Helper;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\EducationalQualification;
 
@@ -12,28 +15,24 @@ class EducationalQualificationController extends Controller
 {
     public function index(Request $request)
     {
-        // Fetch all educational qualifications and pass them to the view
-        $educationalQualifications = EducationalQualification::orderBy('id', 'asc');
-
-        // Handle search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $educationalQualifications->where('degree', 'LIKE', "%{$request->search}%")
-                ->orWhere('description', 'LIKE', "%{$request->search}%");
+        try {
+            if ($request->ajax()) {
+                $data = EducationalQualification::orderBy('id', 'desc')->get();
+                return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($data) {
+                        return '<a href="' . route('admin.educational.qualification.view', $data->id) . '" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
+                        <a href="' . route('admin.educational.qualification.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>
+                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"> Delete</i></a>';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+            return view("backend.layout.educational_qualification.index");
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-
-        // Get per_page value from request or set default to 10
-        $perPage = $request->per_page ?? 10;
-
-        // Paginate the results
-        $educationalQualifications = $educationalQualifications->paginate($perPage);
-
-        // Convert date fields to Carbon instances
-        foreach ($educationalQualifications as $qualification) {
-            $qualification->start_date = \Carbon\Carbon::parse($qualification->start_date);
-            $qualification->end_date = $qualification->end_date ? \Carbon\Carbon::parse($qualification->end_date) : null;
-        }
-
-        return view('backend.layout.educational_qualification.index', compact('educationalQualifications'));
     }
 
     public function create()
@@ -61,11 +60,21 @@ class EducationalQualificationController extends Controller
         // If file is uploaded, handle the certificate file
         if ($request->hasFile('certificate')) {
             $randomString = Str::random(10);
-            $imagePath = Helper::fileUpload($request->file('certificate'), 'qualification', $randomString);
+            $certificateUrl = Helper::fileUpload($request->file(key: 'certificate'), 'qualification', $randomString);
         }
 
         // Create a new educational qualification record
-        EducationalQualification::create($validated);
+        EducationalQualification::create([
+            'degree' => $request->degree,
+            'field_of_study' => $request->field_of_study,
+            'institution_name' => $request->institution_name,
+            'location' => $request->location,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'cgpa' => $request->cgpa,
+            'certificate' => $certificateUrl,
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('admin.educational.qualification.index')
             ->with('success', 'Educational Qualification added successfully');
@@ -107,9 +116,36 @@ class EducationalQualificationController extends Controller
             }
             $educationalQualification->certificate = $imagePath;
         }
-        EducationalQualification::findOrFail($id)->update($validated);
+
+        // Update educational qualification details
+        $educationalQualification->update([
+            'degree' => $request->degree,
+            'field_of_study' => $request->field_of_study,
+            'institution_name' => $request->institution_name,
+            'location' => $request->location,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'cgpa' => $request->cgpa,
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('admin.educational.qualification.index')
             ->with('success', 'Educational Qualification updated successfully');
+    }
+
+    public function view($id)
+    {
+        $educationalQualification = EducationalQualification::findOrFail($id);
+        return view('backend.layout.educational_qualification.view', compact('educationalQualification'));
+    }
+    public function delete($id)
+    {
+        $educationalQualification = EducationalQualification::findOrFail($id);
+        if ($educationalQualification->certificate) {
+            Helper::fileDelete(public_path($educationalQualification->certificate));
+        }
+        $educationalQualification->delete();
+        return redirect()->route('admin.educational.qualification.index')
+            ->with('success', 'Educational Qualification deleted successfully');
     }
 }

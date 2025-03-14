@@ -1,25 +1,73 @@
 @extends('backend.app')
 
-@section('title', 'Edit Working Experience')
+@section('title', 'Edit Educational Qualification')
+@push('style')
+    <style>
+        .preview-img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .text-muted {
+            font-size: 12px;
+            color: #6c757d;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .image-preview-container {
+            margin-top: 10px;
+            height: auto;
+            width: 160px;
+        }
+
+        .preview-card {
+            position: relative;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 2px 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 50%;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="main-content">
-
         <div class="page-content">
             <div class="container-fluid">
-
                 <div class="col-xxl-">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Working Experience Edit</h4>
+                            <h4 class="mb-0 card-title flex-grow-1">Edit Educational Qualification</h4>
                         </div><!-- end card header -->
                         <div class="card-body">
                             <form method="POST"
                                 action="{{ route('admin.educational.qualification.update', $educationalQualification->id) }}"
-                                enctype="multipart/form-data">
+                                enctype="multipart/form-educationalQualification">
                                 @csrf
                                 @method('PUT')
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="degree" class="form-label">Degree<span
                                                 class="text-danger">*</span></label>
@@ -35,7 +83,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="field_of_study" class="form-label">Field of Study</label>
                                     </div>
@@ -50,7 +98,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="institution_name" class="form-label">Institution Name<span
                                                 class="text-danger">*</span></label>
@@ -66,7 +114,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="location" class="form-label">Location</label>
                                     </div>
@@ -81,7 +129,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="start_date" class="form-label">Start Date<span
                                                 class="text-danger">*</span></label>
@@ -96,7 +144,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="end_date" class="form-label">End Date</label>
                                     </div>
@@ -110,7 +158,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="cgpa" class="form-label">CGPA</label>
                                     </div>
@@ -125,7 +173,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="certificate" class="form-label">Certificate (optional)</label>
                                     </div>
@@ -135,10 +183,20 @@
                                         @error('certificate')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                        <div class="image-preview-container" id="certificatePreview">
+                                            @if ($educationalQualification->certificate)
+                                                <div class="preview-container" style="position: relative;">
+                                                    <img src="{{ asset($educationalQualification->certificate) }}"
+                                                        alt="Certificate Preview" class="img-fluid">
+                                                    <button type="button" class="btn btn-danger btn-sm remove-btn"
+                                                        onclick="removeCertificate()">X</button>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="description" class="form-label">Description</label>
                                     </div>
@@ -151,25 +209,64 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-lg-9 offset-lg-3">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
             <!--end row-->
-
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-
-    </div>
 @endsection
 
 @push('js')
+    <script>
+        const certificateInput = document.getElementById('certificate');
+        const certificatePreview = document.getElementById('certificatePreview');
+
+        certificateInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const imagePreview = document.createElement('img');
+                    imagePreview.src = reader.result;
+                    imagePreview.alt = file.name;
+                    imagePreview.classList.add('img-fluid');
+
+                    certificatePreview.innerHTML = ''; // Clear previous previews
+
+                    // Create a container to hold the image and remove button
+                    const previewContainer = document.createElement('div');
+                    previewContainer.classList.add('preview-container');
+                    previewContainer.style.position = 'relative';
+
+                    // Create remove button
+                    const removeBtn = document.createElement('button');
+                    removeBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'remove-btn');
+                    removeBtn.textContent = 'X';
+                    removeBtn.addEventListener('click', function() {
+                        certificateInput.value = ''; // Reset file input
+                        certificatePreview.innerHTML = ''; // Clear preview
+                    });
+
+                    previewContainer.appendChild(imagePreview);
+                    previewContainer.appendChild(removeBtn);
+                    certificatePreview.appendChild(previewContainer);
+                };
+                reader.readAseducationalQualificationURL(file);
+            } else {
+                certificatePreview.innerHTML = '';
+            }
+        });
+
+        function removeCertificate() {
+            certificateInput.value = ''; // Reset file input
+            certificatePreview.innerHTML = ''; // Clear preview
+        }
+    </script>
 @endpush

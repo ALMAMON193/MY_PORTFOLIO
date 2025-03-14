@@ -43,14 +43,13 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>ID</th>
-                                            <th>Project Name</th>
-                                            <th>Description</th>
+                                            <th style="width:320px">Project Name</th>
                                             <th>Github Link</th>
                                             <th>Live Link</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
                                             <th>Status</th>
-                                            <th>Actions</th>
+                                            <th style="width: 180px">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,12 +142,7 @@
                             orderable: false,
                             searchable: false
                         },
-                        {
-                            data: 'description',
-                            name: 'description',
-                            orderable: false,
-                            searchable: false
-                        },
+
                         {
                             data: 'github_link',
                             name: 'github_link',

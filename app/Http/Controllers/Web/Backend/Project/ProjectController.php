@@ -36,13 +36,24 @@ class ProjectController extends Controller
 
                         return $status;
                     })
+                    ->addColumn('live_link', function ($data) {
+                        return '<a href="' . $data->live_link . '" target="_blank" class="btn btn-info btn-sm">
+                                    <i class="ri-external-link-line"></i> Live
+                                </a>';
+                    })
+
+                    ->addColumn('github_link', function ($data) {
+                        return '<a href="' . $data->github_link . '" target="_blank" class="btn btn-dark btn-sm">
+                                    <i class="ri-github-line"></i> GitHub
+                                </a>';
+                    })
 
                     ->addColumn('action', function ($data) {
-                        return '<a href="" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
+                        return '<a href="' . route('admin.project.view', $data->id) . '" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
                         <a href="' . route('admin.project.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>
-                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"></i> Delete</a>';
+                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"> Delete</i></a>';
                     })
-                    ->rawColumns(['action', 'status'])
+                    ->rawColumns(['action', 'status', 'live_link', 'github_link'])
                     ->make(true);
             }
             return view('backend.layout.Project.index');
@@ -122,28 +133,55 @@ class ProjectController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'github_link' => 'nullable|url',
+            'live_link' => 'nullable|url',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'description' => 'nullable|string',
+            'image.*' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:20040',
+            'video.*' => 'nullable|mimes:mp4,avi,mov,mkv|max:200480',
         ]);
 
+        // Find the project by ID
+        $project = Project::findOrFail($id);
 
-        $projects = Project::find($id);
-        $projects->name = $request->name;
+        // Update project details
+        $project->update([
+            'name' => $request->input('name'),
+            'github_link' => $request->input('github_link'),
+            'live_link' => $request->input('live_link'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Handle image uploads
         if ($request->hasFile('image')) {
-            $randomString = Str::random(10);
-            $imagePath = Helper::fileUpload($request->file('image'), 'projects/videos', $randomString);
-            if ($projects->image) {
-                $oldImagePath = public_path($projects->image);
-                if (file_exists($oldImagePath)) {
-                    Helper::fileDelete($oldImagePath);
-                }
+            foreach ($request->file('image') as $image) {
+                $imagePath = Helper::fileUpload($image, 'projects/images', $image->getClientOriginalName());
+                ProjectImage::create([
+                    'project_id' => $project->id,
+                    'image' => $imagePath,
+                ]);
             }
-            $projects->image = $imagePath;
         }
-        $projects->save();
 
-        return redirect()->route('admin.project.index')->with('t-success', 'Drill updated successfully.');
+        // Handle video uploads
+        if ($request->hasFile('video')) {
+            foreach ($request->file('video') as $video) {
+                $videoPath = Helper::fileUpload($video, 'projects/videos', $video->getClientOriginalName());
+                ProjectVideo::create([
+                    'project_id' => $project->id,
+                    'video' => $videoPath,
+                ]);
+            }
+        }
+
+        // Redirect back with success message
+        return redirect()->route('admin.project.index', $project->id)->with('success', 'Project updated successfully!');
     }
 
     public function destroy($id)
@@ -210,5 +248,13 @@ class ProjectController extends Controller
         $video->delete();
         // Return a success response
         return response()->json(['success' => true]);
+    }
+
+    public function view($id)
+    {
+        $data = Project::where('id', $id)->first();
+        $projectImages = ProjectImage::where('project_id', $id)->get();
+        $projectVideos = ProjectVideo::where('project_id', $id)->get();
+        return view('backend.layout.Project.view', compact('data', 'projectImages', 'projectVideos'));
     }
 }

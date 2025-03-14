@@ -1,139 +1,97 @@
 @extends('backend.app')
+@section('title', 'Admin Dashboard | Edit Project')
 
-@section('title', 'Edit Project')
+@push('style')
+    <style>
+        .preview-img,
+        .preview-video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .text-muted {
+            font-size: 12px;
+            color: #6c757d;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .image-preview-container,
+        .video-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .preview-card {
+            position: relative;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 2px 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 50%;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                <div class="col-xxl-">
-                    <div class="card">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Edit Project</h4>
-                        </div><!-- end card header -->
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('admin.project.update', $data->id) }}"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="nameInput" class="form-label">Name <span
-                                                class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Edit Project</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="mb-0 card-title">Edit Project Details</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <form action="{{ route('admin.project.update', $data->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="mb-3">
+                                        <label for="nameInput" class="form-label">Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             id="nameInput" name="name" value="{{ old('name', $data->name) }}"
-                                            placeholder="Enter your project name">
+                                            placeholder="Enter project name">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="inputImage" class="form-label">Image <span
-                                                class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="imageInput" multiple name="image[]" accept="image/*">
-                                        @error('image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @else
-                                            <span class="text-warning">Only png, jpg, jpeg files are allowed</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-9">
-                                        <div id="previewContainer">
-                                            @foreach ($projectImages as $image)
-                                                <div class="card mb-2 bg-light border-success hover-shadow"
-                                                    style="padding: 10px;" data-index="{{ $loop->index }}">
-                                                    <div class="d-flex align-items-center"
-                                                        style="height: 80px; width: 100%; padding: 7px;">
-                                                        <img src="{{ asset($image->image) }}"
-                                                            style="height: 100%; flex-shrink: 0;">
-                                                        <div class="d-flex flex-column ms-3">
-                                                            <div class="fw-bold">{{ basename($image->image) }}</div>
-                                                            <div class="text-muted">
-                                                                {{ round(filesize(public_path($image->image)) / 1024 / 1024, 2) }}
-                                                                MB</div>
-                                                        </div>
-                                                        <button type="button" class="btn btn-danger ms-auto btn-sm"
-                                                            onclick="removeExistingImage({{ $image->id }})">Remove</button>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="descriptionInput" class="form-label">Description <span
-                                                class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description"
-                                            rows="3" placeholder="Enter your project description">{{ old('description', $data->description) }}</textarea>
-                                        @error('description')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="videoInput" class="form-label">Video</label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input type="file" class="form-control @error('video') is-invalid @enderror"
-                                            id="videoInput" multiple name="video[]" accept="video/*">
-                                        @error('video')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @else
-                                            <small class="text-warning">Only mp4, mov, avi, wmv files are allowed.</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-9">
-                                        <div id="videoPreviewContainer">
-                                            @foreach ($projectVideos as $video)
-                                                <div class="card mb-2 bg-light border-success hover-shadow"
-                                                    style="padding: 10px;" data-index="{{ $loop->index }}">
-                                                    <div class="d-flex align-items-center"
-                                                        style="height: 80px; width: 100%; padding: 7px;">
-                                                        <video src="{{ asset($video->video) }}"
-                                                            style="height: 100%; flex-shrink: 0;" controls></video>
-                                                        <div class="d-flex flex-column ms-3">
-                                                            <div class="fw-bold">{{ basename($video->video) }}</div>
-                                                            <div class="text-muted">
-                                                                {{ round(filesize(public_path($video->video)) / 1024 / 1024, 2) }}
-                                                                MB</div>
-                                                        </div>
-                                                        <button type="button" class="btn btn-danger ms-auto btn-sm"
-                                                            onclick="removeExistingVideo({{ $video->id }})">Remove</button>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
+
+                                    <div class="mb-3">
                                         <label for="githubLinkInput" class="form-label">Github Link</label>
-                                    </div>
-                                    <div class="col-lg-9">
                                         <input type="url"
                                             class="form-control @error('github_link') is-invalid @enderror"
                                             id="githubLinkInput" name="github_link"
@@ -145,14 +103,10 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
+
+                                    <div class="mb-3">
                                         <label for="liveLinkInput" class="form-label">Live Link</label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input type="url"
-                                            class="form-control @error('live_link') is-invalid @enderror"
+                                        <input type="url" class="form-control @error('live_link') is-invalid @enderror"
                                             id="liveLinkInput" name="live_link"
                                             value="{{ old('live_link', $data->live_link) }}"
                                             placeholder="Enter your project live link">
@@ -162,163 +116,189 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="startDateInput" class="form-label">Start Date <span
-                                                class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input type="text"
-                                            class="form-control @error('start_date') is-invalid @enderror"
+
+                                    <div class="mb-3">
+                                        <label for="startDateInput" class="form-label">Start Date</label>
+                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror"
                                             id="startDateInput" name="start_date"
                                             value="{{ old('start_date', $data->start_date) }}"
-                                            placeholder="Enter your project start date">
+                                            placeholder="Enter project start date">
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="endDateInput" class="form-label">End Date <span
-                                                class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input type="text" class="form-control @error('end_date') is-invalid @enderror"
-                                            id="endDateInput" name="end_date"
-                                            value="{{ old('end_date', $data->end_date) }}"
-                                            placeholder="Enter your project end date">
+
+                                    <div class="mb-3">
+                                        <label for="endDateInput" class="form-label">End Date</label>
+                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror"
+                                            id="endDateInput" name="end_date" value="{{ old('end_date', $data->end_date) }}"
+                                            placeholder="Enter project end date">
                                         @error('end_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="text-end">
-                                    <button type="submit" class="btn btn-primary">Update Project</button>
-                                </div>
-                            </form>
+
+                                    <div class="mb-3">
+                                        <label for="descriptionInput" class="form-label">Description</label>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description"
+                                            rows="3" placeholder="Enter project description">{{ old('description', $data->description) }}</textarea>
+                                        @error('description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Image Upload -->
+                                    <div class="mb-3">
+                                        <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
+                                            SVG)</label>
+                                        <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                            id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
+                                        @error('image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Display Existing Images -->
+                                    <div class="image-preview-container" id="previewContainer">
+                                        @foreach ($projectImages as $image)
+                                            <div class="preview-card">
+                                                <img src="{{ asset($image->image) }}" class="preview-img"
+                                                    alt="Project Image">
+                                                <div class="text-muted">{{ basename($image->image) }}</div>
+                                                <button type="button" class="remove-btn"
+                                                    onclick="deleteImage({{ $image->id }})">X</button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <!-- Video Upload -->
+                                    <div class="mb-3">
+                                        <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV,
+                                            MKV)</label>
+                                        <input type="file" class="form-control @error('video') is-invalid @enderror"
+                                            id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv">
+                                        @error('video')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Display Existing Videos -->
+                                    <div class="video-preview-container" id="videoPreviewContainer">
+                                        @foreach ($projectVideos as $video)
+                                            <div class="preview-card">
+                                                <video src="{{ asset($video->video) }}" class="preview-video"
+                                                    controls></video>
+                                                <div class="text-muted">{{ basename($video->video) }}</div>
+                                                <button type="button" class="remove-btn"
+                                                    onclick="deleteVideo({{ $video->id }})">X</button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <button type="submit" class="mt-3 btn btn-primary">Update Project</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--end row-->
-        </div> <!-- container-fluid -->
+        </div>
     </div>
-    <!-- End Page-content -->
 @endsection
 
-@push('js')
+@push('script')
     <script>
-        document.getElementById('imageInput').addEventListener('change', function(event) {
-            handleFileSelection(event, 'image');
-        });
-
-        document.getElementById('videoInput').addEventListener('change', function(event) {
-            handleFileSelection(event, 'video');
-        });
-
-        function handleFileSelection(event, type) {
-            const inputElement = event.target;
-            const previewContainer = type === 'image' ? document.getElementById('previewContainer') : document
-                .getElementById('videoPreviewContainer');
-
-            const maxImageSize = 50 * 1024 * 1024; // 50MB in bytes
-            const maxVideoSize = 500 * 1024 * 1024; // 500MB in bytes
-
-            previewContainer.innerHTML = ''; // Clear previous preview
+        function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
+            const input = document.getElementById(inputId);
+            const previewContainer = document.getElementById(previewContainerId);
             const newFileList = new DataTransfer();
+            const existingFiles = new Set();
 
-            Array.from(inputElement.files).forEach((file, index) => {
-                const isImage = type === 'image' && file.type.startsWith('image/');
-                const isVideo = type === 'video' && file.type.startsWith('video/');
-                const isValidSize = (isImage && file.size <= maxImageSize) || (isVideo && file.size <=
-                    maxVideoSize);
+            // Preserve existing previews
+            Array.from(previewContainer.children).forEach(card => {
+                const fileName = card.querySelector('.text-muted').textContent.split(' ')[0];
+                existingFiles.add(fileName);
+            });
 
-                if (!isValidSize) {
-                    alert(`"${file.name}" exceeds the size limit (${isImage ? '50MB' : '500MB'}).`);
+            // Process new files
+            Array.from(input.files).forEach((file, index) => {
+                const fileType = isImage ? 'image/' : 'video/';
+                if (!file.type.startsWith(fileType)) {
+                    alert(`"${file.name}" is not a valid ${isImage ? 'image' : 'video'} file.`);
                     return;
                 }
+                if (existingFiles.has(file.name)) {
+                    alert(`"${file.name}" is already added.`);
+                    return;
+                }
+                newFileList.items.add(file);
+                existingFiles.add(file.name);
 
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const card = document.createElement('div');
-                    card.classList.add('card', 'mb-2', 'bg-light', 'border-success', 'hover-shadow');
-                    card.style.padding = '10px';
+                    card.classList.add('preview-card');
                     card.dataset.index = index;
-
-                    const previewCard = document.createElement('div');
-                    previewCard.classList.add('d-flex', 'align-items-center');
-                    previewCard.style.height = '80px';
-                    previewCard.style.width = '100%';
-                    previewCard.style.padding = '7px';
 
                     let mediaElement;
                     if (isImage) {
                         mediaElement = document.createElement('img');
-                        mediaElement.src = e.target.result;
-                        mediaElement.style.height = '100%';
-                        mediaElement.style.flexShrink = '0';
+                        mediaElement.classList.add('preview-img');
                     } else {
                         mediaElement = document.createElement('video');
-                        mediaElement.src = e.target.result;
+                        mediaElement.classList.add('preview-video');
                         mediaElement.controls = true;
-                        mediaElement.style.height = '100%';
-                        mediaElement.style.flexShrink = '0';
                     }
+                    mediaElement.src = e.target.result;
 
-                    const textContainer = document.createElement('div');
-                    textContainer.classList.add('d-flex', 'flex-column', 'ms-3');
-
-                    const fileName = document.createElement('div');
-                    fileName.classList.add('fw-bold');
-                    fileName.innerText = file.name;
-
-                    const fileSize = document.createElement('div');
-                    fileSize.classList.add('text-muted');
-                    fileSize.innerText = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-
-                    textContainer.appendChild(fileName);
-                    textContainer.appendChild(fileSize);
+                    const fileInfo = document.createElement('div');
+                    fileInfo.classList.add('text-muted');
+                    const fileSize = (file.size / 1024).toFixed(2); // size in KB
+                    fileInfo.innerHTML = `${file.name} (${fileSize} KB)`;
 
                     const removeBtn = document.createElement('button');
-                    removeBtn.innerText = 'Remove';
-                    removeBtn.classList.add('btn', 'btn-danger', 'ms-auto', 'btn-sm');
+                    removeBtn.innerText = 'X';
+                    removeBtn.classList.add('remove-btn');
                     removeBtn.addEventListener('click', function() {
                         card.remove();
-                        removeFileFromInput(file.name, type);
+                        removeFileFromInput(file.name, inputId);
                     });
 
-                    previewCard.appendChild(mediaElement);
-                    previewCard.appendChild(textContainer);
-                    previewCard.appendChild(removeBtn);
-                    card.appendChild(previewCard);
+                    card.appendChild(mediaElement);
+                    card.appendChild(fileInfo);
+                    card.appendChild(removeBtn);
                     previewContainer.appendChild(card);
                 };
                 reader.readAsDataURL(file);
-
-                newFileList.items.add(file);
             });
 
-            inputElement.files = newFileList.files;
+            if (newFileList.files.length < 1) {
+                alert(`You must upload at least 1 ${isImage ? 'image' : 'video'}.`);
+                return;
+            }
+
+            input.files = newFileList.files;
         }
 
-        function removeFileFromInput(fileName, type) {
-            const inputElement = type === 'image' ? document.getElementById('imageInput') : document.getElementById(
-                'videoInput');
-            const fileList = Array.from(inputElement.files).filter(file => file.name !== fileName);
-
+        function removeFileFromInput(fileName, inputId) {
+            const input = document.getElementById(inputId);
+            const fileList = Array.from(input.files).filter(file => file.name !== fileName);
             const newFileList = new DataTransfer();
             fileList.forEach(file => newFileList.items.add(file));
-
-            inputElement.files = newFileList.files;
+            input.files = newFileList.files;
         }
 
-        function removeExistingImage(imageId) {
+        function deleteImage(imageId) {
             if (confirm('Are you sure you want to remove this image?')) {
                 fetch(`{{ url('admin/project/image') }}/${imageId}`, {
                         method: 'DELETE',
@@ -328,13 +308,13 @@
                     }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            document.querySelector(`div[data-index="${imageId}"]`).remove();
+                            location.reload();
                         }
                     });
             }
         }
 
-        function removeExistingVideo(videoId) {
+        function deleteVideo(videoId) {
             if (confirm('Are you sure you want to remove this video?')) {
                 fetch(`{{ url('admin/project/video') }}/${videoId}`, {
                         method: 'DELETE',
@@ -344,10 +324,18 @@
                     }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            document.querySelector(`div[data-index="${videoId}"]`).remove();
+                            location.reload();
                         }
                     });
             }
         }
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            handleFileSelect(event, 'imageInput', 'previewContainer', true);
+        });
+
+        document.getElementById('videoInput').addEventListener('change', function(event) {
+            handleFileSelect(event, 'videoInput', 'videoPreviewContainer', false);
+        });
     </script>
 @endpush
