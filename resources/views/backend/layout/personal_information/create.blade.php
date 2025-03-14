@@ -1,6 +1,15 @@
 @extends('backend.app')
 
 @section('title', 'Create Personal Information')
+@push('style')
+    <style>
+        .card-header {
+            background-color: #F3F6F9;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 15px;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="main-content">
         <div class="page-content">

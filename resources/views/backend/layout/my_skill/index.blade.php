@@ -1,160 +1,270 @@
 @extends('backend.app')
-
-@section('title', 'Data')
-
-@section('styles')
-
-@endsection
-
+@section('title', 'Admin Dashboard | Projects')
+@push('style')
+@endpush
 @section('content')
     <div class="main-content">
+
         <div class="page-content">
             <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div
+                            class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                            <h4 class="mb-sm-0">Projects</h4>
+
+                            <div class="page-title-right">
+                                <ol class="m-0 breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Projects</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <h5 class="card-title mb-0">My Skills Lists</h5>
-                                <a href="{{ route('admin.my.skill.create') }}" class="btn btn-primary btn-sm">Add New
-                                    skill</a>
-                            </div>
-                            <div class="card-body">
-                                <div id="alternative-pagination_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="alternative-pagination_length"><label>Show
-                                                    <select id="per_page" name="alternative-pagination_length"
-                                                        aria-controls="alternative-pagination"
-                                                        class="form-select form-select-sm">
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select> entries</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="alternative-pagination_filter" class="dataTables_filter">
-                                                <label>Search:<input type="search" class="form-control form-control-sm"
-                                                        placeholder="" id="search"
-                                                        aria-controls="alternative-pagination"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="data-table" class="table table-bordered align-middle"
-                                                style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Percentage</th>
-                                                        <th>Skill Type</th>
-                                                        <th>Icon</th>
-                                                        <th>Description</th>
-                                                        <th style="width: 180px">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($skills as $item)
-                                                        <tr>
-                                                            <td class="text-center">{{ $item->id }}</td>
-                                                            <td>{{ $item->name }}</td>
-                                                            <td>{{ $item->percentage }}</td>
-                                                            <td>{{ $item->skill_type }}</td>
-                                                            <td class="text-center"><img src="{{ asset($item->icon) }}"
-                                                                    alt="icon" width="30"></td>
-                                                            <td>{{ $item->description }}</td>
-                                                            <td>
-                                                                <a href=""
-                                                                    class="btn btn-sm btn-soft-primary">View</a>
-                                                                <a href="{{ route('admin.my.skill.edit', $item->id) }}"
-                                                                    class="btn btn-sm btn-soft-success">Edit</a>
-                                                                <button class="btn btn-sm btn-soft-danger"
-                                                                    onclick="deleteData({{ $item->id }})">Delete</button>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="alternative-pagination_info" role="status"
-                                                aria-live="polite">Showing {{ $skills->firstItem() }} to
-                                                {{ $skills->lastItem() }} of {{ $skills->total() }} entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_full_numbers"
-                                                id="alternative-pagination_paginate">
-                                                <ul class="pagination">
-                                                    <li
-                                                        class="paginate_button page-item {{ $skills->onFirstPage() ? 'disabled' : '' }}">
-                                                        <a href="{{ $skills->previousPageUrl() }}"
-                                                            aria-controls="alternative-pagination" data-dt-idx="0"
-                                                            tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    @for ($i = 1; $i <= $skills->lastPage(); $i++)
-                                                        <li
-                                                            class="paginate_button page-item {{ $skills->currentPage() == $i ? 'active' : '' }}">
-                                                            <a href="{{ $skills->url($i) }}"
-                                                                aria-controls="alternative-pagination" data-dt-idx="2"
-                                                                tabindex="0" class="page-link">{{ $i }}</a>
-                                                        </li>
-                                                    @endfor
-                                                    <li
-                                                        class="paginate_button page-item {{ $skills->hasMorePages() ? '' : 'disabled' }}">
-                                                        <a href="{{ $skills->nextPageUrl() }}"
-                                                            aria-controls="alternative-pagination" data-dt-idx="5"
-                                                            tabindex="0" class="page-link">Next</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="card-header d-flex align-items-center">
+                                <h5 class="mb-0 card-title flex-grow-1">Projects List</h5>
+                                <div>
+                                    <a href="{{ route('admin.my.skill.create') }}" class="btn btn-primary"><i
+                                            class="align-middle ri-add-line me-1"></i> Add Skill</a>
                                 </div>
+                            </div>
+
+                            <div class="card-body table-responsive">
+                                <table id="data-table" class="table mb-0 align-middle" style="width:100%">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Skill Name</th>
+                                            <th>Skill Type</th>
+                                            <th>Icon</th>
+                                            <th>Description</th>
+                                            <th>Percentage</th>
+                                            <th style="width: 180px">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div><!--end col-->
-                </div>
+                </div><!--end row-->
+
             </div>
+            <!-- container-fluid -->
         </div>
+        <!-- End Page-content -->
     </div>
 @endsection
-
-@section('scripts')
+@push('script')
     <script>
         $(document).ready(function() {
-            let debounceTimer;
+            var searchable = [];
+            var selectable = [];
 
-            function fetchData() {
-                let searchQuery = $('#search').val();
-                let perPage = $('#per_page').val();
+            // CSRF Token setup for ajax requests
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                }
+            });
 
-                $.ajax({
-                    url: "{{ route('admin.project.index') }}",
-                    method: "GET",
-                    data: {
-                        search: searchQuery,
-                        per_page: perPage,
+            // Initialize DataTable if it's not already initialized
+            if (!$.fn.DataTable.isDataTable('#data-table')) {
+                let dTable = $('#data-table').DataTable({
+                    order: [],
+                    lengthMenu: [
+                        [10, 25, 50, 100, 200, 500, -1],
+                        ["10", "25", "50", "100", "200", "500", "All"]
+                    ],
+                    pageLength: 10,
+                    processing: true,
+                    responsive: true,
+                    serverSide: true,
+                    language: {
+                        lengthMenu: '_MENU_',
+                        search: '',
+                        searchPlaceholder: 'Search..',
+                        zeroRecords: `<tr class="noresult" style ='display:flex; justify-content:center; width:100%;'>
+                            <td colspan="11" class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                        colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px">
+                                    </lord-icon>
+                                </div>
+                                <h5 class="mt-2 text-center">Sorry! No Result Found</h5>
+                                <p class="mb-0 text-center text-muted">We've searched more than 150+ Orders. We did not find any results for your search.</p>
+                            </td>
+                        </tr>`,
+                        infoEmpty: "",
+                        infoFiltered: ""
                     },
-                    success: function(response) {
-                        $('#alternative-pagination_wrapper').html(response.html);
-                    }
+                    scroller: {
+                        loadingIndicator: false
+                    },
+                    pagingType: "full_numbers",
+                    dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    ajax: {
+                        url: "{{ route('admin.my.skill.index') }}",
+                        type: "get",
+                        dataSrc: function(json) {
+                            // Show "No Result Found" if there is no data
+                            if (json.data.length === 0) {
+                                $('.noresult').show();
+                            } else {
+                                $('.noresult').hide();
+                            }
+                            return json.data;
+                        }
+                    },
+
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+
+                        {
+                            data: 'name',
+                            name: 'name',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'skill_type',
+                            name: 'skill_type',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'icon',
+                            name: 'icon',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'description',
+                            name: 'description',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'percentage',
+                            name: 'percentage',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                });
+
+                new DataTable('#example', {
+                    responsive: true
                 });
             }
-
-            // Handle per-page change
-            $('#per_page').on('change', function() {
-                fetchData();
-            });
-
-            // Handle search with debounce
-            $('#search').on('keyup', function() {
-                clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(fetchData, 500);
-            });
         });
+
+
+        function deleteAlert(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ route('admin.my.skill.destroy', ['id' => ':id']) }}`.replace(':id',
+                            id),
+                        method: 'delete',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id
+                        },
+                        success: function(response) {
+                            if (response['t-success']) {
+                                Swal.fire('Deleted!', response['message'], 'success').then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire('Error!', 'There was an issue deleting the record.', 'error');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Error deleting record ' + id + ': ' + xhr.responseText);
+                            Swal.fire('Error!', xhr.responseText, 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Status Change Confirm Alert
+        function showStatusChangeAlert(event, id, newStatus) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You want to update the status to ' + newStatus + '?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                customClass: {
+                    confirmButton: 'custom-confirm-button',
+                    cancelButton: 'custom-cancel-button'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    statusChange(id, newStatus);
+                }
+            });
+        }
+
+        // Status Change Function
+        function statusChange(id, newStatus) {
+            var url = '{{ route('admin.project.status', ['id' => ':id']) }}';
+            $.ajax({
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                url: url.replace(':id', id),
+                data: {
+                    status: newStatus
+                },
+                success: function(resp) {
+                    $('#data-table').DataTable().ajax.reload();
+                    if (resp.success) {
+                        toastr.success(resp.message);
+                    } else {
+                        toastr.error(resp.message);
+                    }
+                },
+                error: function(error) {
+                    toastr.error('Something went wrong!');
+                }
+            });
+        }
     </script>
-@endsection
+@endpush

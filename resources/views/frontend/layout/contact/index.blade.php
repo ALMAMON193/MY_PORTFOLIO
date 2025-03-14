@@ -39,7 +39,9 @@
                     </div>
                     <div class="grid grid-cols-12 gap-[30px]">
                         <div class="col-span-12 mt-[30px] lg:col-span-7">
-                            <form id="contact-form" class="contact-form" data-aos="fade-up" data-aos-delay="100">
+                            <form method="POST" action="{{ route('contact.store') }}" enctype="multipart/form-data"
+                                class="contact-form" data-aos="fade-up" data-aos-delay="100">
+                                @csrf
                                 <div class="grid gap-[30px] md:flex">
                                     <input class="inputBox" type="text" placeholder="Enter Your Name" id="name"
                                         name="name" required="required">
@@ -47,16 +49,16 @@
                                         placeholder="Enter Your Email">
                                 </div>
                                 <div class="mt-[30px]">
-                                    <input class="inputBox" placeholder="Website Link:" type="url" id="website"
-                                        name="website" required="required">
+                                    <input class="inputBox" placeholder="Website Link:" type="text" id="website"
+                                        name="subject" required="required">
                                 </div>
                                 <div class="mt-[30px]">
-                                    <textarea name="" id="" cols="30" rows="10" placeholder="Enter Your Massage"
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter Your Massage"
                                         class="w-full rounded-lg border bg-transparent p-[15px] pl-[10px] text-text focus:outline-none dark:border-btn"></textarea>
                                 </div>
                                 <div class="wow fadeIn animated mt-[30px]"
                                     style="visibility: hidden; animation-name: none;">
-                                    <button class="btn">SEND MESSAGE</button>
+                                    <button type="submit" class="btn">SEND MESSAGE</button>
                                     <!-- <p>success</p> -->
                                 </div>
                             </form>

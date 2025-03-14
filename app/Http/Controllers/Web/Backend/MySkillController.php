@@ -2,18 +2,42 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
+use Exception;
 use App\Helpers\Helper;
 use App\Models\MySkill;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class MySkillController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $skills = MySkill::paginate(10);
-        return view('backend.layout.my_skill.index', compact('skills'));
+        try {
+            if ($request->ajax()) {
+                $data = MySkill::latest()->get();
+                return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('icon', function ($data) {
+                        $image = $data->icon;
+                        $url = asset($image);
+                        return '<img src="' . $url . '" alt="image" width="100px" height="100px" style="margin-left:20px;">';
+                    })
+                    ->addColumn('action', function ($data) {
+                        return '<a href="' . route('admin.my.skill.view', $data->id) . '" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
+                        <a href="' . route('admin.my.skill.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>
+                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"> Delete</i></a>';
+                    })
+                    ->rawColumns(['icon', 'action'])
+                    ->make(true);
+            }
+            return view('backend.layout.my_skill.index');
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
     }
 
     public function create()
@@ -95,5 +119,10 @@ class MySkillController extends Controller
         $skill->delete();
 
         return redirect()->route('admin.my.skill.index')->with('success', 'Skill deleted successfully');
+    }
+    public function view($id)
+    {
+        $skill = MySkill::findOrFail($id);
+        return view('backend.layout.my_skill.view', compact(var_name: 'skill'));
     }
 }

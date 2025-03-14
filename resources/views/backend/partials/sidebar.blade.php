@@ -107,6 +107,13 @@
                         <i class="ri-skull-2-line"></i> <span data-key="t-my-skills">My Skills</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.service.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.service.index') ? 'active' : '' }}"
+                        data-key="t-my-skills" id="sidebar-my-skills">
+                        <i class="ri-skull-2-line"></i> <span data-key="t-my-skills">Services</span>
+                    </a>
+                </li>
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span>
                 </li>
                 <li class="nav-item">

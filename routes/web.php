@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\Backend\EducationalQualificationController;
 use App\Http\Controllers\Web\Backend\MySkillController;
+use App\Http\Controllers\web\Backend\Service\ServiceControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\Profile\ProfileController;
 use App\Http\Controllers\Web\Backend\Project\ProjectController;
@@ -41,7 +42,7 @@ Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->g
     Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [ProjectController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [ProjectController::class, 'destroy'])->name('destroy');
-    Route::patch('/status/{id}', action: [ProjectController::class, 'status'])->name('status');
+    Route::post('/status/{id}', action: [ProjectController::class, 'status'])->name('status');
     Route::delete('/image/{id}', [ProjectController::class, 'deleteImage'])->name('deleteImage');
     Route::delete('/video/{id}', [ProjectController::class, 'deleteVideo'])->name('deleteVideo');
     Route::get('/view/{id}', [ProjectController::class, 'view'])->name('view');
@@ -51,7 +52,7 @@ Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->g
 Route::middleware(['guest'])->prefix('admin/personal-info')->name('admin.personal.info.')->group(function () {
     Route::get('/create', [PersonalInformationController::class, 'create'])->name('create');
     Route::post('/store', [PersonalInformationController::class, 'store'])->name('store');
-    Route::patch('/status/{id}', [PersonalInformationController::class, 'status'])->name('status');
+    Route::post('/status/{id}', [PersonalInformationController::class, 'status'])->name('status');
 });
 
 //drill all route
@@ -84,8 +85,29 @@ Route::middleware(['guest'])->prefix('admin/my-skill')->name('admin.my.skill.')-
     Route::get('/edit/{id}', [MySkillController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [MySkillController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [MySkillController::class, 'destroy'])->name('destroy');
-    Route::patch('/status/{id}', [MySkillController::class, 'status'])->name('status');
+    Route::post('/status/{id}', [MySkillController::class, 'status'])->name('status');
+    Route::get('/view/{id}', [MySkillController::class, 'view'])->name('view');
 });
 
+Route::middleware(['guest'])->prefix('admin/service')->name('admin.service.')->group(function () {
+    Route::get('/', [ServiceControler::class, 'index'])->name('index');
+    Route::get('/create', [ServiceControler::class, 'create'])->name('create');
+    Route::post('/store', [ServiceControler::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [ServiceControler::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [ServiceControler::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [ServiceControler::class, 'destroy'])->name('destroy');
+    Route::post('/status/{id}', [ServiceControler::class, 'status'])->name('status');
+    Route::get('/view/{id}', [ServiceControler::class, 'view'])->name('view');
+});
+Route::middleware(['guest'])->prefix('admin/service')->name('admin.service.')->group(function () {
+    Route::get('/', [ServiceControler::class, 'index'])->name('index');
+    Route::get('/create', [ServiceControler::class, 'create'])->name('create');
+    Route::post('/store', [ServiceControler::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [ServiceControler::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [ServiceControler::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [ServiceControler::class, 'destroy'])->name('destroy');
+    Route::post('/status/{id}', [ServiceControler::class, 'status'])->name('status');
+    Route::get('/view/{id}', [ServiceControler::class, 'view'])->name('view');
+});
 
 require __DIR__ . '/auth.php';

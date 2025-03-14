@@ -1,6 +1,7 @@
 @extends('backend.app')
 
 @section('title', 'Create Work Experience')
+
 @section('content')
     <div class="main-content">
 
@@ -10,14 +11,14 @@
                 <div class="col-xxl-">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Work Experience Create</h4>
+                            <h4 class="mb-0 card-title flex-grow-1">Work Experience Create</h4>
 
                         </div><!-- end card header -->
                         <div class="card-body">
                             <form method="POST" action="{{ route('admin.working.experience.store') }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="job_title" class="form-label">Job Title<span
                                                 class="text-danger">*</span> </label>
@@ -32,7 +33,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="company_name" class="form-label">Company Name<span
                                                 class="text-danger">*</span> </label></label>
@@ -47,7 +48,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="location" class="form-label">Location</label>
                                     </div>
@@ -61,7 +62,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="start_date" class="form-label">Start Date<span
                                                 class="text-danger">*</span> </label></label>
@@ -76,7 +77,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="end_date" class="form-label">End Date</label>
                                     </div>
@@ -90,7 +91,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="job_description" class="form-label">Job Description</label>
                                     </div>
@@ -103,7 +104,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="mb-3 row">
                                     <div class="col-lg-3">
                                         <label for="employment_type" class="form-label">Employment Type</label>
                                     </div>

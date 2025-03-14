@@ -9,4 +9,5 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('/service', [HomeController::class, 'service'])->name('service');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/contact', action: [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [HomeController::class, 'store'])->name('contact.store');

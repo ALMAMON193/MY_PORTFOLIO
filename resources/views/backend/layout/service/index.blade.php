@@ -1,5 +1,5 @@
 @extends('backend.app')
-@section('title', 'Admin Dashboard | Projects')
+@section('title', 'Admin Dashboard | Services')
 @push('style')
 @endpush
 @section('content')
@@ -13,12 +13,12 @@
                     <div class="col-12">
                         <div
                             class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                            <h4 class="mb-sm-0">Projects</h4>
+                            <h4 class="mb-sm-0">Services</h4>
 
                             <div class="page-title-right">
                                 <ol class="m-0 breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Projects</li>
+                                    <li class="breadcrumb-item active">Services</li>
                                 </ol>
                             </div>
 
@@ -31,10 +31,10 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
-                                <h5 class="mb-0 card-title flex-grow-1">Projects List</h5>
+                                <h5 class="mb-0 card-title flex-grow-1">Services List</h5>
                                 <div>
-                                    <a href="{{ route('admin.working.experience.create') }}" class="btn btn-primary"><i
-                                            class="align-middle ri-add-line me-1"></i> Add Skill</a>
+                                    <a href="{{ route('admin.service.create') }}" class="btn btn-primary"><i
+                                            class="align-middle ri-add-line me-1"></i> Add Service</a>
                                 </div>
                             </div>
 
@@ -43,13 +43,10 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>ID</th>
-                                            <th>Job Title</th>
-                                            <th>Company Name</th>
-                                            <th>Location</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Job Description</th>
-                                            <th>Employment Type</th>
+                                            <th>Name</th>
+                                            <th>Image</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
                                             <th style="width: 180px">Actions</th>
                                         </tr>
                                     </thead>
@@ -118,7 +115,7 @@
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     ajax: {
-                        url: "{{ route('admin.working.experience.index') }}",
+                        url: "{{ route('admin.service.index') }}",
                         type: "get",
                         dataSrc: function(json) {
                             // Show "No Result Found" if there is no data
@@ -137,45 +134,28 @@
                             orderable: false,
                             searchable: false
                         },
+
                         {
-                            data: 'job_title',
-                            name: 'job_title',
+                            data: 'name',
+                            name: 'name',
                             orderable: false,
                             searchable: false
                         },
                         {
-                            data: 'company_name',
-                            name: 'company_name',
+                            data: 'image',
+                            name: 'image',
                             orderable: false,
                             searchable: false
                         },
                         {
-                            data: 'location',
-                            name: 'location',
+                            data: 'description',
+                            name: 'description',
                             orderable: false,
                             searchable: false
                         },
                         {
-                            data: 'start_date',
-                            name: 'start_date',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'end_date',
-                            name: 'end_date',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'job_description',
-                            name: 'job_description',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'employment_type',
-                            name: 'employment_type',
+                            data: 'status',
+                            name: 'status',
                             orderable: false,
                             searchable: false
                         },
@@ -207,7 +187,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `{{ route('admin.my.skill.destroy', ['id' => ':id']) }}`.replace(':id',
+                        url: `{{ route('admin.service.destroy', ['id' => ':id']) }}`.replace(':id',
                             id),
                         method: 'delete',
                         data: {
@@ -220,7 +200,7 @@
                                     location.reload();
                                 });
                             } else {
-                                Swal.fire('Error!', 'There was an issue deleting the record.', 'error');
+                                Swal.fire('Error!', response['message'], 'error');
                             }
                         },
                         error: function(xhr, status, error) {
@@ -256,7 +236,7 @@
 
         // Status Change Function
         function statusChange(id, newStatus) {
-            var url = '{{ route('admin.project.status', ['id' => ':id']) }}';
+            var url = '{{ route('admin.service.status', ['id' => ':id']) }}';
             $.ajax({
                 type: "POST",
                 headers: {

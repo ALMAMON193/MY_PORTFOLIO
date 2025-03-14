@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\WorkingExperience;
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\WorkingExperience;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class WorkingExperienceController extends Controller
 {
@@ -12,22 +15,25 @@ class WorkingExperienceController extends Controller
 
     public function index(Request $request)
     {
-        $experiences = WorkingExperience::orderBy('id', 'asc');
+        try {
+            if ($request->ajax()) {
+                $data = WorkingExperience::latest()->get();
+                return DataTables::of($data)
+                    ->addIndexColumn()
 
-        // Handle search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $experiences->where('name', 'LIKE', "%{$request->search}%")
-                ->orWhere('description', 'LIKE', "%{$request->search}%");
+                    ->addColumn('action', function ($data) {
+                        return '<a href="' . route('admin.working.experience.view', $data->id) . '" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
+                        <a href="' . route('admin.working.experience.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>
+                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"> Delete</i></a>';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+            return view('backend.layout.working_experience.index');
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-
-        // Get per_page value from request or set default to 10
-        $perPage = $request->per_page ?? 10;
-
-        // Paginate the results
-        $experiences = $experiences->paginate($perPage);
-
-        // Pass the paginated data to the view
-        return view('backend.layout.working_experience.index', compact('experiences'));
     }
 
 
@@ -75,5 +81,15 @@ class WorkingExperienceController extends Controller
 
         // Redirect with success message
         return redirect()->route('admin.working.experience.index')->with('success', 'Data updated successfully');
+    }
+    public function destroy($id)
+    {
+        WorkingExperience::findOrFail($id)->delete();
+        return redirect()->route('admin.working.experience.index')->with('success', 'Data deleted successfully');
+    }
+    public function view($id)
+    {
+        $experiences = WorkingExperience::findOrFail($id);
+        return view('backend.layout.working_experience.view', compact('experiences'));
     }
 }

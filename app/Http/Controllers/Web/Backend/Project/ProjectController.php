@@ -29,7 +29,7 @@ class ProjectController extends Controller
                         $status .= $data->status;
                         $status .= '</button>';
                         $status .= '<ul class="dropdown-menu" aria-labelledby="dropdownStatus' . $data->id . '">';
-                        $status .= '<li><a class="dropdown-item " href="javascript:void(0);" style="width:135px;" onclick="showStatusChangeAlert(event, ' . $data->id . ', \'active\')">Active</a></li>';
+                        $status .= '<li><a class="dropdown-item" href="javascript:void(0);" style="width:135px;" onclick="showStatusChangeAlert(event, ' . $data->id . ', \'active\')">Active</a></li>';
                         $status .= '<li><a class="dropdown-item" href="javascript:void(0);" style="width:135px;" onclick="showStatusChangeAlert(event, ' . $data->id . ', \'inactive\')">Inactive</a></li>';
                         $status .= '</ul>';
                         $status .= '</div>';
