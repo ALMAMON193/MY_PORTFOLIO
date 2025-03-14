@@ -15,27 +15,41 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
 {
+
     public function index(Request $request)
     {
-        $query = Project::orderBy('id', 'asc');
-        // Handle search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $query->where('name', 'LIKE', "%{$request->search}%")
-                ->orWhere('description', 'LIKE', "%{$request->search}%");
+        try {
+            if ($request->ajax()) {
+                $data = Project::orderBy('id', 'desc')->get();
+                return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('status', function ($data) {
+                        $status = '<div class="dropdown">';
+                        $status .= '<button class="btn btn-sm ' . ($data->status == 'Active' ? 'btn-success' : 'btn-danger') . ' dropdown-toggle" type="button" id="dropdownStatus' . $data->id . '" data-bs-toggle="dropdown" aria-expanded="false">';
+                        $status .= $data->status;
+                        $status .= '</button>';
+                        $status .= '<ul class="dropdown-menu" aria-labelledby="dropdownStatus' . $data->id . '">';
+                        $status .= '<li><a class="dropdown-item " href="javascript:void(0);" style="width:135px;" onclick="showStatusChangeAlert(event, ' . $data->id . ', \'active\')">Active</a></li>';
+                        $status .= '<li><a class="dropdown-item" href="javascript:void(0);" style="width:135px;" onclick="showStatusChangeAlert(event, ' . $data->id . ', \'inactive\')">Inactive</a></li>';
+                        $status .= '</ul>';
+                        $status .= '</div>';
+
+                        return $status;
+                    })
+
+                    ->addColumn('action', function ($data) {
+                        return '<a href="" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
+                        <a href="' . route('admin.project.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>
+                        <a href="#" onclick="deleteAlert(' . $data->id . ')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line" id="custom-sa-warning"></i> Delete</a>';
+                    })
+                    ->rawColumns(['action', 'status'])
+                    ->make(true);
+            }
+            return view('backend.layout.Project.index');
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-
-        // Get per_page value from request or set default to 10
-        $perPage = $request->per_page ?? 10;
-        $data = $query->paginate($perPage);
-
-        // Check if the request is AJAX, return only the updated table
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('backend.layout.Project.partials.table', compact('data'))->render()
-            ]);
-        }
-
-        return view('backend.layout.Project.index', compact('data'));
     }
 
 

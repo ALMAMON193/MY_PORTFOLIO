@@ -2,7 +2,7 @@ name: Deploy project to our server
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
@@ -16,4 +16,4 @@ jobs:
         with:
           server: ftp.softvencefsd.xyz
           username: mishal@mishal.softvencefsd.xyz
-          password: "G{pn,AWPl7XG"
+          password: "G{pn,AWP"
