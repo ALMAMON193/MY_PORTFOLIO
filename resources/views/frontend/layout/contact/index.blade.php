@@ -19,17 +19,20 @@
                     <h2 class="text-[32px] font-semibold uppercase leading-tight text-white md:text-[52px]"
                         data-aos="fade-up" data-aos-delay="100">
                         Let’s discuss about <br class="hidden md:block">
-                        an
-                        <span class="text-theme"> project!</span>
+                        an <span class="text-theme">innovative project!</span>
                     </h2>
                     <p class="mt-[20px] text-text lg:w-[60%]" data-aos="fade-up" data-aos-delay="150">
-                        The imperative for integrated, expansive, and seamless digital
-                        experiences is fueling software product design and development
-                        across organizations at an unprecedented scale. These demands
-                        require capabilities to imagine, build, and run digital products
-                        and services for new and existing.
+                        In today’s fast-paced digital world, building integrated, scalable, and seamless experiences
+                        is crucial for businesses to stay ahead. As a <strong>Full-Stack Developer</strong>, I specialize
+                        in crafting robust applications that blend **cutting-edge UI/UX, scalable back-end systems,
+                        and secure, high-performance architecture**.
+                    </p>
+                    <p class="mt-[15px] text-text lg:w-[60%]" data-aos="fade-up" data-aos-delay="200">
+                        Whether you need a **custom web application, an advanced API, a scalable e-commerce platform, or a high-speed SaaS solution**,
+                        I’m here to turn your ideas into reality. Let’s collaborate to build something exceptional!
                     </p>
                 </div>
+
 
                 <div class="mt-[60px] md:mt-[80px]">
                     <div>
@@ -66,9 +69,9 @@
                         <div class="col-span-12 lg:col-span-5" data-aos="fade-up" data-aos-delay="100">
                             <div class="mt-[30px] rounded-xl bg-card p-[10px]">
                                 <div class="contact-map">
-                                    <iframe title="map"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29487.110529660204!2d91.78233825630927!3d22.50835433721081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd66e0fc1fe75%3A0x1a5fa83776c97924!2sHathazari!5e0!3m2!1sen!2sbd!4v1689738975067!5m2!1sen!2sbd"
-                                        height="390" width="100%">
+                                    <iframe title="Mirpur Shewrapara Map"
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.3006317122045!2d90.3664210752873!3d23.80635867864148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c15226c8c88f%3A0x9caa16b536ca0077!2sShewrapara%2C%20Mirpur%2C%20Dhaka%201212%2C%20Bangladesh!5e0!3m2!1sen!2sbd!4v1710600000000!5m2!1sen!2sbd"
+                                            height="390" width="100%" style="border:0;" allowfullscreen="" loading="lazy">
                                     </iframe>
                                 </div>
                             </div>

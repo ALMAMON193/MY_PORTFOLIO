@@ -3,13 +3,13 @@
         <div class="flex justify-between rounded-[10px] bg-card px-[15px] py-[30px] md:px-[30px]">
             <div class="logo flex items-center">
                 <a href="/">
-                    <img src="{{ asset('') }}frontend/images/logo.svg" alt="Lariv - React Portfolio Template" />
+                    <img style="height:50px;" src="{{ asset('') }}frontend/images/icon/logo.png" alt="Lariv - React Portfolio Template" />
                 </a>
             </div>
             <menu class="hidden items-center lg:flex">
                 <ul class="flex gap-[40px]">
                     <li>
-                        <a href="" class="navActive">Home</a>
+                        <a href="{{route('home')}}" class="navActive">Home</a>
                     </li>
                     <li>
                         <a href="{{route('about')}}" class="navNotActive">About Us</a>

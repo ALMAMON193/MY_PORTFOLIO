@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Frontend;
 
 use App\Models\Contact;
 use App\Models\MySkill;
+use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\WorkingExperience;
@@ -24,7 +25,8 @@ class HomeController extends Controller
     }
     public function portfolio()
     {
-        return view('frontend.layout.portfolio.index');
+        $portfolio = Project::orderBy("created_at", "desc")->get();
+        return view('frontend.layout.portfolio.index', compact('portfolio'));
     }
     public function service()
     {
@@ -64,5 +66,11 @@ class HomeController extends Controller
 
         // Return success response
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
+
+    public function portfolioDetails($id)
+    {
+        $project = Project::find($id);
+        return view('frontend.layout.portfolio.details', compact('project'));
     }
 }

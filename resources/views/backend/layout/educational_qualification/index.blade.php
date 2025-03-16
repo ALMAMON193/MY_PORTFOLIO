@@ -3,7 +3,6 @@
 @push('style')
 @endpush
 @section('content')
-    <div class="main-content">
 
         <div class="page-content">
             <div class="container-fluid">
@@ -65,8 +64,6 @@
             </div>
             <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
-    </div>
 @endsection
 @push('script')
     <script>

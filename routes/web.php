@@ -22,7 +22,7 @@ use App\Http\Controllers\Web\Backend\WorkingExperienceController;
 
 Route::get('/', function () {
     return view('frontend.layout.index');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('backend.layout.dashboard');

@@ -122,5 +122,5 @@
     </div>
 @endsection
 
-@push('js')
+@push('script')
 @endpush

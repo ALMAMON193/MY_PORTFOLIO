@@ -45,10 +45,10 @@
     <!-- header-area-end -->
 
     <!-- side bar start -->
- @include('frontend.partials.sidebar')
+  @include('frontend.partials.sidebar')
     <!-- side bar end -->
 
- @yield('content')
+   @yield('content')
 
     <!-- footer start -->
     @include('frontend.partials.footer')

@@ -33,7 +33,10 @@
         <div class="vertical-overlay"></div>
 
         <!-- Main Content -->
-        @yield('content')
+        <div class="main-content">
+            @yield('content')
+        </div>
+
         <!-- End main content -->
 
     </div>

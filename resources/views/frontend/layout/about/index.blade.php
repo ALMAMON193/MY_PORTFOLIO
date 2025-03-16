@@ -34,13 +34,13 @@
 
                                             </h3>
                                             <p class="mt-[6px] text-text" data-aos="fade-up" data-aos-delay="150">
-                                                Software Developer
+                                                Web Developer
                                             </p>
                                             <div class="mt-[26px] flex justify-center" data-aos="fade-up"
                                                 data-aos-delay="200">
                                                 <img src="{{ asset('frontend/images/profile/user.png') }}"
                                                     alt="Lariv portfolio web template"
-                                                    class="w-full rounded-2xl object-cover">
+                                                    class="object-cover w-full rounded-2xl">
                                             </div>
                                             <div class="mt-[26px]" data-aos="fade-up" data-aos-delay="250">
                                                 <p class="text-[20px] text-text" data-aos="fade-up" data-aos-delay="100">
@@ -84,13 +84,12 @@
                         <div class="mt-[80px]">
                             <h2 class="text-[32px] font-semibold uppercase leading-tight text-white md:text-[52px]"
                                 data-aos="fade-up" data-aos-delay="50">
-                                I can develop that
+                                I build solutions
                                 <br class="hidden md:block">
-                                help
-                                <span class="text-theme"> people!</span>
+                                that <span class="text-theme">empower people!</span>
                             </h2>
                             <p class="mt-[20px] text-text" data-aos="fade-up" data-aos-delay="100">
-                                {{ $personal_info->bio ?? 'I am a professional web developer. I can develop that help people!' }}
+                                {{ $personal_info->bio ?? 'I am a skilled Full-Stack Developer with a passion for building digital solutions that simplify lives and drive businesses forward. Whether it’s a web platform, a scalable API, or a custom application, I turn ideas into reality!' }}
                             </p>
                         </div>
 
@@ -232,7 +231,7 @@
                                                 {{ $skill->description ?? 'Description Not Available' }}
                                             </p>
                                             <div class="mt-[20px] w-full">
-                                                <div class="mb-2 flex items-center justify-between gap-4"
+                                                <div class="flex items-center justify-between gap-4 mb-2"
                                                     data-aos="fade-up" data-aos-delay="250">
                                                     <p class="text-[16px] font-medium text-white">
                                                         {{ $skill->name ?? 'Skill Not Available' }}

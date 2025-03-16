@@ -54,7 +54,6 @@
 @endpush
 
 @section('content')
-    <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
@@ -136,8 +135,8 @@
 
                                     </div>
                                     <div class="mb-3">
-                                        <div class="mb-3">
-                                            <label for="descriptionInput" class="form-label">Description</label>
+                                        <label for="descriptionInput" class="form-label">Description</label>
+                                        <div class="snow-editor" style="height: 300px;">
                                             <textarea class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description"
                                                 rows="3" placeholder="Enter project description">{{ old('description') }}</textarea>
                                             @error('description')
@@ -145,8 +144,10 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                        </div>
+                                        </div> <!-- end Snow-editor-->
                                     </div>
+                                    <!-- end col -->
+
                                     <!-- Image Upload -->
                                     <div class="mb-3">
                                         <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
@@ -186,7 +187,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @push('script')

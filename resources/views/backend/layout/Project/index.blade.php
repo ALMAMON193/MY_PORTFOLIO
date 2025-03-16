@@ -3,68 +3,66 @@
 @push('style')
 @endpush
 @section('content')
-    <div class="main-content">
 
-        <div class="page-content">
-            <div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div
-                            class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                            <h4 class="mb-sm-0">Projects</h4>
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div
+                        class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                        <h4 class="mb-sm-0">Projects</h4>
 
-                            <div class="page-title-right">
-                                <ol class="m-0 breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Projects</li>
-                                </ol>
-                            </div>
-
+                        <div class="page-title-right">
+                            <ol class="m-0 breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Projects</li>
+                            </ol>
                         </div>
+
                     </div>
                 </div>
-                <!-- end page title -->
+            </div>
+            <!-- end page title -->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h5 class="mb-0 card-title flex-grow-1">Projects List</h5>
-                                <div>
-                                    <a href="{{ route('admin.project.create') }}" class="btn btn-primary"><i
-                                            class="align-middle ri-add-line me-1"></i> Add Project</a>
-                                </div>
-                            </div>
-
-                            <div class="card-body table-responsive">
-                                <table id="data-table" class="table mb-0 align-middle" style="width:100%">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th style="width:320px">Project Name</th>
-                                            <th>Github Link</th>
-                                            <th>Live Link</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Status</th>
-                                            <th style="width: 180px">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h5 class="mb-0 card-title flex-grow-1">Projects List</h5>
+                            <div>
+                                <a href="{{ route('admin.project.create') }}" class="btn btn-primary"><i
+                                        class="align-middle ri-add-line me-1"></i> Add Project</a>
                             </div>
                         </div>
-                    </div><!--end col-->
-                </div><!--end row-->
 
-            </div>
-            <!-- container-fluid -->
+                        <div class="card-body table-responsive">
+                            <table id="data-table" class="table mb-0 align-middle" style="width:100%">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th style="width:320px">Project Name</th>
+                                    <th>Github Link</th>
+                                    <th>Live Link</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th style="width: 180px">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
         </div>
-        <!-- End Page-content -->
+        <!-- container-fluid -->
     </div>
+    <!-- End Page-content -->
 @endsection
 @push('script')
     <script>

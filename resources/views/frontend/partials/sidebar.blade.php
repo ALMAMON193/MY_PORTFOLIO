@@ -7,7 +7,7 @@
                     class="fa-regular fa-xmark text-white transition-all duration-500 group-hover:rotate-90 group-hover:text-theme"></i>
             </span>
             <div>
-                <img src="{{ asset('') }}frontend/images/logo.svg" alt="Lariv - React Portfolio Template" />
+                <img style="height: 50px;" src="{{ asset('') }}frontend/images/icon/logo.png" alt="Lariv - React Portfolio Template" />
             </div>
         </div>
         <div class="my-[30px] border-t border-[#ddd]"></div>

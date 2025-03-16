@@ -132,9 +132,7 @@
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-
-    </div>
 @endsection
 
-@push('js')
+@push('script')
 @endpush

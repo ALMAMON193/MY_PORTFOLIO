@@ -12,7 +12,7 @@
                     </p>
                     <h2 class="relative mt-[20px] inline-block text-[32px] font-semibold leading-tight md:text-[62px] wow animated fadeInUp"
                         data-wow-duration="1.5s" data-wow-delay="0.4s" data-wow-offset="0">
-                        HI, I'M AMIT!
+                        HI, I'M Al Mamon!
                         <span class="absolute bottom-[15px] right-[-100px]">
                             <img src="{{ asset('') }}frontend/images/icon/icon-1.png"
                                 alt="Lariv - React Portfolio Template" class="wobble-hor-bottom" />
@@ -20,18 +20,17 @@
                     </h2>
                     <h2 class="text-[52px] font-semibold leading-tight md:text-[62px] wow animated fadeInUp"
                         data-wow-duration="1.5s" data-wow-delay="0.5s">
-                        CREATIVE <span class="text-theme">DEVELOPER!</span>
+                        Web <span class="text-theme">DEVELOPER!</span>
                     </h2>
                     <br />
                     <p class="text-text wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s">
-                        I'm a passionate UI/UX designer with a mission to create
-                        delightful and intuitive digital experiences. With a strong
-                        foundation in design principles and a keen eye for detail, I
-                        specialize in translating complex ideas into user-friendly
-                        interfaces that captivate and engage.
+                        I'm a passionate Full Stack Developer with a mission to build scalable, high-performance web applications.
+                        With expertise in both frontend and backend technologies, I specialize in crafting seamless user experiences
+                        and robust architectures that drive efficiency and innovation.
                     </p>
+
                     <div class="mt-[50px] wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
-                        <a href="/" class="btn"> Hire Me Now! </a>
+                        <a href="{{route('contact')}}" class="btn"> Hire Me Now! </a>
                     </div>
 
                     <!-- Count Section  -->
@@ -39,7 +38,7 @@
                         <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
                             data-wow-delay="0.3s">
                             <h2 class="text-[50px] font-semibold">
-                                <span class="counter">4</span>+
+                                <span class="counter">1.5</span>+
                             </h2>
                             <p class="text-white">
                                 YEARS OF AWESOME <br />
@@ -49,7 +48,7 @@
                         <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
                             data-wow-delay="0.3s">
                             <h2 class="text-[50px] font-semibold">
-                                <span class="counter">200</span>+
+                                <span class="counter">15</span>+
                             </h2>
                             <p class="text-white">
                                 PROJECTS COMPLETED <br />
@@ -57,15 +56,16 @@
                             </p>
                         </div>
                         <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.3s">
+                             data-wow-delay="0.3s">
                             <h2 class="text-[50px] font-semibold">
-                                <span class="counter">780</span>+
+                                <span class="counter">20</span>+
                             </h2>
                             <p class="text-white">
-                                HAVE TEAM MEMBER <br />
-                                ON 10 COUNTRY
+                                SUCCESSFUL PROJECTS <br />
+                                CONTRIBUTED WORLDWIDE
                             </p>
                         </div>
+
                     </div>
 
                     <!-- Inner Card  -->

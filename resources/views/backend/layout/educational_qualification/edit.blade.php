@@ -52,7 +52,7 @@
 @endpush
 
 @section('content')
-    <div class="main-content">
+
         <div class="page-content">
             <div class="container-fluid">
                 <div class="col-xxl-">
@@ -219,11 +219,10 @@
             </div>
             <!--end row-->
         </div> <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
+
 @endsection
 
-@push('js')
+@push('script')
     <script>
         const certificateInput = document.getElementById('certificate');
         const certificatePreview = document.getElementById('certificatePreview');

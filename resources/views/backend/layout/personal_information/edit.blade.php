@@ -2,7 +2,6 @@
 
 @section('title', 'Edit Project')
 @section('content')
-    <div class="main-content">
 
         <div class="page-content">
             <div class="container-fluid">
@@ -173,13 +172,10 @@
             <!--end row-->
 
         </div> <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
 
-    </div>
 @endsection
 
-@push('js')
+@push('script')
     <script>
         document.getElementById('imageInput').addEventListener('change', function(event) {
             handleFileSelection(event, 'image');

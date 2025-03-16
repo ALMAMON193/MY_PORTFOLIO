@@ -11,7 +11,7 @@
     </style>
 @endpush
 @section('content')
-    <div class="main-content">
+
         <div class="page-content">
             <div class="container-fluid">
                 @if (session('success'))
@@ -332,11 +332,11 @@
             </div>
             <!--end row-->
         </div> <!-- container-fluid -->
-    </div>
+
     <!-- End Page-content -->
 @endsection
 
-@push('js')
+@push('script')
     <script>
         setTimeout(function() {
             var alert = document.getElementById('success-alert');

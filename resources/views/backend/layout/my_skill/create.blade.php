@@ -57,8 +57,6 @@
     </style>
 @endpush
 @section('content')
-    <div class="main-content">
-
         <div class="page-content">
             <div class="container-fluid">
 
@@ -197,15 +195,13 @@
                 </div>
             </div>
             <!--end row-->
-
         </div> <!-- container-fluid -->
-    </div>
+
     <!-- End Page-content -->
 
-    </div>
 @endsection
 
-@push('js')
+@push('script')
     <script>
         function previewFile(input) {
             let file = input.files[0];
