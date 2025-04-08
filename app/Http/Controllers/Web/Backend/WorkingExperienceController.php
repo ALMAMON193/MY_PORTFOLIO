@@ -11,8 +11,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class WorkingExperienceController extends Controller
 {
-
-
     public function index(Request $request)
     {
         try {
