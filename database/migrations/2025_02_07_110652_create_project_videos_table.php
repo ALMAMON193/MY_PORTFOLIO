@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('project_videos', function (Blueprint $table) {
             $table->id();
             $table->integer('project_id');
-            $table->string('video');
+            $table->string('video')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

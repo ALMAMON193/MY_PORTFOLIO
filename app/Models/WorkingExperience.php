@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static latest()
+ * @method static orderBy(string $string, string $string1)
  */
 class WorkingExperience extends Model
 {

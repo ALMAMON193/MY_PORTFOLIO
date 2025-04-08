@@ -2,6 +2,7 @@
 @section('title', 'Admin Dashboard | Create Service Image')
 
 @push('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
     <style>
         .preview-img,
         .preview-video {
@@ -50,6 +51,9 @@
             font-size: 12px;
             border-radius: 50%;
         }
+        .note-editor .note-toolbar, .note-popover .popover-content{
+            background: #E1E1E3 !important;
+        }
     </style>
 @endpush
 
@@ -70,117 +74,132 @@
                             <div class="card-header">
                                 <h4 class="mb-0 card-title">Service Image Upload</h4>
                             </div>
-
                             <div class="card-body">
-                                <form action="{{ route('admin.project.store') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
+                                <div class="card-body">
+                                    <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
 
-                                    <div class="mb-3">
-                                        <label for="nameInput" class="form-label">Name</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            id="nameInput" name="name" value="{{ old('name') }}"
-                                            placeholder="Enter project name">
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="githubLinkInput" class="form-label">Github Link</label>
-                                        <input type="url"
-                                            class="form-control @error('github_link') is-invalid @enderror"
-                                            id="githubLinkInput" name="github_link" value="{{ old('github_link') }}"
-                                            placeholder="Enter your project github link">
-                                        @error('github_link')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="liveLinkInput" class="form-label">Live Link</label>
-                                        <input type="url" class="form-control @error('live_link') is-invalid @enderror"
-                                            id="liveLinkInput" name="live_link" value="{{ old('live_link') }}"
-                                            placeholder="Enter your project live link">
-                                        @error('live_link')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="startDateInput" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}"
-                                            placeholder="Enter project start date">
-                                        @error('start_date')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <!-- Basic Information Section -->
+                                        <div class="mb-4">
+                                            <h6 class="mb-3 text-muted">Basic Information</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="nameInput" class="form-label">Name</label>
+                                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                           id="nameInput" name="name" value="{{ old('name') }}"
+                                                           placeholder="Enter project name">
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                                                    @enderror
+                                                </div>
 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="endDateInput" class="form-label">End Date</label>
-                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}"
-                                            placeholder="Enter project end date">
-                                        @error('end_date')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="startDateInput" class="form-label">Start Date</label>
+                                                    <input type="date" class="form-control @error('start_date') is-invalid @enderror"
+                                                           id="startDateInput" name="start_date" value="{{ old('start_date') }}">
+                                                    @error('start_date')
+                                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                                                    @enderror
+                                                </div>
 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="descriptionInput" class="form-label">Description</label>
-                                        <div class="snow-editor" style="height: 300px;">
-                                            <textarea class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description"
-                                                rows="3" placeholder="Enter project description">{{ old('description') }}</textarea>
-                                            @error('description')
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="endDateInput" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control @error('end_date') is-invalid @enderror"
+                                                           id="endDateInput" name="end_date" value="{{ old('end_date') }}">
+                                                    @error('end_date')
+                                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Links Section -->
+                                        <div class="mb-4">
+                                            <h6 class="mb-3 text-muted">Project Links</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="githubLinkInput" class="form-label">Github Link</label>
+                                                    <input type="url" class="form-control @error('github_link') is-invalid @enderror"
+                                                           id="githubLinkInput" name="github_link" value="{{ old('github_link') }}"
+                                                           placeholder="https://github.com/your-project">
+                                                    @error('github_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="liveLinkInput" class="form-label">Live Link</label>
+                                                    <input type="url" class="form-control @error('live_link') is-invalid @enderror"
+                                                           id="liveLinkInput" name="live_link" value="{{ old('live_link') }}"
+                                                           placeholder="https://your-project.com">
+                                                    @error('live_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Description Section -->
+                                        <div class="mb-4">
+                                            <h6 class="mb-3 text-muted">Project Description</h6>
+                                            <div class="mb-3">
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="summernote"
+                              name="description" rows="5">{{ old('description') }}</textarea>
+                                                @error('description')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div> <!-- end Snow-editor-->
-                                    </div>
-                                    <!-- end col -->
+                            <strong>{{ $message }}</strong>
+                        </span>
+                                                @enderror
+                                            </div>
+                                        </div>
 
-                                    <!-- Image Upload -->
-                                    <div class="mb-3">
-                                        <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
-                                            SVG)</label>
-                                        <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg"
-                                            value="{{ old('image' ?? '') }}">
+                                        <!-- Media Upload Section -->
+                                        <div class="mb-4">
+                                            <h6 class="mb-3 text-muted">Media Upload</h6>
 
-                                        @error('image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="image-preview-container" id="previewContainer"></div>
+                                            <!-- Image Upload -->
+                                            <div class="mb-3">
+                                                <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF, SVG)</label>
+                                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                                       id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
+                                                @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                                                @enderror
+                                                <div class="form-text">Maximum file size: 5MB each</div>
+                                            </div>
+                                            <div class="image-preview-container row g-2 mb-3" id="previewContainer"></div>
 
-                                    <!-- Video Upload -->
-                                    <div class="mb-3">
-                                        <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV,
-                                            MKV)</label>
-                                        <input type="file" class="form-control @error('video') is-invalid @enderror"
-                                            id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv"
-                                            value="{{ old('video' ?? '') }}">
+                                            <!-- Video Upload -->
+                                            <div class="mb-3">
+                                                <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV, MKV)</label>
+                                                <input type="file" class="form-control @error('video') is-invalid @enderror"
+                                                       id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv">
+                                                @error('video')
+                                                <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                                                @enderror
+                                                <div class="form-text">Maximum file size: 20MB each</div>
+                                            </div>
+                                            <div class="video-preview-container row g-2 mb-3" id="videoPreviewContainer"></div>
+                                        </div>
 
-                                        @error('video')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="video-preview-container" id="videoPreviewContainer"></div>
-                                    <button type="submit" class="mt-3 btn btn-primary">Upload Files</button>
-                                </form>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="submit" class="btn btn-primary px-4">Save Project</button>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -190,6 +209,12 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
+    </script>
     <script>
         function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
             const input = document.getElementById(inputId);

@@ -255,6 +255,190 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mt-[60px]">
+                            <h2 class="text-[32px] font-semibold" data-aos="fade-up" data-aos-delay="50">
+                                My <span class="text-theme">Advantages:</span>
+                            </h2>
+                            <div class="items mt-[40px] grid gap-[40px]">
+                                <!-- Accordion 1 - Web Development -->
+                                <div class="item relative border-l-[2px] border-theme pb-[16px] pl-[35px]">
+                                    <div class="accordion-header cursor-pointer group" onclick="toggleAccordion(this)">
+                                        <i class="fa-solid fa-fire-flame-curved absolute left-[-13px] top-[-25px] text-[30px] text-theme"></i>
+                                        <div class="card-header bg-gray-600/20 pl-5 pr-4 py-4  flex justify-between items-center">
+                                            <h3 class="text-[20px] font-medium text-white md:text-[25px] ">Web Development</h3>
+                                           <i class="fa-solid fa-chevron-down text-theme transform transition-transform duration-300 group-[.active]:rotate-180 mr-5"></i>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content hidden mt-4 pl-4">
+                                        <div class="card-body">
+                                            <p class="mt-[5px] text-[18px] font-medium text-text mb-6">
+                                                Building responsive and interactive websites using modern technologies.
+                                            </p>
+
+                                            <!-- Skill Item 1 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        HTML/CSS
+                                                    </p>
+                                                    <h6 class="text-white">95%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 95%;"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Skill Item 2 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        JavaScript
+                                                    </p>
+                                                    <h6 class="text-white">90%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 90%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion 2 - Frontend Frameworks -->
+                                <div class="item relative border-l-[2px] border-theme pb-[16px] pl-[35px]">
+                                    <div class="accordion-header cursor-pointer group" onclick="toggleAccordion(this)">
+                                        <i class="fa-solid fa-code absolute left-[-13px] top-[-25px] text-[30px] text-theme"></i>
+                                        <div class="card-header bg-gray-600/20 pl-5 pr-4 py-4  flex justify-between items-center">
+                                            <h3 class="text-[20px] font-medium text-white md:text-[25px]">Frontend Frameworks</h3>
+                                           <i class="fa-solid fa-chevron-down text-theme transform transition-transform duration-300 group-[.active]:rotate-180 mr-5"></i>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content hidden mt-4 pl-4">
+                                        <div class="card-body">
+                                            <p class="mt-[5px] text-[18px] font-medium text-text mb-6">
+                                                Expertise in modern JavaScript frameworks and libraries.
+                                            </p>
+
+                                            <!-- Skill Item 1 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        React.js
+                                                    </p>
+                                                    <h6 class="text-white">88%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 88%;"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Skill Item 2 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        Vue.js
+                                                    </p>
+                                                    <h6 class="text-white">85%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 85%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion 3 - Backend Development -->
+                                <div class="item relative border-l-[2px] border-theme pb-[16px] pl-[35px]">
+                                    <div class="accordion-header cursor-pointer group" onclick="toggleAccordion(this)">
+                                        <i class="fa-solid fa-server absolute left-[-13px] top-[-25px] text-[30px] text-theme"></i>
+                                        <div class="card-header bg-gray-600/20 pl-5 pr-4 py-4  flex justify-between items-center">
+                                            <h3 class="text-[20px] font-medium text-white md:text-[25px]">Backend Development</h3>
+                                           <i class="fa-solid fa-chevron-down text-theme transform transition-transform duration-300 group-[.active]:rotate-180 mr-5"></i>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content hidden mt-4 pl-4">
+                                        <div class="card-body">
+                                            <p class="mt-[5px] text-[18px] font-medium text-text mb-6">
+                                                Building robust server-side applications and APIs.
+                                            </p>
+
+                                            <!-- Skill Item 1 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        Node.js
+                                                    </p>
+                                                    <h6 class="text-white">87%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 87%;"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Skill Item 2 -->
+                                            <div class="skill-item mb-6">
+                                                <div class="flex items-center justify-between gap-4 mb-2" data-aos="fade-up" data-aos-delay="250">
+                                                    <p class="text-[16px] font-medium text-white">
+                                                        Express.js
+                                                    </p>
+                                                    <h6 class="text-white">85%</h6>
+                                                </div>
+                                                <div class="border border-theme/20 bg-theme/10 py-[8px] px-1 flex items-center h-[12px] w-full overflow-hidden font-sans text-xs font-medium rounded-full">
+                                                    <div class="h-[6px] justify-center overflow-hidden rounded-full bg-theme wow" style="width: 85%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function toggleAccordion(header) {
+                                const item = header.closest('.item');
+                                const content = item.querySelector('.accordion-content');
+                                const allContents = document.querySelectorAll('.accordion-content');
+
+                                // Close all other accordion contents
+                                allContents.forEach(accContent => {
+                                    if (accContent !== content) {
+                                        accContent.classList.add('hidden');
+                                        accContent.closest('.item').classList.remove('active');
+                                    }
+                                });
+
+                                // Toggle the clicked accordion content
+                                content.classList.toggle('hidden');
+                                item.classList.toggle('active');
+                            }
+                        </script>
+
+                        <style>
+                            .accordion-content {
+                                transition: all 0.3s ease;
+                                max-height: 0;
+                                overflow: hidden;
+                            }
+
+                            .accordion-content:not(.hidden) {
+                                max-height: 1000px;
+                            }
+
+                            .card-header {
+                                transition: all 0.3s ease;
+                                background-color: rgb(255 1 79 / var(--tw-bg-opacity));
+                            }
+
+                            .card-body {
+                                padding: 0 15px 15px 0;
+                            }
+
+                            .skill-item {
+                                margin-bottom: 24px;
+                            }
+                        </style>
+
                     </div>
                 </div>
             </div>

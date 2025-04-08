@@ -1,5 +1,8 @@
 @extends('frontend.app')
 @section('title', 'index')
+@push('style')
+
+@endpush
 @section('content')
     <main>
         <section class="py-[30px] md:py-[80px]">
@@ -37,21 +40,66 @@
                             <div class="col-span-12 md:col-span-6 lg:col-span-4" data-aos="fade-up" data-aos-delay="200">
                                 <div class="group rounded-2xl bg-btn p-[30px]">
                                     <div class="overflow-hidden rounded-2xl">
-                                        <img src="{{ asset('frontend/images/projects/project-1.png') }}"
-                                            alt="Lariv - React Portfolio Template"
-                                            class="w-full object-cover transition-all duration-500 group-hover:scale-[110%]">
+                                        @if(isset($image[$item->id]) && $image[$item->id]->isNotEmpty())
+                                            <img src="{{ asset($image[$item->id]->first()->image) }}"
+                                                 alt="{{ $item->name }}"
+                                                 class="w-full object-cover transition-all duration-500 group-hover:scale-[110%]">
+                                        @else
+                                            <img src="{{ asset('frontend/images/projects/project-1.png') }}"
+                                                 alt="Default Project Image"
+                                                 class="w-full object-cover transition-all duration-500 group-hover:scale-[110%]">
+                                        @endif
                                     </div>
                                     <div>
                                         <p class="mt-[16px] text-[14px] text-text">
-                                            Mobile Application
+                                            {{ $item->name }}
                                         </p>
-                                        <div
-                                            class="text-white transition-all duration-300 cursor-pointer portfolio-button-open hover:text-theme">
+                                        <div class="text-white transition-all duration-300 cursor-pointer portfolio-button-open hover:text-theme">
                                             <a href="{{ route('portfolio.details', $item->id) }}">
                                                 <h2 class="mt-[15px] text-[20px] font-medium capitalize md:text-[20px]">
-                                                    Minto - Ai Resume Builder Case Study- UI/UX Design
+                                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->description), 30) }}
                                                 </h2>
                                             </a>
+                                        </div>
+                                        <!-- GitHub and Live buttons -->
+                                        <div class="mt-[15px] flex gap-4 flex-wrap justify-start">
+                                            <!-- GitHub Button -->
+                                            @if($item->github_link)
+                                                <a href="https://www.mozycihad.me.uk" target="_blank" class="git_btn_button flex items-center justify-center gap-2" style="
+        display: inline-block;
+        border-radius: 0.375rem;
+        border: none; /* Removed the border */
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 1 79 / var(--tw-bg-opacity));
+        padding: 12px 26px;
+        font-weight: 600;
+        width: 48%;
+        text-align: center;
+        transition: all 0.3s ease;">
+                                                    <!-- GitHub Icon -->
+                                                    <i class="fab fa-github"></i>
+                                                    GitHub
+                                                </a>
+                                            @endif
+
+                                            <!-- Live Button -->
+                                            @if($item->live_link)
+                                                <a href="https://www.nux.com" target="_blank" class="live_link_btn flex items-center justify-center gap-2" style="
+        display: inline-block;
+        text-align: center;
+        border-radius: 0.375rem;
+        border: none; /* Removed the border */
+        --tw-bg-opacity: 1;
+        background-color: #000000;
+        padding: 12px 26px;
+        font-weight: 600;
+        width: 48%;
+        transition: all 0.3s ease;">
+                                                    <!-- Live Icon -->
+                                                    <i class="fas fa-link"></i>
+                                                    Live
+                                                </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //drill all route
-Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/project')->name('admin.project.')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('index');
     Route::get('/create', [ProjectController::class, 'create'])->name('create');
     Route::post('/store', [ProjectController::class, 'store'])->name('store');
@@ -49,14 +49,14 @@ Route::middleware(['guest'])->prefix('admin/project')->name('admin.project.')->g
 });
 
 //drill all route
-Route::middleware(['guest'])->prefix('admin/personal-info')->name('admin.personal.info.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/personal-info')->name('admin.personal.info.')->group(function () {
     Route::get('/create', [PersonalInformationController::class, 'create'])->name('create');
     Route::post('/store', [PersonalInformationController::class, 'store'])->name('store');
     Route::post('/status/{id}', [PersonalInformationController::class, 'status'])->name('status');
 });
 
 //drill all route
-Route::middleware(['guest'])->prefix('admin/working-experience')->name('admin.working.experience.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/working-experience')->name('admin.working.experience.')->group(function () {
     Route::get('/', [WorkingExperienceController::class, 'index'])->name('index');
     Route::get('/create', [WorkingExperienceController::class, 'create'])->name('create');
     Route::post('/store', [WorkingExperienceController::class, 'store'])->name('store');
@@ -67,7 +67,7 @@ Route::middleware(['guest'])->prefix('admin/working-experience')->name('admin.wo
     Route::get('{id}/view', [WorkingExperienceController::class, 'view'])->name('view');
 });
 
-Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('admin.educational.qualification.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/educational/qualification')->name('admin.educational.qualification.')->group(function () {
     Route::get('/', [EducationalQualificationController::class, 'index'])->name('index');
     Route::get('/create', [EducationalQualificationController::class, 'create'])->name('create');
     Route::post('/store', [EducationalQualificationController::class, 'store'])->name('store');
@@ -78,7 +78,7 @@ Route::middleware(['guest'])->prefix('admin/educational/qualification')->name('a
     Route::get('/view/{id}', [EducationalQualificationController::class, 'view'])->name('view');
 });
 
-Route::middleware(['guest'])->prefix('admin/my-skill')->name('admin.my.skill.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/my-skill')->name('admin.my.skill.')->group(function () {
     Route::get('/', [MySkillController::class, 'index'])->name('index');
     Route::get('/create', [MySkillController::class, 'create'])->name('create');
     Route::post('/store', [MySkillController::class, 'store'])->name('store');
@@ -89,7 +89,7 @@ Route::middleware(['guest'])->prefix('admin/my-skill')->name('admin.my.skill.')-
     Route::get('/view/{id}', [MySkillController::class, 'view'])->name('view');
 });
 
-Route::middleware(['guest'])->prefix('admin/service')->name('admin.service.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/service')->name('admin.service.')->group(function () {
     Route::get('/', [ServiceControler::class, 'index'])->name('index');
     Route::get('/create', [ServiceControler::class, 'create'])->name('create');
     Route::post('/store', [ServiceControler::class, 'store'])->name('store');
@@ -99,15 +99,6 @@ Route::middleware(['guest'])->prefix('admin/service')->name('admin.service.')->g
     Route::post('/status/{id}', [ServiceControler::class, 'status'])->name('status');
     Route::get('/view/{id}', [ServiceControler::class, 'view'])->name('view');
 });
-Route::middleware(['guest'])->prefix('admin/service')->name('admin.service.')->group(function () {
-    Route::get('/', [ServiceControler::class, 'index'])->name('index');
-    Route::get('/create', [ServiceControler::class, 'create'])->name('create');
-    Route::post('/store', [ServiceControler::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [ServiceControler::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [ServiceControler::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [ServiceControler::class, 'destroy'])->name('destroy');
-    Route::post('/status/{id}', [ServiceControler::class, 'status'])->name('status');
-    Route::get('/view/{id}', [ServiceControler::class, 'view'])->name('view');
-});
+
 
 require __DIR__ . '/auth.php';

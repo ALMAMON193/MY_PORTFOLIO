@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web\Frontend;
 use App\Models\Contact;
 use App\Models\MySkill;
 use App\Models\Project;
+use App\Models\ProjectImage;
+use App\Models\ProjectVideo;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\WorkingExperience;
@@ -26,8 +28,17 @@ class HomeController extends Controller
     public function portfolio()
     {
         $portfolio = Project::orderBy("created_at", "desc")->get();
-        return view('frontend.layout.portfolio.index', compact('portfolio'));
+        // Fetch the first image associated with each project
+        $image = ProjectImage::with("project")
+            ->orderBy("created_at", "desc")
+            ->get()
+            ->groupBy('project_id');
+        $video = ProjectVideo::with("project")  ->orderBy("created_at", "desc")
+            ->get()
+            ->groupBy('project_id');
+        return view('frontend.layout.portfolio.index', compact('portfolio', 'image', 'video'));
     }
+
     public function service()
     {
         $services = Service::orderBy("created_at", "desc")->get();

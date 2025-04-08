@@ -2,6 +2,7 @@
 @section('title', 'Admin Dashboard | Edit Project')
 
 @push('style')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
     <style>
         .preview-img,
         .preview-video {
@@ -50,6 +51,9 @@
             font-size: 12px;
             border-radius: 50%;
         }
+        .note-editor .note-toolbar, .note-popover .popover-content{
+            background: #E1E1E3 !important;
+        }
     </style>
 @endpush
 
@@ -75,8 +79,6 @@
                                 <form action="{{ route('admin.project.update', $data->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
-
                                     <div class="mb-3">
                                         <label for="nameInput" class="form-label">Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -143,9 +145,9 @@
 
                                     <div class="mb-3">
                                         <label for="descriptionInput" class="form-label">Description</label>
-                                        <div class="snow-editor" style="height: 300px;">
-                                            <textarea class="form-control @error('description') is-invalid @enderror" id="descriptionInput" name="description"
-                                                rows="3" placeholder="Enter project description">{{ old('description', $data->description) }}</textarea>
+                                        <div>
+                                              <textarea class="form-control @error('description') is-invalid @enderror" id="summernote"
+                                                        name="description" rows="5">{{ old('description', $data->description) }}</textarea>
                                             @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -218,6 +220,12 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
+    </script>
     <script>
         function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
             const input = document.getElementById(inputId);

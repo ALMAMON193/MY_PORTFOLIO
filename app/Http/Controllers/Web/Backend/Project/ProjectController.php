@@ -68,9 +68,9 @@ class ProjectController extends Controller
     {
         return view('backend.layout.Project.create');
     }
-
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|array',

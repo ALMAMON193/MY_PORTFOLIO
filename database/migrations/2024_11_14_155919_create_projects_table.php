@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('github_link')->nullable();
             $table->string('live_link')->nullable();
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
             $table->softDeletes();
             $table->timestamps();
