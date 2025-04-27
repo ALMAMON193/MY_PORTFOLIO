@@ -21,7 +21,7 @@ use App\Http\Controllers\Web\Backend\WorkingExperienceController;
 */
 
 Route::get('/', function () {
-    return view('frontend.layout.index');
+    return view('frontend.layout.index2');
 })->name('home');
 
 Route::get('/dashboard', function () {

@@ -89,13 +89,13 @@
                         </div>
                         <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
                             data-wow-delay="0.35s">
-                            <a href="/project">
+                            <a href="{{route('portfolio')}}">
                                 <div
                                     class="grid gap-[10px] rounded-lg border-2 border-dotted border-text p-[20px]">
                                     <h3 class="text-center text-[24px]">Projects</h3>
                                     <div class="flex justify-around">
                                         <img src="{{ asset('frontend/images/show/show-1.png') }}"
-                                            alt="Lariv - React Portfolio Template" />
+                                            alt="Portfolio" />
                                     </div>
                                 </div>
                             </a>
