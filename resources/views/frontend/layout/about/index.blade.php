@@ -55,21 +55,21 @@
                                             </div>
                                             <div class="mt-[30px] flex justify-center gap-3" data-aos="fade-up"
                                                 data-aos-delay="200">
-                                                <a href="#" class="block">
+                                                <a href="https://www.facebook.com/md.mamonkhan193" class="block">
                                                     <i class="fa-brands fa-facebook-f socialRound"></i>
                                                 </a>
-                                                <a href="#" class="block">
+                                                <a href="https://x.com/Mamon12209" class="block">
                                                     <i class="fa-brands fa-twitter socialRound"></i>
                                                 </a>
-                                                <a href="#" class="block">
+                                                <a href="https://www.linkedin.com/in/al-mamon/" class="block">
                                                     <i class="fa-brands fa-linkedin-in socialRound"></i>
                                                 </a>
-                                                <a href="#" class="block">
+                                                <a href="https://github.com/ALMAMON193" class="block">
                                                     <i class="fa-brands fa-github socialRound"></i>
                                                 </a>
                                             </div>
                                             <div class="mt-[30px]" data-aos="fade-up" data-aos-delay="250">
-                                                <a href="assets/pdf/Resume-of-Amit-Biswas-MERN.pdf"
+                                                <a href=""
                                                     class="block rounded-full border-2 border-theme bg-theme py-[10px] font-medium text-white transition-all duration-300 hover:bg-transparent">
                                                     Download CV
                                                 </a>

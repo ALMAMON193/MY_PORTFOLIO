@@ -83,37 +83,37 @@
                                         <div class="mb-4">
                                             <h6 class="mb-3 text-muted">Basic Information</h6>
                                             <div class="row">
-                                                <div class="col-md-6 mb-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="nameInput" class="form-label">Name</label>
                                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                            id="nameInput" name="name" value="{{ old('name') }}"
                                                            placeholder="Enter project name">
                                                     @error('name')
                                                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-md-6 mb-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="startDateInput" class="form-label">Start Date</label>
                                                     <input type="date" class="form-control @error('start_date') is-invalid @enderror"
                                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}">
                                                     @error('start_date')
                                                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-md-6 mb-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="endDateInput" class="form-label">End Date</label>
                                                     <input type="date" class="form-control @error('end_date') is-invalid @enderror"
                                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}">
                                                     @error('end_date')
                                                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -123,27 +123,27 @@
                                         <div class="mb-4">
                                             <h6 class="mb-3 text-muted">Project Links</h6>
                                             <div class="row">
-                                                <div class="col-md-6 mb-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="githubLinkInput" class="form-label">Github Link</label>
                                                     <input type="url" class="form-control @error('github_link') is-invalid @enderror"
                                                            id="githubLinkInput" name="github_link" value="{{ old('github_link') }}"
                                                            placeholder="https://github.com/your-project">
                                                     @error('github_link')
                                                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                     @enderror
                                                 </div>
 
-                                                <div class="col-md-6 mb-3">
+                                                <div class="mb-3 col-md-6">
                                                     <label for="liveLinkInput" class="form-label">Live Link</label>
                                                     <input type="url" class="form-control @error('live_link') is-invalid @enderror"
                                                            id="liveLinkInput" name="live_link" value="{{ old('live_link') }}"
                                                            placeholder="https://your-project.com">
                                                     @error('live_link')
                                                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -179,7 +179,7 @@
                                                 @enderror
                                                 <div class="form-text">Maximum file size: 5MB each</div>
                                             </div>
-                                            <div class="image-preview-container row g-2 mb-3" id="previewContainer"></div>
+                                            <div class="mb-3 image-preview-container row g-2" id="previewContainer"></div>
 
                                             <!-- Video Upload -->
                                             <div class="mb-3">
@@ -193,11 +193,11 @@
                                                 @enderror
                                                 <div class="form-text">Maximum file size: 20MB each</div>
                                             </div>
-                                            <div class="video-preview-container row g-2 mb-3" id="videoPreviewContainer"></div>
+                                            <div class="mb-3 video-preview-container row g-2" id="videoPreviewContainer"></div>
                                         </div>
 
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit" class="btn btn-primary px-4">Save Project</button>
+                                        <div class="gap-2 d-grid d-md-flex justify-content-md-end">
+                                            <button type="submit" class="px-4 btn btn-primary">Save Project</button>
                                         </div>
                                     </form>
                             </div>
