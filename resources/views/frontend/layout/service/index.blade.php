@@ -55,7 +55,7 @@
                 </div>
 
                 <!-- Review Information  -->
-                {{-- <div class="mt-[100px]">
+                <div class="mt-[100px]">
                     <h2 class="text-[32px] font-semibold" data-aos="fade-up" data-aos-delay="50">
                         What People Says ?
                     </h2>
@@ -128,7 +128,7 @@
                             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </section>
     </main>
