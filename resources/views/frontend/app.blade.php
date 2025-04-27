@@ -1,60 +1,47 @@
-<!DOCTYPE html>
-<html class="no-js" lang="zxx">
 
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/nft-landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Nov 2024 15:57:36 GMT -->
 <head>
+
     <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Home || Lariv - HTML Portfolio Web Template</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-   @include('frontend.partials.style')
+    <title>Landing | Velzon - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+@include('frontend.partials.style')
+
 </head>
 
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example">
 
-    <!-- Preloader Start-->
+<!-- Begin page -->
+<div class="layout-wrapper landing">
+    @include('frontend.partials.sidebar')
+    <div class="bg-overlay bg-overlay-pattern"></div>
+    <!-- end navbar -->
+    @yield('content')
+   @extends('frontend.partials.footer')
 
-    <div class="InitLoader">
-        <div class="fingerprint-spinner">
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-            <div class="spinner-ring"></div>
-        </div>
-    </div>
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon landing-back-top" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
 
-    <!-- back href top start  -->
-    <div class="progress-wrap">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-        </svg>
-    </div>
-    <!-- back href top end -->
+</div>
+<!-- end layout wrapper -->
 
-    <!-- Bg image start-->
-    <div class="bg-img" style="background-image: url('{{ asset('') }}frontend/images/show/bg.png')"></div>
-    <!-- Bg image end-->
 
-    <!-- header-area-start -->
-   @include('frontend.partials.header')
-    <!-- header-area-end -->
-
-    <!-- side bar start -->
-  @include('frontend.partials.sidebar')
-    <!-- side bar end -->
-
-   @yield('content')
-
-    <!-- footer start -->
-    @include('frontend.partials.footer')
-    <!-- footer end -->
-
-    @include('frontend.partials.script')
+<!-- JAVASCRIPT -->
+@include('frontend.partials.script')
 </body>
 
+
+<!-- Mirrored from themesbrand.com/velzon/html/master/nft-landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Nov 2024 15:57:41 GMT -->
 </html>
