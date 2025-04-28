@@ -38,53 +38,42 @@
             </div>
             <div class="col-lg-6">
                 <div class="text-muted">
-                    <h1 class="mb-3 lh-base"><span class="text-primary">About </span>US</h1>
-                    <p class="ff-secondary fs-16 mb-2">The first step in finding your <b>dream job </b> is deciding where to look for first-hand insight. Contact professionals who are already working in industries or positions that interest you.</p>
-                    <p class="ff-secondary fs-16">Schedule informational interviews and phone calls or ask for the opportunity to shadow them on the job.</p>
+                    <h1 class="mb-3 lh-base">
+                        <span class="text-primary">About</span> Me
+                    </h1>
+                    <p class="ff-secondary fs-16 mb-2">
+                        I am a passionate <b>Full Stack Developer</b> with strong experience in building modern, scalable, and high-performance web applications. I specialize in both front-end and back-end development, delivering complete solutions for businesses and startups.
+                    </p>
+                    <!-- Static Personal Information (Two Columns) -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5 class="text-primary mb-3">Personal Information</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><strong>Name:</strong> John Doe</li>
+                                <li class="mb-2"><strong>Email:</strong> john.doe@example.com</li>
+                                <li class="mb-2"><strong>Phone:</strong> +1 234 567 890</li>
+                                <li class="mb-2"><strong>Gender:</strong> Male</li>
+                                <li class="mb-2"><strong>Emergency Contact:</strong> +1 987 654 321</li>
+                            </ul>
+                        </div>
 
-                    <div class="vstack gap-2 mb-4 pb-1">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0 me-2">
-                                <div class="avatar-xs icon-effect">
-                                    <div class="avatar-title bg-transparent text-success rounded-circle h2">
-                                        <i class="ri-check-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0">Dynamic Content</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0 me-2">
-                                <div class="avatar-xs icon-effect">
-                                    <div class="avatar-title bg-transparent text-success rounded-circle h2">
-                                        <i class="ri-check-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0">Setup plugin's information.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0 me-2">
-                                <div class="avatar-xs icon-effect">
-                                    <div class="avatar-title bg-transparent text-success rounded-circle h2">
-                                        <i class="ri-check-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <p class="mb-0">Themes customization information</p>
-                            </div>
+                        <div class="col-lg-6">
+                            <h5 class="text-primary mb-3">Address Information</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><strong>Address:</strong> 123 Main Street</li>
+                                <li class="mb-2"><strong>Country:</strong> USA</li>
+                                <li class="mb-2"><strong>Nationality:</strong> American</li>
+                                <li class="mb-2"><strong>Occupation:</strong> Full Stack Developer</li>
+                                <li class="mb-2"><strong>Company Name:</strong> ABC Tech Inc.</li>
+                            </ul>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#!" class="btn btn-primary">Find Your Jobs <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
+                        <a href="#contact" class="btn btn-primary">Hire Me <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
                     </div>
                 </div>
+
             </div>
             <!-- end col -->
         </div>

@@ -55,52 +55,7 @@
     <!-- end hero section -->
     @include('frontend.layout.about.index')
     <!-- start wallet -->
-    <section class="section" id="wallet">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center mb-5">
-                        <h2 class="mb-3 fw-semibold lh-base">Connect NFT Marketplace</h2>
-                        <p class="text-muted">A non-fungible token is a non-interchangeable unit of data stored on a blockchain, a form of digital ledger, that can be sold and traded.</p>
-                    </div>
-                </div><!-- end col -->
-            </div><!-- end row -->
-
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="card text-center border shadow-none material-shadow">
-                        <div class="card-body py-5 px-4">
-                            <img src="frontend/images/nft/wallet/metamask.png" alt="" height="55" class="mb-3 pb-2">
-                            <h5>Metamask</h5>
-                            <p class="text-muted pb-1">MetaMask is a popular cryptocurrency wallet known for its ease of use, availability on both desktops.</p>
-                            <a href="#!" class="btn btn-soft-info">Connect Wallet</a>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-                <div class="col-lg-4">
-                    <div class="card text-center border shadow-none material-shadow">
-                        <div class="card-body py-5 px-4">
-                            <img src="frontend/images/nft/wallet/coinbase.png" alt="" height="55" class="mb-3 pb-2">
-                            <h5>Coinbase Wallet</h5>
-                            <p class="text-muted pb-1">Coinbase Wallet is a self-custody wallet that gives you complete control of your crypto for your Wallet.</p>
-                            <a href="#!" class="btn btn-info">Change Wallet</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="card text-center border shadow-none material-shadow">
-                        <div class="card-body py-5 px-4">
-                            <img src="frontend/images/nft/wallet/binance.png" alt="" height="55" class="mb-3 pb-2">
-                            <h5>Binance</h5>
-                            <p class="text-muted pb-1">Binance is considered a safe exchange that allows user account protection via the use of Two Authentication.</p>
-                            <a href="#!" class="btn btn-soft-info">Connect Wallet</a>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section><!-- end wallet -->
+    @include('frontend.layout.service.index')<!-- end wallet -->
 
     <!-- start marketplace -->
     <section class="section bg-light" id="marketplace">
@@ -300,63 +255,6 @@
         </div><!-- end container -->
     </section>
     <!-- end marketplace -->
-
-    <!-- start features -->
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center mb-5">
-                        <h2 class="mb-3 fw-semibold lh-base">Create and Sell Your NFTs</h2>
-                        <p class="text-muted">The process of creating an NFT may cost less than a dollar, but the process of selling it can cost up to a thousand dollars. For example, Allen Gannett, a software developer.</p>
-                    </div>
-                </div><!-- end col -->
-            </div><!-- end row -->
-
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="card shadow-none">
-                        <div class="card-body">
-                            <img src="frontend/images/nft/wallet.png" alt="" class="avatar-sm">
-                            <h5 class="mt-4">Set up your wallet</h5>
-                            <p class="text-muted fs-14">You have to choose whether to use a hot wallet a cold wallet.</p>
-                            <a href="#!" class="link-success fs-14">Read More <i class="ri-arrow-right-line align-bottom"></i></a>
-                        </div>
-                    </div>
-                </div><!--end col-->
-                <div class="col-lg-3">
-                    <div class="card shadow-none">
-                        <div class="card-body">
-                            <img src="frontend/images/nft/money.png" alt="" class="avatar-sm">
-                            <h5 class="mt-4">Create your collection</h5>
-                            <p class="text-muted fs-14">Create a collection in Opensea and give it a proper art.</p>
-                            <a href="#!" class="link-success fs-14">Read More <i class="ri-arrow-right-line align-bottom"></i></a>
-                        </div>
-                    </div>
-                </div><!--end col-->
-                <div class="col-lg-3">
-                    <div class="card shadow-none">
-                        <div class="card-body">
-                            <img src="frontend/images/nft/add.png" alt="" class="avatar-sm">
-                            <h5 class="mt-4">Add your NFT's</h5>
-                            <p class="text-muted fs-14">Go to your profile icon and top right corner creation page.</p>
-                            <a href="#!" class="link-success fs-14">Read More <i class="ri-arrow-right-line align-bottom"></i></a>
-                        </div>
-                    </div>
-                </div><!--end col-->
-                <div class="col-lg-3">
-                    <div class="card shadow-none">
-                        <div class="card-body">
-                            <img src="frontend/images/nft/sell.png" alt="" class="avatar-sm">
-                            <h5 class="mt-4">Sell Your NFT's</h5>
-                            <p class="text-muted fs-14">Create a collection in Opensea and give Add items and art.</p>
-                            <a href="#!" class="link-success fs-14">Read More <i class="ri-arrow-right-line align-bottom"></i></a>
-                        </div>
-                    </div>
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!-- end container -->
-    </section><!-- end features -->
 
     <!-- start plan -->
     <section class="section bg-light" id="categories">
@@ -577,30 +475,5 @@
     <!-- start Skill Process -->
     @include('frontend.layout.skill.index')
    <!-- end Skill Process -->
-
-    <!-- start cta -->
-    <section class="py-5 bg-primary position-relative">
-        <div class="bg-overlay bg-overlay-pattern opacity-50"></div>
-        <div class="container">
-            <div class="row align-items-center gy-4">
-                <div class="col-sm">
-                    <div>
-                        <h4 class="text-white mb-0 fw-semibold">Create and Sell Your NFT's</h4>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-sm-auto">
-                    <div>
-                        <a href="apps-nft-create.html" class="btn bg-gradient btn-danger">Create NFT</a>
-                        <a href="apps-nft-explore.html" class="btn bg-gradient btn-info">Discover More</a>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end cta -->
 
 @endsection
