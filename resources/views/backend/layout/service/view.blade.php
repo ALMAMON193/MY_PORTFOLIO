@@ -68,25 +68,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <div class="label">Name:</div>
-                                    <div class="value">{{ $skill->name }}</div>
+                                    <div class="label"><strong>Name:</strong></div>
+                                    <div class="value">{{ $service->name }}</div>
                                 </div>
-
                                 <div class="mb-3">
-                                    <div class="label">Skill Type:</div>
-                                    <div class="value">{{ $skill->skill_type }}</div>
+                                    <div class="label"><strong>Description:</strong></div>
+                                    <div class="value">{{ $service->description ?? 'N/A' }}</div>
                                 </div>
-
-                                <div class="mb-3">
-                                    <div class="label">Description:</div>
-                                    <div class="value">{{ $skill->description ?? 'N/A' }}</div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="label">Percentage:</div>
-                                    <div class="value">{{ $skill->percentage ?? 'N/A' }} %</div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -94,11 +82,11 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="mb-0 card-title">Icon</h4>
+                                <h4 class="mb-0 card-title"><strong>Icon</strong></h4>
                             </div>
                             <div class="text-center card-body">
-                                @if ($skill->icon)
-                                    <img src="{{ asset($skill->icon) }}" alt="Skill Preview" class="preview-img">
+                                @if ($service->image)
+                                    <img src="{{ asset($service->image) }}" alt="Skill Preview" class="preview-img">
                                 @else
                                     <span>No Skill Image uploaded.</span>
                                 @endif
@@ -111,7 +99,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-end">
-                            <a href="{{ route('admin.my.skill.index') }}" class="btn btn-secondary">Back to
+                            <a href="{{ route('admin.service.index') }}" class="btn btn-secondary">Back to
                                 List</a>
                         </div>
                     </div>

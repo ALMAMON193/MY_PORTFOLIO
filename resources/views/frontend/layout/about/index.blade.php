@@ -52,7 +52,7 @@
                     <div class="position-absolute" style="right: -15px; top: 50%; width: 100px; height: 100px; background: linear-gradient(to right, #28a745, #20c997); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); z-index: 10; animation: rotate-slow 12s linear infinite;">
                         <div class="bg-white rounded-circle d-flex flex-column align-items-center justify-content-center" style="width: 85px; height: 85px;">
                             <span class="text-success fw-bold fs-5">5+</span>
-                            <span class="text-muted fs-8 text-uppercase text-center">Years Experience</span>
+                            <span class="text-muted fs-8 text-uppercase text-center" style="font-size: 10px;">Years Experience</span>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('category');
+            $table->enum('reposotory', ['private', 'public'])->default('private');
+            $table->integer('team_size')->nullable();
             $table->text('description');
             $table->string('github_link')->nullable();
             $table->string('live_link')->nullable();
