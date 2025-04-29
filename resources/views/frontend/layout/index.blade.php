@@ -1,148 +1,265 @@
 @extends('frontend.app')
-@section('title','index')
 @section('content')
-<main>
-    <section class="py-[30px] md:py-[80px]">
+    <!-- start hero section -->
+    <section class="section nft-hero" id="hero">
+        <div class="bg-overlay"></div>
         <div class="container">
-            <!-- Intro Section  -->
-            <div class="grid grid-cols-12 gap-[30px]">
-                <div class="order-2 col-span-12 mt-[40px] py-[40px] md:mt-0 md:pr-[60px] lg:order-1 lg:col-span-8">
-                    <p class="text-[22px] wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                        <span class="text-theme">Hi!</span> There I’m
-                    </p>
-                    <h2 class="relative mt-[20px] inline-block text-[32px] font-semibold leading-tight md:text-[62px] wow animated fadeInUp"
-                        data-wow-duration="1.5s" data-wow-delay="0.4s" data-wow-offset="0">
-                        HI, I'M Al Mamon!
-                        <span class="absolute bottom-[15px] right-[-100px]">
-                            <img src="{{ asset('') }}frontend/images/icon/icon-1.png"
-                                alt="Lariv - React Portfolio Template" class="wobble-hor-bottom" />
-                        </span>
-                    </h2>
-                    <h2 class="text-[52px] font-semibold leading-tight md:text-[62px] wow animated fadeInUp"
-                        data-wow-duration="1.5s" data-wow-delay="0.5s">
-                        Web <span class="text-theme">DEVELOPER!</span>
-                    </h2>
-                    <br />
-                    <p class="text-text wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s">
-                        I'm a passionate Full Stack Developer with a mission to build scalable, high-performance web applications.
-                        With expertise in both frontend and backend technologies, I specialize in crafting seamless user experiences
-                        and robust architectures that drive efficiency and innovation.
-                    </p>
-
-                    <div class="mt-[50px] wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
-                        <a href="{{route('contact')}}" class="btn"> Hire Me Now! </a>
+            <div class="row align-items-center justify-content-between">
+                <!-- Left Content -->
+                <div class="col-lg-6">
+                    <div class="hero-text">
+                        <h1 class="display-4 fw-medium mb-4 lh-base text-white animated fadeInUp">Hi, I'm Al Mamon!</h1>
+                        <h2 class="display-4 fw-medium mb-4 lh-base text-white animated fadeInUp delay-1s">Web <span class="text-danger">Developer!</span></h2>
+                        <p class="lead text-white-50 lh-base mb-4 pb-2 animated fadeInUp delay-2s">
+                            I'm a passionate Full Stack Developer with a mission to build scalable, high-performance web applications.
+                            With expertise in both frontend and backend technologies, I specialize in crafting seamless user experiences and robust architectures that drive efficiency and innovation.
+                        </p>
+                        <a href="#contact" class="btn btn-danger btn-hover animated fadeInUp delay-3s">Hire Me Now!</a>
                     </div>
-
-                    <!-- Count Section  -->
-                    <div class="mt-[60px] grid grid-cols-12 gap-[30px] md:gap-2">
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.3s">
-                            <h2 class="text-[50px] font-semibold">
-                                <span class="counter">1.5</span>+
-                            </h2>
-                            <p class="text-white">
-                                YEARS OF AWESOME <br />
-                                EXPERIENCE
-                            </p>
-                        </div>
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.3s">
-                            <h2 class="text-[50px] font-semibold">
-                                <span class="counter">15</span>+
-                            </h2>
-                            <p class="text-white">
-                                PROJECTS COMPLETED <br />
-                                ON THIS YEAR
-                            </p>
-                        </div>
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                             data-wow-delay="0.3s">
-                            <h2 class="text-[50px] font-semibold">
-                                <span class="counter">20</span>+
-                            </h2>
-                            <p class="text-white">
-                                SUCCESSFUL PROJECTS <br />
-                                CONTRIBUTED WORLDWIDE
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <!-- Inner Card  -->
-                    <div class="mt-[60px] grid grid-cols-12 gap-[30px]">
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.3s">
-                            <a href="/service">
-                                <div
-                                    class="grid gap-[30px] rounded-lg border-2 border-dotted border-text p-[20px]">
-                                    <h3 class="text-center text-[24px]">Services</h3>
-                                    <div class="flex justify-around p-[10px]">
-                                        <img src="{{ asset('frontend/images/icon/icon-2.png') }}"
-                                            alt="Lariv - React Portfolio Template" />
-                                        <img src="{{ asset('frontend/images/icon/icon-3.png') }}"
-                                            alt="Lariv - React Portfolio Template" />
-                                        <img src="{{ asset('frontend/images/icon/icon-4.png') }}"
-                                            alt="Lariv - React Portfolio Template" />
-                                    </div>
+                </div>
+                <!-- Right Stats -->
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="row text-center mt-4">
+                        <div class="col-md-4 mb-4">
+                            <div class="progress-bar-wrapper">
+                                <!-- Circle Progress -->
+                                <div class="progress-circle" data-progress="75">
+                                    <h2 class="text-danger">1.5+</h2>
                                 </div>
-                            </a>
+                                <p class="text-white-50">Years of Awesome Experience</p>
+                            </div>
                         </div>
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.35s">
-                            <a href="{{route('portfolio')}}">
-                                <div
-                                    class="grid gap-[10px] rounded-lg border-2 border-dotted border-text p-[20px]">
-                                    <h3 class="text-center text-[24px]">Projects</h3>
-                                    <div class="flex justify-around">
-                                        <img src="{{ asset('frontend/images/show/show-1.png') }}"
-                                            alt="Portfolio" />
-                                    </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="progress-bar-wrapper">
+                                <!-- Circle Progress -->
+                                <div class="progress-circle" data-progress="85">
+                                    <h2 class="text-danger">15+</h2>
                                 </div>
-                            </a>
+                                <p class="text-white-50">Projects Completed This Year</p>
+                            </div>
                         </div>
-                        <div class="col-span-12 md:col-span-4 wow animated fadeInUp" data-wow-duration="1.5s"
-                            data-wow-delay="0.4s">
-                            <a href="/about">
-                                <div
-                                    class="grid gap-[38px] rounded-lg border-2 border-dotted border-text p-[20px]">
-                                    <h3 class="text-center text-[24px]">About Us</h3>
-                                    <div class="flex justify-around p-[10px]">
-                                        <img src="{{ asset('frontend/images/logo.svg') }}"
-                                            alt="Lariv - React Portfolio Template" />
-                                    </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="progress-bar-wrapper">
+                                <!-- Circle Progress -->
+                                <div class="progress-circle" data-progress="90">
+                                    <h2 class="text-danger">25+</h2>
                                 </div>
-                            </a>
+                                <p class="text-white-50">Successful Projects Worldwide</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="order-1 col-span-12 lg:order-2 lg:col-span-4">
-                    <div class="relative mt-[50px]">
-                        <div class="wow animated fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                            <img src="{{ asset('frontend/images/profile/user-1.png') }}"
-                                alt="Lariv - React Portfolio Template" class="w-full" />
-                            <img src="{{ asset('frontend/images/icon/figma.png') }}"
-                                alt="Lariv - React Portfolio Template"
-                                class="slide-top-1 absolute left-[-10px] top-[90px] w-[60px] md:top-[170px] md:w-[80px] lg:top-[120px]" />
-                            <img src="{{ asset('frontend/images/icon/photoshop-logo.png') }}"
-                                alt="Lariv - React Portfolio Template"
-                                class="slide-top-2 absolute right-[-10px] top-[260px] w-[60px] md:top-[450px] md:w-[80px] lg:top-[250px]" />
-                        </div>
-                        <div class="pulse absolute bottom-[-50px] right-[40px] flex items-center gap-[20px] rounded-full bg-card px-[40px] py-[18px] md:bottom-[-17px] lg:right-[-34px] wow animated fadeInUp"
-                            data-wow-duration="1.5s" data-wow-delay="0.4s">
-                            <div>
-                                <FaSeedling class="text-[40px] text-theme" />
+            </div> <!-- end row -->
+        </div><!-- end container -->
+    </section>
+    <!-- end hero section -->
+    @include('frontend.layout.about.index')
+    <!-- start wallet -->
+    @include('frontend.layout.service.index')<!-- end wallet -->
+
+    <!-- start marketplace -->
+   @include('frontend.layout.portfolio.index')
+    <!-- end marketplace -->
+    <!-- start candidates -->
+    <section class="section bg-light" id="my-team">
+        <div class="bg-overlay bg-overlay-pattern"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5">
+                        <h1 class="mb-3 ff-secondary fw-semibold text-capitalize lh-base">Hire Experts <span class="text-primary">Team</span></h1>
+                        <p class="text-muted mb-4">Hiring experts costs more per hour than hiring entry- or mid-level freelancers, but they can usually get the work done faster—and better.</p>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="swiper candidate-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card text-center">
+                                    <div class="card-body p-4">
+                                        <img src="frontend/images/users/avatar-2.jpg" alt="" class="rounded-circle avatar-md mx-auto d-block">
+                                        <h5 class="fs-17 mt-3 mb-2">Nancy Martino</h5>
+                                        <p class="text-muted fs-13 mb-3">Creative Designer</p>
+
+                                        <p class="text-muted mb-4 fs-14">
+                                            <i class="ri-map-pin-2-line text-primary me-1 align-bottom"></i> Escondido, California
+                                        </p>
+
+                                        <a href="#!" class="btn btn-primary w-100">View Profile</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h2 class="text-[26px] font-semibold">
-                                    <span class="counter">1100</span> k+
-                                </h2>
-                                <p class="text-base text-white">Real Customers</p>
+                            <div class="swiper-slide">
+                                <div class="card text-center">
+                                    <div class="card-body p-4">
+                                        <img src="frontend/images/users/avatar-3.jpg" alt="" class="rounded-circle avatar-md mx-auto d-block">
+                                        <h5 class="fs-17 mt-3 mb-2">Glen Matney</h5>
+                                        <p class="text-muted fs-13 mb-3">Marketing Director</p>
+
+                                        <p class="text-muted mb-4 fs-14">
+                                            <i class="ri-map-pin-2-line text-primary me-1 align-bottom"></i> Escondido, California
+                                        </p>
+
+                                        <a href="#!" class="btn btn-primary w-100">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card text-center">
+                                    <div class="card-body p-4">
+                                        <img src="frontend/images/users/avatar-10.jpg" alt="" class="rounded-circle avatar-md mx-auto d-block">
+                                        <h5 class="fs-17 mt-3 mb-2">Alexis Clarke</h5>
+                                        <p class="text-muted fs-13 mb-3">Product Manager</p>
+
+                                        <p class="text-muted mb-4 fs-14">
+                                            <i class="ri-map-pin-2-line text-primary me-1 align-bottom"></i> Escondido, California
+                                        </p>
+
+                                        <a href="#!" class="btn btn-primary w-100">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card text-center">
+                                    <div class="card-body p-4">
+                                        <img src="frontend/images/users/avatar-8.jpg" alt="" class="rounded-circle avatar-md mx-auto d-block" />
+                                        <h5 class="fs-17 mt-3 mb-2">James Price</h5>
+                                        <p class="text-muted fs-13 mb-3">Product Designer</p>
+
+                                        <p class="text-muted mb-4 fs-14">
+                                            <i class="ri-map-pin-2-line text-primary me-1 align-bottom"></i> Escondido, California
+                                        </p>
+
+                                        <a href="#!" class="btn btn-primary w-100">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card text-center">
+                                    <div class="card-body p-4">
+                                        <img src="frontend/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-md mx-auto d-block" />
+                                        <h5 class="fs-17 mt-3 mb-2">Michael Morris</h5>
+                                        <p class="text-muted fs-13 mb-3">Full Stack Developer</p>
+
+                                        <p class="text-muted mb-4 fs-14">
+                                            <i class="ri-map-pin-2-line text-primary me-1 align-bottom"></i> Escondido, California
+                                        </p>
+
+                                        <a href="#!" class="btn btn-primary w-100">View Profile</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- end container -->
     </section>
-</main>
+    <!-- end candidates -->
+
+    <!-- start blog -->
+    <section class="section" id="blogs">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5">
+                        <h1 class="mb-3 ff-secondary fw-semibold text-capitalize lh-base">Our Latest <span class="text-primary">News</span></h1>
+                        <p class="text-muted mb-4">We thrive when coming up with innovative ideas but also understand that a smart concept should be supported with faucibus sapien odio measurable results.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="frontend/images/small/img-8.jpg" alt="" class="img-fluid rounded" />
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-inline fs-14 text-muted">
+                                <li class="list-inline-item">
+                                    <i class="ri-calendar-line align-bottom me-1"></i> 30 Oct, 2021
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="ri-message-2-line align-bottom me-1"></i> 364 Comment
+                                </li>
+                            </ul>
+                            <a href="javascript:void(0);">
+                                <h5>Design your apps in your own way ?</h5>
+                            </a>
+                            <p class="text-muted fs-14">One disadvantage of Lorum Ipsum is that in Latin certain letters appear more frequently than others.</p>
+
+                            <div>
+                                <a href="#!" class="link-success">Learn More <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="frontend/images/small/img-6.jpg" alt="" class="img-fluid rounded" />
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-inline fs-14 text-muted">
+                                <li class="list-inline-item">
+                                    <i class="ri-calendar-line align-bottom me-1"></i> 02 Oct, 2021
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="ri-message-2-line align-bottom me-1"></i> 245 Comment
+                                </li>
+                            </ul>
+                            <a href="javascript:void(0);">
+                                <h5>Smartest Applications for Business ?</h5>
+                            </a>
+                            <p class="text-muted fs-14">Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception.</p>
+
+                            <div>
+                                <a href="#!" class="link-success">Learn More <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="frontend/images/small/img-9.jpg" alt="" class="img-fluid rounded" />
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-inline fs-14 text-muted">
+                                <li class="list-inline-item">
+                                    <i class="ri-calendar-line align-bottom me-1"></i> 23 Sept, 2021
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="ri-message-2-line align-bottom me-1"></i> 354 Comment
+                                </li>
+                            </ul>
+                            <a href="javascript:void(0);">
+                                <h5>How apps is changing the IT world</h5>
+                            </a>
+                            <p class="text-muted fs-14">Intrinsically incubate intuitive opportunities and real-time potentialities Appropriately communicate one-to-one technology.</p>
+
+                            <div>
+                                <a href="#!" class="link-success">Learn More <i class="ri-arrow-right-line align-bottom ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end blog -->
+
+    <!-- start Skill Process -->
+    @include('frontend.layout.skill.index')
+   <!-- end Skill Process -->
+
 @endsection

@@ -1,4 +1,4 @@
-<section class="section bg-gradient text-light" id="creators">
+<section class="section bg-gradient text-light" id="skills">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -9,7 +9,7 @@
             </div>
         </div><!-- end row -->
 
-        <div class="row" id="skills-container">
+        <div class="row" >
             <!-- Skill 1: HTML5 -->
             <div class="col-lg-3 col-md-6">
                 <div class="card mb-4 ribbon-box ribbon-fill ribbon-sm skill-card">

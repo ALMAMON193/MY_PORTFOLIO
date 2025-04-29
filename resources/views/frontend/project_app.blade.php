@@ -12,7 +12,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="frontend/images/favicon.ico">
 
 @include('frontend.partials.style')
 
@@ -22,18 +22,16 @@
 
 <!-- Begin page -->
 <div class="layout-wrapper landing">
-    @include('frontend.partials.nav')
+    @include('frontend.partials.sidebar')
     <div class="bg-overlay bg-overlay-pattern"></div>
     <!-- end navbar -->
-    @yield('content')
+   @yield('project')
    @extends('frontend.partials.footer')
-
     <!--start back-to-top-->
     <button onclick="topFunction()" class="btn btn-danger btn-icon landing-back-top" id="back-to-top">
         <i class="ri-arrow-up-line"></i>
     </button>
     <!--end back-to-top-->
-
 </div>
 <!-- end layout wrapper -->
 

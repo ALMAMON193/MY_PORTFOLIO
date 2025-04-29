@@ -1,162 +1,212 @@
-<section class="section" id="services">
+<!-- start services -->
+<section class="section bg-light" id="services">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="mb-3 fw-semibold">Our Development Services</h2>
-            <p class="text-muted">We deliver end-to-end digital transformation solutions tailored to your business needs, leveraging the latest technologies to ensure scalability, performance, and exceptional user experiences.</p>
-        </div>
-
-        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="row g-4">
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1084/1084984.png" height="55" class="mb-3 pb-2">
-                                    <h5>Frontend Development</h5>
-                                    <p class="text-muted pb-1">We create pixel-perfect, responsive interfaces using React.js, Vue.js, and Angular frameworks. Our frontend solutions focus on performance optimization, accessibility standards, and seamless cross-browser compatibility to deliver engaging user experiences.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1084/1084990.png" height="55" class="mb-3 pb-2">
-                                    <h5>Backend Development</h5>
-                                    <p class="text-muted pb-1">Our backend solutions utilize Node.js, Python (Django/Flask), and Java Spring Boot to build scalable, secure APIs and microservices. We implement robust database architectures, caching mechanisms, and cloud integrations to ensure high availability and performance.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/2489/2489715.png" height="55" class="mb-3 pb-2">
-                                    <h5>API Integration</h5>
-                                    <p class="text-muted pb-1">We specialize in seamless integration with RESTful and GraphQL APIs, payment gateways (Stripe, PayPal), CRM systems, and third-party services. Our solutions include comprehensive documentation, version control, and thorough testing for reliable connectivity.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="text-center mb-5">
+                    <h1 class="mb-3 ff-secondary fw-semibold text-capitalize lh-base">Web Development <span class="text-primary">Services</span> Offered</h1>
+                    <p class="text-muted">Expert solutions for your digital needs. From chatbots to responsive designs, we deliver quality web development services tailored to your business.</p>
                 </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
 
-                <!-- Slide 2 -->
-                <div class="carousel-item">
-                    <div class="row g-4">
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/8649/8649597.png" height="55" class="mb-3 pb-2">
-                                    <h5>AI Chatbot Solutions</h5>
-                                    <p class="text-muted pb-1">We develop intelligent conversational AI using natural language processing (NLP) and machine learning. Our chatbots handle complex queries, integrate with knowledge bases, and provide 24/7 customer support with human-like interaction capabilities.</p>
-                                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-robot-line fs-1"></i>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/2489/2489717.png" height="55" class="mb-3 pb-2">
-                                    <h5>Payment Integration</h5>
-                                    <p class="text-muted pb-1">Secure PCI-compliant payment solutions with Stripe, PayPal, and Razorpay integrations. We implement recurring billing, subscription management, fraud detection, and multi-currency support with seamless checkout experiences.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card text-center border shadow-none material-shadow h-100">
-                                <div class="card-body py-5 px-4">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/1084/1084967.png" height="55" class="mb-3 pb-2">
-                                    <h5>UI/UX Design</h5>
-                                    <p class="text-muted pb-1">Our design process includes user research, wireframing, prototyping in Figma, and usability testing. We create intuitive interfaces with attention to visual hierarchy, consistent design systems, and responsive layouts that enhance user engagement.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">ChatBot Integration</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Custom AI chatbots with REST API integration to enhance customer engagement and support</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-            <!-- Pagination -->
-            <div class="swiper-pagination swiper-pagination-dark position-relative mt-4"></div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-code-s-slash-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">REST API Development</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Secure and scalable API solutions to connect your applications and services seamlessly</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm mb-4 mx-auto position-relative">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-layout-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">Frontend Development</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Responsive and interactive user interfaces built with modern frameworks like React, Vue, or Angular</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-pantone-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">UI/UX Design</h5>
+                        </a>
+                        <p class="mb-0 text-muted">User-centered design that enhances usability and creates delightful digital experiences</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-database-2-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">Backend Development</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Robust server-side solutions with Node.js, Python, PHP, or Java for powerful web applications</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-speed-up-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">Performance Optimization</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Speed up your website with advanced techniques for faster loading and better user experience</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-shield-check-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">Security Implementation</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Protect your web applications with industry-standard security practices and vulnerability testing</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card shadow-none text-center py-3 hover-effect">
+                    <div class="card-body py-4">
+                        <div class="avatar-sm position-relative mb-4 mx-auto">
+                            <div class="job-icon-effect"></div>
+                            <div class="avatar-title bg-transparent text-success rounded-circle">
+                                <i class="ri-responsive-line fs-1"></i>
+                            </div>
+                        </div>
+                        <a href="#!" class="stretched-link">
+                            <h5 class="fs-17 pt-1">Responsive Web Design</h5>
+                        </a>
+                        <p class="mb-0 text-muted">Mobile-friendly websites that look and work flawlessly across all devices and screen sizes</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- end row -->
     </div>
+    <!-- end container -->
 </section>
+<!-- end services -->
 
 <style>
-    .material-shadow {
-        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    /* Hover effects for service cards */
+    .hover-effect {
         transition: all 0.3s ease;
-        border-radius: 8px;
+        border: 1px solid transparent;
     }
-    .material-shadow:hover {
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    .hover-effect:hover {
         transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border: 1px solid #e6f7e9;
     }
-    .card-body {
+
+    /* Animated effect for icons */
+    .job-icon-effect {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: rgba(67, 209, 135, 0.1);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.95);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.05);
+            opacity: 0.4;
+        }
+        100% {
+            transform: scale(0.95);
+            opacity: 0.7;
+        }
+    }
+
+    /* Enhanced icon styling */
+    .avatar-title i {
         transition: all 0.3s ease;
     }
-    .card:hover .card-body {
-        transform: scale(1.02);
-    }
-    .text-muted {
-        color: #6c757d !important;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-    .pb-1 {
-        padding-bottom: 0.25rem !important;
-    }
-    .swiper-pagination-bullet {
-        width: 12px;
-        height: 12px;
-        background: rgba(0,0,0,0.3);
-        opacity: 1;
-        margin: 0 5px !important;
-    }
-    .swiper-pagination-bullet-active {
-        background: #0d6efd;
+
+    .card:hover .avatar-title i {
         transform: scale(1.2);
+        color: #28a745;
+    }
+
+    /* Smooth transition for links */
+    .stretched-link::after {
+        transition: all 0.3s ease;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card {
+            margin-bottom: 20px;
+        }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize carousel with pagination
-        var carousel = new bootstrap.Carousel(document.getElementById('servicesCarousel'), {
-            interval: 5000
-        });
-
-        // Custom pagination functionality
-        var items = document.querySelectorAll('.carousel-item');
-        var pagination = document.querySelector('.swiper-pagination');
-
-        items.forEach((item, index) => {
-            let bullet = document.createElement('span');
-            bullet.className = 'swiper-pagination-bullet';
-            if(index === 0) bullet.classList.add('swiper-pagination-bullet-active');
-
-            bullet.addEventListener('click', () => {
-                carousel.to(index);
-                updatePagination(index);
-            });
-            pagination.appendChild(bullet);
-        });
-
-        function updatePagination(activeIndex) {
-            document.querySelectorAll('.swiper-pagination-bullet').forEach((bullet, index) => {
-                bullet.classList.toggle('swiper-pagination-bullet-active', index === activeIndex);
-            });
-        }
-
-        document.getElementById('servicesCarousel').addEventListener('slid.bs.carousel', function() {
-            let activeIndex = [...items].findIndex(item => item.classList.contains('active'));
-            updatePagination(activeIndex);
-        });
-    });
-</script>

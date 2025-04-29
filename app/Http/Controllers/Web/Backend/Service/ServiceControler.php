@@ -38,6 +38,7 @@ class ServiceControler extends Controller
 
                         return $status;
                     })
+
                     ->addColumn('action', function ($data) {
                         return '<a href="' . route('admin.service.view', $data->id) . '" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View</a>
                         <a href="' . route('admin.service.edit', $data->id) . '" class="btn btn-warning btn-sm"><i class="ri-edit-2-line"></i> Edit</a>

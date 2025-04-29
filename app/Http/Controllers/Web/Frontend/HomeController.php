@@ -79,9 +79,9 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 
-    public function portfolioDetails($id)
+    public function portfolioDetails()
     {
-        $project = Project::find($id);
-        return view('frontend.layout.portfolio.details', compact('project'));
+
+        return view('frontend.layout.portfolio.details');
     }
 }

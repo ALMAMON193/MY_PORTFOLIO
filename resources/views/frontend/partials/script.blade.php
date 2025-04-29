@@ -11,7 +11,8 @@
   <script src="{{asset('frontend/libs/swiper/swiper-bundle.min.js')}}"></script>
 
   <script src="{{asset('frontend/js/pages/nft-landing.init.js')}}"></script>
-
+  <!--job landing init -->
+  <script src="{{asset('frontend/js/pages/job-lading.init.js')}}"></script>
   <!-- Circle Progress JavaScript -->
   <script>
       document.addEventListener("DOMContentLoaded", function () {
