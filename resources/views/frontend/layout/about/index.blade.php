@@ -153,11 +153,11 @@
 
                     <!-- Action buttons -->
                     <div class="mt-4">
-                        <a href="#contact" class="btn btn-success btn-lg me-3">
+                        <a href="#contact" class="btn btn-success btn-lg">
                             <span>Hire Me</span>
                             <i class="ri-arrow-right-line ms-2"></i>
                         </a>
-                        <a href="#portfolio" class="btn btn-outline-success btn-lg">
+                        <a href="#portfolio" class="btn btn-success btn-lg">
                             <span>View Portfolio</span>
                             <i class="ri-image-line ms-2"></i>
                         </a>

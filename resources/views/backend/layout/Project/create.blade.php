@@ -1,5 +1,5 @@
 @extends('backend.app')
-@section('title', 'Admin Dashboard | Create Service Image')
+@section('title', 'Admin Dashboard | Create Project')
 
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
@@ -65,13 +65,26 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">File Upload</h4>
+                        <h4 class="mb-sm-0">Create Project</h4>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12">
+                    {{-- error message show --}}
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Basic Information Card -->
@@ -82,10 +95,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
-                                        <label for="nameInput" class="form-label">Name</label>
+                                        <label for="nameInput" class="form-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             id="nameInput" name="name" value="{{ old('name') }}"
-                                            placeholder="Enter project name">
+                                            placeholder="Enter project name" required>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -94,9 +107,9 @@
                                     </div>
 
                                     <div class="mb-3 col-md-4">
-                                        <label for="startDateInput" class="form-label">Start Date</label>
+                                        <label for="startDateInput" class="form-label">Start Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}">
+                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}" required>
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -105,10 +118,58 @@
                                     </div>
 
                                     <div class="mb-3 col-md-4">
-                                        <label for="endDateInput" class="form-label">End Date</label>
+                                        <label for="endDateInput" class="form-label">End Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}">
+                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}" required>
                                         @error('end_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Specifications Card -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0 text-muted">Project Specifications</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label for="categoryInput" class="form-label">Category</label>
+                                        <input type="text" class="form-control @error('category') is-invalid @enderror"
+                                            id="categoryInput" name="category" value="{{ old('category') }}"
+                                            placeholder="Web Application, Mobile App, etc.">
+                                        @error('category')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3 col-md-4">
+                                        <label for="repositoryInput" class="form-label">Repository Visibility</label>
+                                        <select class="form-control @error('repository') is-invalid @enderror"
+                                            id="repositoryInput" name="repository">
+                                            <option value="private" {{ old('repository') == 'private' ? 'selected' : '' }}>Private</option>
+                                            <option value="public" {{ old('repository') == 'public' ? 'selected' : '' }}>Public</option>
+                                        </select>
+                                        @error('repository')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3 col-md-4">
+                                        <label for="teamSizeInput" class="form-label">Team Size</label>
+                                        <input type="number" class="form-control @error('team_size') is-invalid @enderror"
+                                            id="teamSizeInput" name="team_size" value="{{ old('team_size') }}"
+                                            placeholder="Number of team members" min="1">
+                                        @error('team_size')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -127,8 +188,7 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="githubLinkInput" class="form-label">Github Link</label>
-                                        <input type="url"
-                                            class="form-control @error('github_link') is-invalid @enderror"
+                                        <input type="url" class="form-control @error('github_link') is-invalid @enderror"
                                             id="githubLinkInput" name="github_link" value="{{ old('github_link') }}"
                                             placeholder="https://github.com/your-project">
                                         @error('github_link')
@@ -156,12 +216,12 @@
                         <!-- Project Description Card -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h6 class="mb-0 text-muted">Project Description</h6>
+                                <h6 class="mb-0 text-muted">Project Description <span class="text-danger">*</span></h6>
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="summernote" name="description"
-                                        rows="5">{{ old('description') }}</textarea>
+                                        rows="5" required>{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -179,10 +239,9 @@
                             <div class="card-body">
                                 <!-- Image Upload -->
                                 <div class="mb-3">
-                                    <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
-                                        SVG)</label>
+                                    <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF, SVG) <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                        id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
+                                        id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg" required>
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -194,8 +253,7 @@
 
                                 <!-- Video Upload -->
                                 <div class="mb-3">
-                                    <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV,
-                                        MKV)</label>
+                                    <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV, MKV)</label>
                                     <input type="file" class="form-control @error('video') is-invalid @enderror"
                                         id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv">
                                     @error('video')
@@ -205,72 +263,23 @@
                                     @enderror
                                     <div class="form-text">Maximum file size: 20MB each</div>
                                 </div>
-                                <div class="mb-3 video-preview-container row g-2" id="videoPreviewContainer">
-                                </div>
+                                <div class="mb-3 video-preview-container row g-2" id="videoPreviewContainer"></div>
                             </div>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h6 class="mb-0 text-muted">Project Specifications</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-4">
-                                        <label for="categoryInput" class="form-label">Category</label>
-                                        <input type="text" class="form-control @error('category') is-invalid @enderror"
-                                               id="categoryInput" name="category" value="{{ old('category') }}"
-                                               placeholder="Web Application, Mobile App, etc.">
-                                        @error('category')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
 
-                                    <div class="mb-3 col-md-4">
-                                        <label for="repositoryInput" class="form-label">Repository Visibility</label>
-                                        <select class="form-control @error('repository') is-invalid @enderror"
-                                                id="repositoryInput" name="repository">
-                                            <option value="private" {{ old('repository') == 'private' ? 'selected' : '' }}>Private</option>
-                                            <option value="public" {{ old('repository') == 'public' ? 'selected' : '' }}>Public</option>
-                                        </select>
-                                        @error('repository')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3 col-md-4">
-                                        <label for="teamSizeInput" class="form-label">Team Size</label>
-                                        <input type="number" class="form-control @error('team_size') is-invalid @enderror"
-                                               id="teamSizeInput" name="team_size" value="{{ old('team_size') }}"
-                                               placeholder="Number of team members">
-                                        @error('team_size')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Project Features Card - Always show at least one field -->
+                        <!-- Project Features Card -->
                         <div class="card mb-4" id="featuresSection">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-muted">Project Features</h6>
-                                <button type="button" class="btn btn-sm btn-primary" id="addFeatureBtn">Add
-                                    Feature</button>
+                                <h6 class="mb-0 text-muted">Project Features <span class="text-danger">*</span></h6>
+                                <button type="button" class="btn btn-sm btn-primary" id="addFeatureBtn">Add Feature</button>
                             </div>
                             <div class="card-body">
                                 <div id="featuresContainer">
                                     <div class="feature-item mb-3 border p-3 rounded">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label class="form-label">Feature Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text"
-                                                    class="form-control @error('feature_name.0') is-invalid @enderror"
+                                                <label class="form-label">Feature Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('feature_name.0') is-invalid @enderror"
                                                     name="feature_name[]" value="{{ old('feature_name.0', '') }}"
                                                     placeholder="Feature name" required>
                                                 @error('feature_name.0')
@@ -319,8 +328,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-12 d-flex align-items-end">
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,22 +338,19 @@
                             </div>
                         </div>
 
-                        <!-- Project Technologies Card - Always show at least one field -->
+                        <!-- Project Technologies Card -->
                         <div class="card mb-4" id="technologiesSection">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-muted">Technologies Used</h6>
-                                <button type="button" class="btn btn-sm btn-primary" id="addTechnologyBtn">Add
-                                    Technology</button>
+                                <h6 class="mb-0 text-muted">Technologies Used <span class="text-danger">*</span></h6>
+                                <button type="button" class="btn btn-sm btn-primary" id="addTechnologyBtn">Add Technology</button>
                             </div>
                             <div class="card-body">
                                 <div id="technologiesContainer">
                                     <div class="technology-item mb-3 border p-3 rounded">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label class="form-label">Technology Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text"
-                                                    class="form-control @error('technology_name.0') is-invalid @enderror"
+                                                <label class="form-label">Technology Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('technology_name.0') is-invalid @enderror"
                                                     name="technology_name[]" value="{{ old('technology_name.0', '') }}"
                                                     placeholder="Technology name" required>
                                                 @error('technology_name.0')
@@ -355,11 +360,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="form-label">Icon URL</label>
-                                                <input type="file"
-                                                    class="form-control @error('icon.0') is-invalid @enderror"
-                                                    name="icon[]" value="{{ old('icon.0', '') }}"
-                                                    placeholder="Optional icon URL">
+                                                <label class="form-label">Icon</label>
+                                                <input type="file" class="form-control @error('icon.0') is-invalid @enderror"
+                                                    name="icon[]">
                                                 @error('icon.0')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -386,11 +389,10 @@
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Icon URL</label>
+                                                        <label class="form-label">Icon</label>
                                                         <input type="file"
                                                             class="form-control @error('icon.' . $loop->iteration) is-invalid @enderror"
-                                                            name="icon[]" value="{{ old('icon.' . $loop->iteration) }}"
-                                                            placeholder="Optional icon URL">
+                                                            name="icon[]">
                                                         @error('icon.' . $loop->iteration)
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -398,8 +400,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="col-md12 d-flex align-items-end">
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -409,22 +410,19 @@
                             </div>
                         </div>
 
-                        <!-- Project Challenges Card - Always show at least one field -->
+                        <!-- Project Challenges Card -->
                         <div class="card mb-4" id="challengesSection">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-muted">Challenges & Solutions</h6>
-                                <button type="button" class="btn btn-sm btn-primary" id="addChallengeBtn">Add
-                                    Challenge</button>
+                                <h6 class="mb-0 text-muted">Challenges & Solutions <span class="text-danger">*</span></h6>
+                                <button type="button" class="btn btn-sm btn-primary" id="addChallengeBtn">Add Challenge</button>
                             </div>
                             <div class="card-body">
                                 <div id="challengesContainer">
                                     <div class="challenge-item mb-3 border p-3 rounded">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label class="form-label">Challenge Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text"
-                                                    class="form-control @error('challenge_name.0') is-invalid @enderror"
+                                                <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control @error('challenge_name.0') is-invalid @enderror"
                                                     name="challenge_name[]" value="{{ old('challenge_name.0', '') }}"
                                                     placeholder="Challenge name" required>
                                                 @error('challenge_name.0')
@@ -453,7 +451,6 @@
                                                     </span>
                                                 @enderror
                                             </div>
-
                                         </div>
                                     </div>
 
@@ -494,8 +491,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="col-12 mt-2 text-end">
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -504,14 +500,13 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Submit Button -->
-
-                        <div class="card-body">
-                            <div class="gap-2 d-grid d-md-flex justify-content-md-end">
-                                <button type="submit" class="px-4 btn btn-primary">Save Project</button>
-                            </div>
+                        <div class="mb-4">
+                                <div class="gap-2 d-grid d-md-flex justify-content-md-end">
+                                    <button type="submit" class="px-4 btn btn-primary">Save Project</button>
+                                </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -527,64 +522,71 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Common template for remove button (simple cross)
-            const removeBtn = `
-            <button type="button" class="btn btn-sm btn-light remove-item position-absolute"
-                style="top: 10px; right: 10px; background: red; color: white; padding: 0.2rem 0.5rem; font-size: 1.2rem; line-height: 1;">
-                &times;
-            </button>`;
+ <!-- JavaScript for dynamic fields and previews -->
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add feature
+        document.getElementById('addFeatureBtn').addEventListener('click', function() {
+            const container = document.getElementById('featuresContainer');
+            const index = container.querySelectorAll('.feature-item').length;
 
-            // Add Feature
-            document.getElementById('addFeatureBtn').addEventListener('click', function() {
-                const container = document.getElementById('featuresContainer');
-                const html = `
-            <div class="feature-item mb-3 border p-3 rounded position-relative">
-                ${removeBtn}
+            const html = `
+            <div class="feature-item mb-3 border p-3 rounded">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="form-label">Feature Name</label>
+                        <label class="form-label">Feature Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="feature_name[]" placeholder="Feature name" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Description</label>
                         <textarea class="form-control" name="feature_description[]" rows="1" placeholder="Feature description"></textarea>
                     </div>
+                    <div class="col-12 mt-2 text-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                    </div>
                 </div>
-            </div>`;
-                container.insertAdjacentHTML('beforeend', html);
-            });
+            </div>
+            `;
 
-            // Add Technology
-            document.getElementById('addTechnologyBtn').addEventListener('click', function() {
-                const container = document.getElementById('technologiesContainer');
-                const html = `
-            <div class="technology-item mb-3 border p-3 rounded position-relative">
-                ${removeBtn}
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Add technology
+        document.getElementById('addTechnologyBtn').addEventListener('click', function() {
+            const container = document.getElementById('technologiesContainer');
+            const index = container.querySelectorAll('.technology-item').length;
+
+            const html = `
+            <div class="technology-item mb-3 border p-3 rounded">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="form-label">Technology Name</label>
+                        <label class="form-label">Technology Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="technology_name[]" placeholder="Technology name" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Icon URL</label>
-                        <input type="file" class="form-control" name="icon[]" placeholder="Optional icon URL">
+                        <label class="form-label">Icon</label>
+                        <input type="file" class="form-control" name="icon[]">
+                    </div>
+                    <div class="col-12 mt-2 text-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
                     </div>
                 </div>
-            </div>`;
-                container.insertAdjacentHTML('beforeend', html);
-            });
+            </div>
+            `;
 
-            // Add Challenge
-            document.getElementById('addChallengeBtn').addEventListener('click', function() {
-                const container = document.getElementById('challengesContainer');
-                const html = `
-            <div class="challenge-item mb-3 border p-3 rounded position-relative">
-                ${removeBtn}
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Add challenge
+        document.getElementById('addChallengeBtn').addEventListener('click', function() {
+            const container = document.getElementById('challengesContainer');
+            const index = container.querySelectorAll('.challenge-item').length;
+
+            const html = `
+            <div class="challenge-item mb-3 border p-3 rounded">
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="form-label">Challenge Name</label>
+                        <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="challenge_name[]" placeholder="Challenge name" required>
                     </div>
                     <div class="col-md-4">
@@ -595,50 +597,27 @@
                         <label class="form-label">Solution</label>
                         <textarea class="form-control" name="solution_description[]" rows="1" placeholder="Describe the solution"></textarea>
                     </div>
+                    <div class="col-12 mt-2 text-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                    </div>
                 </div>
-            </div>`;
-                container.insertAdjacentHTML('beforeend', html);
-            });
+            </div>
+            `;
 
-            // Remove item
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('remove-item')) {
-                    const item = e.target.closest('.feature-item, .technology-item, .challenge-item');
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Remove item
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-item')) {
+                const item = e.target.closest('.feature-item, .technology-item, .challenge-item');
+                if (item) {
                     item.remove();
                 }
-            });
-
-            // Basic form validation
-            document.querySelector('form').addEventListener('submit', function(e) {
-                let isValid = true;
-
-                const checkRequired = (selector) => {
-                    const inputs = document.querySelectorAll(selector);
-                    return inputs.length === 1 && !inputs[0].value.trim();
-                };
-
-                if (checkRequired('#featuresContainer input[name="feature_name[]"]')) {
-                    isValid = false;
-                    document.querySelector('#featuresContainer input[name="feature_name[]"]').focus();
-                }
-                if (checkRequired('#technologiesContainer input[name="technology_name[]"]')) {
-                    isValid = false;
-                    document.querySelector('#technologiesContainer input[name="technology_name[]"]')
-                .focus();
-                }
-                if (checkRequired('#challengesContainer input[name="challenge_name[]"]')) {
-                    isValid = false;
-                    document.querySelector('#challengesContainer input[name="challenge_name[]"]').focus();
-                }
-
-                if (!isValid) {
-                    e.preventDefault();
-                    alert('Please fill in all required fields (marked with *)');
-                }
-            });
+            }
         });
-    </script>
-
+    });
+   </script>
     <script>
         function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
             const input = document.getElementById(inputId);

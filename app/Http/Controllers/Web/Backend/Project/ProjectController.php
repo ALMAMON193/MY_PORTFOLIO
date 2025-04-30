@@ -9,9 +9,13 @@ use Illuminate\Support\Str;
 use App\Models\ProjectImage;
 use App\Models\ProjectVideo;
 use Illuminate\Http\Request;
+use App\Models\ProjectFeature;
+use App\Models\ProjectTechnology;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\ProjectChallengesAndSolution;
+
 
 class ProjectController extends Controller
 {
@@ -70,17 +74,36 @@ class ProjectController extends Controller
     }
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|array',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg', // 5MB
             'description' => 'required',
             'github_link' => 'nullable|url',
             'live_link' => 'nullable|url',
-            'start_date' => 'required|string',
-            'end_date' => 'required|string|after_or_equal:start_date',
-            'video.*' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:512000',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'video.*' => 'nullable|file|mimes:mp4,mov,avi,mkv', // 20MB
+            'category' => 'nullable|string|max:255',
+            'repository' => 'nullable|in:private,public',
+            'team_size' => 'nullable|integer|min:1',
+
+            // Features validation
+            'feature_name' => 'required|array|min:1',
+            'feature_name.*' => 'required|string|max:255',
+            'feature_description.*' => 'nullable|string',
+
+            // Technologies validation
+            'technology_name' => 'required|array|min:1',
+            'technology_name.*' => 'required|string|max:255',
+            'icon.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+            // Challenges validation
+            'challenge_name' => 'required|array|min:1',
+            'challenge_name.*' => 'required|string|max:255',
+            'problem_description.*' => 'nullable|string',
+            'solution_description.*' => 'nullable|string',
         ]);
 
         try {
@@ -92,6 +115,9 @@ class ProjectController extends Controller
             $project->live_link = $request->live_link;
             $project->start_date = $request->start_date;
             $project->end_date = $request->end_date;
+            $project->category = $request->category;
+            $project->repository = $request->repository;
+            $project->team_size = $request->team_size;
             $project->save();
 
             // Handle image uploads
@@ -104,6 +130,7 @@ class ProjectController extends Controller
                     ]);
                 }
             }
+
             // Handle video uploads
             if ($request->hasFile('video')) {
                 foreach ($request->file('video') as $video) {
@@ -114,10 +141,52 @@ class ProjectController extends Controller
                     ]);
                 }
             }
-            return redirect()->route('admin.project.index')->with('t-success', 'Project created successfully.');
+
+            // Save project features
+            if ($request->has('feature_name')) {
+                foreach ($request->feature_name as $index => $featureName) {
+                    ProjectFeature::create([
+                        'project_id' => $project->id,
+                        'feature_name' => $featureName,
+                        'feature_description' => $request->feature_description[$index] ?? null,
+                    ]);
+                }
+            }
+
+            // Save project technologies
+            if ($request->has('technology_name')) {
+                foreach ($request->technology_name as $index => $techName) {
+                    $iconPath = null;
+
+                    if (isset($request->file('icon')[$index])) {
+                        $icon = $request->file('icon')[$index];
+                        $iconPath = Helper::fileUpload($icon, 'projects/technologies', $icon->getClientOriginalName());
+                    }
+
+                    ProjectTechnology::create([
+                        'project_id' => $project->id,
+                        'technology_name' => $techName,
+                        'icon' => $iconPath,
+                    ]);
+                }
+            }
+
+            // Save project challenges
+            if ($request->has('challenge_name')) {
+                foreach ($request->challenge_name as $index => $challengeName) {
+                    ProjectChallengesAndSolution::create([
+                        'project_id' => $project->id,
+                        'challenge_name' => $challengeName,
+                        'problem_description' => $request->problem_description[$index] ?? null,
+                        'solution_description' => $request->solution_description[$index] ?? null,
+                    ]);
+                }
+            }
+
+            return redirect()->route('admin.project.index')->with('success', 'Project created successfully.');
         } catch (Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->back()->with('t-error', 'Something went wrong. Please try again.');
+            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
         }
     }
 

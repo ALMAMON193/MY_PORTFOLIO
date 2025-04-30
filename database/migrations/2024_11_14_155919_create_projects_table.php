@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('category');
-            $table->enum('reposotory', ['private', 'public'])->default('private');
+            $table->enum('repository', ['private', 'public'])->default('private');
             $table->integer('team_size')->nullable();
             $table->text('description');
             $table->string('github_link')->nullable();
