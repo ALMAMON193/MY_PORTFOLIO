@@ -22,13 +22,40 @@ class Project extends Model
 
     protected $guarded = [];
 
-    public function images()
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ProjectImage::class);
     }
 
-    public function videos()
+    /**
+     * Get all videos for the project
+     */
+    public function videos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ProjectVideo::class);
+    }
+
+    /**
+     * Get all features for the project
+     */
+    public function features(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProjectFeature::class);
+    }
+
+    /**
+     * Get all technologies for the project
+     */
+    public function technologies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProjectTechnology::class);
+    }
+
+    /**
+     * Get all challenges for the project
+     */
+    public function challenges(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProjectChallengesAndSolution::class);
     }
 }

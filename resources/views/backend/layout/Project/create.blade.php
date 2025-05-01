@@ -98,7 +98,7 @@
                                         <label for="nameInput" class="form-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             id="nameInput" name="name" value="{{ old('name') }}"
-                                            placeholder="Enter project name" required>
+                                            placeholder="Enter project name" >
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
                                     <div class="mb-3 col-md-4">
                                         <label for="startDateInput" class="form-label">Start Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}" required>
+                                            id="startDateInput" name="start_date" value="{{ old('start_date') }}" >
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -118,9 +118,9 @@
                                     </div>
 
                                     <div class="mb-3 col-md-4">
-                                        <label for="endDateInput" class="form-label">End Date <span class="text-danger">*</span></label>
+                                        <label for="endDateInput" class="form-label">End Date </label>
                                         <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}" required>
+                                            id="endDateInput" name="end_date" value="{{ old('end_date') }}" >
                                         @error('end_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -134,12 +134,12 @@
                         <!-- Project Specifications Card -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h6 class="mb-0 text-muted">Project Specifications</h6>
+                                <h6 class="mb-0">Project Specifications<span class="text-danger">*</span></h6>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-4">
-                                        <label for="categoryInput" class="form-label">Category</label>
+                                        <label for="categoryInput" class="form-label">Category<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('category') is-invalid @enderror"
                                             id="categoryInput" name="category" value="{{ old('category') }}"
                                             placeholder="Web Application, Mobile App, etc.">
@@ -216,12 +216,12 @@
                         <!-- Project Description Card -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h6 class="mb-0 text-muted">Project Description <span class="text-danger">*</span></h6>
+                                <h6 class="mb-0">Project Description <span class="text-danger">*</span></h6>
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="summernote" name="description"
-                                        rows="5" required>{{ old('description') }}</textarea>
+                                        rows="5" >{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -241,13 +241,13 @@
                                 <div class="mb-3">
                                     <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF, SVG) <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                        id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg" required>
+                                        id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg" >
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <div class="form-text">Maximum file size: 5MB each</div>
+                                    <div class="form-text">Maximum file size: 1048576 KB each</div>
                                 </div>
                                 <div class="mb-3 image-preview-container row g-2" id="previewContainer"></div>
 
@@ -261,7 +261,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <div class="form-text">Maximum file size: 20MB each</div>
+                                    <div class="form-text">Maximum file size: 1048576 KB each</div>
                                 </div>
                                 <div class="mb-3 video-preview-container row g-2" id="videoPreviewContainer"></div>
                             </div>
@@ -281,7 +281,7 @@
                                                 <label class="form-label">Feature Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('feature_name.0') is-invalid @enderror"
                                                     name="feature_name[]" value="{{ old('feature_name.0', '') }}"
-                                                    placeholder="Feature name" required>
+                                                    placeholder="Feature name" >
                                                 @error('feature_name.0')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -310,7 +310,7 @@
                                                         <input type="text"
                                                             class="form-control @error('feature_name.' . $loop->iteration) is-invalid @enderror"
                                                             name="feature_name[]" value="{{ $feature }}"
-                                                            placeholder="Feature name" required>
+                                                            placeholder="Feature name" >
                                                         @error('feature_name.' . $loop->iteration)
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -341,7 +341,7 @@
                         <!-- Project Technologies Card -->
                         <div class="card mb-4" id="technologiesSection">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-muted">Technologies Used <span class="text-danger">*</span></h6>
+                                <h6 class="mb-0">Technologies Used <span class="text-danger">*</span></h6>
                                 <button type="button" class="btn btn-sm btn-primary" id="addTechnologyBtn">Add Technology</button>
                             </div>
                             <div class="card-body">
@@ -352,7 +352,7 @@
                                                 <label class="form-label">Technology Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('technology_name.0') is-invalid @enderror"
                                                     name="technology_name[]" value="{{ old('technology_name.0', '') }}"
-                                                    placeholder="Technology name" required>
+                                                    placeholder="Technology name" >
                                                 @error('technology_name.0')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -381,7 +381,7 @@
                                                         <input type="text"
                                                             class="form-control @error('technology_name.' . $loop->iteration) is-invalid @enderror"
                                                             name="technology_name[]" value="{{ $technology }}"
-                                                            placeholder="Technology name" required>
+                                                            placeholder="Technology name" >
                                                         @error('technology_name.' . $loop->iteration)
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -413,7 +413,7 @@
                         <!-- Project Challenges Card -->
                         <div class="card mb-4" id="challengesSection">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-muted">Challenges & Solutions <span class="text-danger">*</span></h6>
+                                <h6 class="mb-0">Challenges & Solutions <span class="text-danger">*</span></h6>
                                 <button type="button" class="btn btn-sm btn-primary" id="addChallengeBtn">Add Challenge</button>
                             </div>
                             <div class="card-body">
@@ -424,7 +424,7 @@
                                                 <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control @error('challenge_name.0') is-invalid @enderror"
                                                     name="challenge_name[]" value="{{ old('challenge_name.0', '') }}"
-                                                    placeholder="Challenge name" required>
+                                                    placeholder="Challenge name" >
                                                 @error('challenge_name.0')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -463,7 +463,7 @@
                                                         <input type="text"
                                                             class="form-control @error('challenge_name.' . $loop->iteration) is-invalid @enderror"
                                                             name="challenge_name[]" value="{{ $challenge }}"
-                                                            placeholder="Challenge name" required>
+                                                            placeholder="Challenge name" >
                                                         @error('challenge_name.' . $loop->iteration)
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -535,7 +535,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Feature Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="feature_name[]" placeholder="Feature name" required>
+                        <input type="text" class="form-control" name="feature_name[]" placeholder="Feature name" >
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Description</label>
@@ -561,7 +561,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Technology Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="technology_name[]" placeholder="Technology name" required>
+                        <input type="text" class="form-control" name="technology_name[]" placeholder="Technology name" >
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Icon</label>
@@ -587,7 +587,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="challenge_name[]" placeholder="Challenge name" required>
+                        <input type="text" class="form-control" name="challenge_name[]" placeholder="Challenge name" >
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Problem Description</label>

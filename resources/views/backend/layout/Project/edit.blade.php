@@ -76,95 +76,162 @@
                             </div>
 
                             <div class="card-body">
-                                <form action="{{ route('admin.project.update', $data->id) }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('admin.project.update', $project->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="nameInput" class="form-label">Name</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            id="nameInput" name="name" value="{{ old('name', $data->name) }}"
-                                            placeholder="Enter project name">
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
+
+                                    <!-- Basic Information Card -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h6 class="mb-0 text-muted">Basic Information</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="nameInput" class="form-label">Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                           id="nameInput" name="name" value="{{ old('name', $project->name) }}"
+                                                           placeholder="Enter project name" required>
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="githubLinkInput" class="form-label">Github Link</label>
-                                        <input type="url"
-                                            class="form-control @error('github_link') is-invalid @enderror"
-                                            id="githubLinkInput" name="github_link"
-                                            value="{{ old('github_link', $data->github_link) }}"
-                                            placeholder="Enter your project github link">
-                                        @error('github_link')
-                                            <span class="invalid-feedback" role="alert">
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="startDateInput" class="form-label">Start Date <span class="text-danger">*</span></label>
+                                                    <input type="date" class="form-control @error('start_date') is-invalid @enderror"
+                                                           id="startDateInput" name="start_date" value="{{ old('start_date', $project->start_date) }}" required>
+                                                    @error('start_date')
+                                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="liveLinkInput" class="form-label">Live Link</label>
-                                        <input type="url" class="form-control @error('live_link') is-invalid @enderror"
-                                            id="liveLinkInput" name="live_link"
-                                            value="{{ old('live_link', $data->live_link) }}"
-                                            placeholder="Enter your project live link">
-                                        @error('live_link')
-                                            <span class="invalid-feedback" role="alert">
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="endDateInput" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control @error('end_date') is-invalid @enderror"
+                                                           id="endDateInput" name="end_date" value="{{ old('end_date', $project->end_date) }}">
+                                                    @error('end_date')
+                                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="startDateInput" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                            id="startDateInput" name="start_date"
-                                            value="{{ old('start_date', $data->start_date) }}"
-                                            placeholder="Enter project start date">
-                                        @error('start_date')
-                                            <span class="invalid-feedback" role="alert">
+                                    <!-- Project Specifications Card -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h6 class="mb-0">Project Specifications<span class="text-danger">*</span></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="categoryInput" class="form-label">Category<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control @error('category') is-invalid @enderror"
+                                                           id="categoryInput" name="category" value="{{ old('category', $project->category) }}"
+                                                           placeholder="Web Application, Mobile App, etc." required>
+                                                    @error('category')
+                                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="endDateInput" class="form-label">End Date</label>
-                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                            id="endDateInput" name="end_date" value="{{ old('end_date', $data->end_date) }}"
-                                            placeholder="Enter project end date">
-                                        @error('end_date')
-                                            <span class="invalid-feedback" role="alert">
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="repositoryInput" class="form-label">Repository Visibility</label>
+                                                    <select class="form-control @error('repository') is-invalid @enderror"
+                                                            id="repositoryInput" name="repository" required>
+                                                        <option value="private" {{ old('repository', $project->repository) == 'private' ? 'selected' : '' }}>Private</option>
+                                                        <option value="public" {{ old('repository', $project->repository) == 'public' ? 'selected' : '' }}>Public</option>
+                                                    </select>
+                                                    @error('repository')
+                                                    <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
+                                                    @enderror
+                                                </div>
+
+                                                <div class="mb-3 col-md-4">
+                                                    <label for="teamSizeInput" class="form-label">Team Size</label>
+                                                    <input type="number" class="form-control @error('team_size') is-invalid @enderror"
+                                                           id="teamSizeInput" name="team_size" value="{{ old('team_size', $project->team_size) }}"
+                                                           placeholder="Number of team members" min="1">
+                                                    @error('team_size')
+                                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="descriptionInput" class="form-label">Description</label>
-                                        <div>
-                                              <textarea class="form-control @error('description') is-invalid @enderror" id="summernote"
-                                                        name="description" rows="5">{{ old('description', $data->description) }}</textarea>
-                                            @error('description')
+                                    <!-- Project Links Card -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h6 class="mb-0 text-muted">Project Links</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="githubLinkInput" class="form-label">Github Link</label>
+                                                    <input type="url" class="form-control @error('github_link') is-invalid @enderror"
+                                                           id="githubLinkInput" name="github_link" value="{{ old('github_link', $project->github_link) }}"
+                                                           placeholder="https://github.com/your-project">
+                                                    @error('github_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="liveLinkInput" class="form-label">Live Link</label>
+                                                    <input type="url" class="form-control @error('live_link') is-invalid @enderror"
+                                                           id="liveLinkInput" name="live_link" value="{{ old('live_link', $project->live_link) }}"
+                                                           placeholder="https://your-project.com">
+                                                    @error('live_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Project Description Card -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h6 class="mb-0">Project Description <span class="text-danger">*</span></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="summernote" name="description"
+                                              rows="5" required>{{ old('description', $project->description) }}</textarea>
+                                                @error('description')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div> <!-- end Snow-editor-->
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- end col -->
 
+                                    <!-- Media Upload Card -->
                                     <!-- Image Upload -->
                                     <div class="mb-3">
                                         <label for="imageInput" class="form-label">Upload Images (JPEG, PNG, JPG, GIF,
                                             SVG)</label>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                            id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
+                                               id="imageInput" multiple name="image[]" accept=".jpeg,.png,.jpg,.gif,.svg">
                                         @error('image')
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -175,10 +242,10 @@
                                         @foreach ($projectImages as $image)
                                             <div class="preview-card">
                                                 <img src="{{ asset($image->image) }}" class="preview-img"
-                                                    alt="Project Image">
+                                                     alt="Project Image">
                                                 <div class="text-muted">{{ basename($image->image) }}</div>
                                                 <button type="button" class="remove-btn"
-                                                    onclick="deleteImage({{ $image->id }})">X</button>
+                                                        onclick="deleteImage({{ $image->id }})">X</button>
                                             </div>
                                         @endforeach
                                     </div>
@@ -188,9 +255,9 @@
                                         <label for="videoInput" class="form-label">Upload Videos (MP4, AVI, MOV,
                                             MKV)</label>
                                         <input type="file" class="form-control @error('video') is-invalid @enderror"
-                                            id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv">
+                                               id="videoInput" multiple name="video[]" accept=".mp4,.avi,.mov,.mkv">
                                         @error('video')
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -201,15 +268,262 @@
                                         @foreach ($projectVideos as $video)
                                             <div class="preview-card">
                                                 <video src="{{ asset($video->video) }}" class="preview-video"
-                                                    controls></video>
+                                                       controls></video>
                                                 <div class="text-muted">{{ basename($video->video) }}</div>
                                                 <button type="button" class="remove-btn"
-                                                    onclick="deleteVideo({{ $video->id }})">X</button>
+                                                        onclick="deleteVideo({{ $video->id }})">X</button>
                                             </div>
                                         @endforeach
                                     </div>
 
-                                    <button type="submit" class="mt-3 btn btn-primary">Update Project</button>
+                                    <!-- Project Features Card -->
+                                    <div class="card mb-4" id="featuresSection">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0 text-muted">Project Features <span class="text-danger">*</span></h6>
+                                            <button type="button" class="btn btn-sm btn-primary" id="addFeatureBtn">Add Feature</button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="featuresContainer">
+                                                @foreach($project->features as $index => $feature)
+                                                    <div class="feature-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Feature Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('feature_name.'.$index) is-invalid @enderror"
+                                                                       name="feature_name[]" value="{{ old('feature_name.'.$index, $feature->feature_name) }}"
+                                                                       placeholder="Feature name" required>
+                                                                @error('feature_name.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Description</label>
+                                                                <textarea class="form-control @error('feature_description.'.$index) is-invalid @enderror" name="feature_description[]"
+                                                                          rows="1" placeholder="Feature description">{{ old('feature_description.'.$index, $feature->feature_description) }}</textarea>
+                                                                @error('feature_description.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            @if($index > 0)
+                                                                <div class="col-12 mt-2 text-end">
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+
+                                                @if(count($project->features) == 0)
+                                                    <div class="feature-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Feature Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('feature_name.0') is-invalid @enderror"
+                                                                       name="feature_name[]" value="{{ old('feature_name.0', '') }}"
+                                                                       placeholder="Feature name" required>
+                                                                @error('feature_name.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Description</label>
+                                                                <textarea class="form-control @error('feature_description.0') is-invalid @enderror" name="feature_description[]"
+                                                                          rows="1" placeholder="Feature description">{{ old('feature_description.0', '') }}</textarea>
+                                                                @error('feature_description.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Project Technologies Card -->
+                                    <div class="card mb-4" id="technologiesSection">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Technologies Used <span class="text-danger">*</span></h6>
+                                            <button type="button" class="btn btn-sm btn-primary" id="addTechnologyBtn">Add Technology</button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="technologiesContainer">
+                                                @foreach($project->technologies as $index => $technology)
+                                                    <div class="technology-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Technology Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('technology_name.'.$index) is-invalid @enderror"
+                                                                       name="technology_name[]" value="{{ old('technology_name.'.$index, $technology->technology_name) }}"
+                                                                       placeholder="Technology name" required>
+                                                                @error('technology_name.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Icon</label>
+                                                                @if($technology->icon)
+                                                                    <div class="mb-2">
+                                                                        <img src="{{ asset('storage/' . $technology->icon) }}" alt="Technology Icon" height="30">
+                                                                    </div>
+                                                                @endif
+                                                                <input type="file" class="form-control @error('icon.'.$index) is-invalid @enderror"
+                                                                       name="icon[]">
+                                                                @error('icon.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            @if($index > 0)
+                                                                <div class="col-12 mt-2 text-end">
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+
+                                                @if(count($project->technologies) == 0)
+                                                    <div class="technology-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Technology Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('technology_name.0') is-invalid @enderror"
+                                                                       name="technology_name[]" value="{{ old('technology_name.0', '') }}"
+                                                                       placeholder="Technology name" required>
+                                                                @error('technology_name.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Icon</label>
+                                                                <input type="file" class="form-control @error('icon.0') is-invalid @enderror"
+                                                                       name="icon[]">
+                                                                @error('icon.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Project Challenges Card -->
+                                    <div class="card mb-4" id="challengesSection">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Challenges & Solutions <span class="text-danger">*</span></h6>
+                                            <button type="button" class="btn btn-sm btn-primary" id="addChallengeBtn">Add Challenge</button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="challengesContainer">
+                                                @foreach($project->challenges as $index => $challenge)
+                                                    <div class="challenge-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('challenge_name.'.$index) is-invalid @enderror"
+                                                                       name="challenge_name[]" value="{{ old('challenge_name.'.$index, $challenge->challenge_name) }}"
+                                                                       placeholder="Challenge name" required>
+                                                                @error('challenge_name.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Problem Description</label>
+                                                                <textarea class="form-control @error('problem_description.'.$index) is-invalid @enderror" name="problem_description[]"
+                                                                          rows="1" placeholder="Describe the problem">{{ old('problem_description.'.$index, $challenge->problem_description) }}</textarea>
+                                                                @error('problem_description.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Solution</label>
+                                                                <textarea class="form-control @error('solution_description.'.$index) is-invalid @enderror" name="solution_description[]"
+                                                                          rows="1" placeholder="Describe the solution">{{ old('solution_description.'.$index, $challenge->solution_description) }}</textarea>
+                                                                @error('solution_description.'.$index)
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            @if($index > 0)
+                                                                <div class="col-12 mt-2 text-end">
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+
+                                                @if(count($project->challenges) == 0)
+                                                    <div class="challenge-item mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control @error('challenge_name.0') is-invalid @enderror"
+                                                                       name="challenge_name[]" value="{{ old('challenge_name.0', '') }}"
+                                                                       placeholder="Challenge name" required>
+                                                                @error('challenge_name.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Problem Description</label>
+                                                                <textarea class="form-control @error('problem_description.0') is-invalid @enderror" name="problem_description[]"
+                                                                          rows="1" placeholder="Describe the problem">{{ old('problem_description.0', '') }}</textarea>
+                                                                @error('problem_description.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Solution</label>
+                                                                <textarea class="form-control @error('solution_description.0') is-invalid @enderror" name="solution_description[]"
+                                                                          rows="1" placeholder="Describe the solution">{{ old('solution_description.0', '') }}</textarea>
+                                                                @error('solution_description.0')
+                                                                <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="mb-4">
+                                        <div class="gap-2 d-grid d-md-flex justify-content-md-end">
+                                            <a href="{{ route('admin.project.index') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                                            <button type="submit" class="px-4 btn btn-primary">Update Project</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -227,32 +541,179 @@
         });
     </script>
     <script>
+        // Store original files for each input
+        const originalFiles = {
+            imageInput: [],
+            videoInput: []
+        };
+
+        // Add feature
+        document.getElementById('addFeatureBtn')?.addEventListener('click', function() {
+            const container = document.getElementById('featuresContainer');
+            const index = container.querySelectorAll('.feature-item').length;
+
+            const html = `
+        <div class="feature-item mb-3 border p-3 rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Feature Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="feature_name[]" placeholder="Feature name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" name="feature_description[]" rows="1" placeholder="Feature description"></textarea>
+                </div>
+                <div class="col-12 mt-2 text-end">
+                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                </div>
+            </div>
+        </div>
+        `;
+
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Add technology
+        document.getElementById('addTechnologyBtn')?.addEventListener('click', function() {
+            const container = document.getElementById('technologiesContainer');
+            const index = container.querySelectorAll('.technology-item').length;
+
+            const html = `
+        <div class="technology-item mb-3 border p-3 rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Technology Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="technology_name[]" placeholder="Technology name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Icon</label>
+                    <input type="file" class="form-control" name="icon[]">
+                </div>
+                <div class="col-12 mt-2 text-end">
+                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                </div>
+            </div>
+        </div>
+        `;
+
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Add challenge
+        document.getElementById('addChallengeBtn')?.addEventListener('click', function() {
+            const container = document.getElementById('challengesContainer');
+            const index = container.querySelectorAll('.challenge-item').length;
+
+            const html = `
+        <div class="challenge-item mb-3 border p-3 rounded">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Challenge Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="challenge_name[]" placeholder="Challenge name" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Problem Description</label>
+                    <textarea class="form-control" name="problem_description[]" rows="1" placeholder="Describe the problem"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Solution</label>
+                    <textarea class="form-control" name="solution_description[]" rows="1" placeholder="Describe the solution"></textarea>
+                </div>
+                <div class="col-12 mt-2 text-end">
+                    <button type="button" class="btn btn-sm btn-danger remove-item">Remove</button>
+                </div>
+            </div>
+        </div>
+        `;
+
+            container.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Remove item functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-item')) {
+                if (confirm('Are you sure you want to remove this item?')) {
+                    e.target.closest('.feature-item, .technology-item, .challenge-item').remove();
+                }
+            }
+        });
+
+        // Form validation
+        document.querySelector('form')?.addEventListener('submit', function(e) {
+            let valid = true;
+
+            // Validate required fields
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            // Validate at least one feature
+            if (document.querySelectorAll('.feature-item').length === 0) {
+                alert('Please add at least one feature');
+                valid = false;
+            }
+
+            // Validate at least one technology
+            if (document.querySelectorAll('.technology-item').length === 0) {
+                alert('Please add at least one technology');
+                valid = false;
+            }
+
+            // Validate at least one challenge
+            if (document.querySelectorAll('.challenge-item').length === 0) {
+                alert('Please add at least one challenge');
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+                // Scroll to the first error
+                document.querySelector('.is-invalid')?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
+
         function handleFileSelect(event, inputId, previewContainerId, isImage = true) {
             const input = document.getElementById(inputId);
             const previewContainer = document.getElementById(previewContainerId);
             const newFileList = new DataTransfer();
-            const existingFiles = new Set();
 
-            // Preserve existing previews
-            Array.from(previewContainer.children).forEach(card => {
-                const fileName = card.querySelector('.text-muted').textContent.split(' ')[0];
-                existingFiles.add(fileName);
-            });
+            // Store original files on first selection
+            if (originalFiles[inputId].length === 0 && input.files.length > 0) {
+                originalFiles[inputId] = Array.from(input.files);
+            }
 
-            // Process new files
-            Array.from(input.files).forEach((file, index) => {
+            // Combine original files with new selections
+            const allFiles = [...originalFiles[inputId], ...Array.from(input.files)];
+            const uniqueFiles = [];
+            const fileNames = new Set();
+
+            // Process all files to ensure no duplicates
+            allFiles.forEach(file => {
                 const fileType = isImage ? 'image/' : 'video/';
                 if (!file.type.startsWith(fileType)) {
                     alert(`"${file.name}" is not a valid ${isImage ? 'image' : 'video'} file.`);
                     return;
                 }
-                if (existingFiles.has(file.name)) {
-                    alert(`"${file.name}" is already added.`);
-                    return;
-                }
-                newFileList.items.add(file);
-                existingFiles.add(file.name);
 
+                if (!fileNames.has(file.name)) {
+                    fileNames.add(file.name);
+                    uniqueFiles.push(file);
+                    newFileList.items.add(file);
+                }
+            });
+
+            // Update preview container
+            previewContainer.innerHTML = '';
+            uniqueFiles.forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const card = document.createElement('div');
@@ -279,8 +740,10 @@
                     removeBtn.innerText = 'X';
                     removeBtn.classList.add('remove-btn');
                     removeBtn.addEventListener('click', function() {
-                        card.remove();
-                        removeFileFromInput(file.name, inputId);
+                        if (confirm('Are you sure you want to remove this file?')) {
+                            card.remove();
+                            removeFileFromInput(file.name, inputId);
+                        }
                     });
 
                     card.appendChild(mediaElement);
@@ -291,11 +754,6 @@
                 reader.readAsDataURL(file);
             });
 
-            if (newFileList.files.length < 1) {
-                alert(`You must upload at least 1 ${isImage ? 'image' : 'video'}.`);
-                return;
-            }
-
             input.files = newFileList.files;
         }
 
@@ -305,16 +763,19 @@
             const newFileList = new DataTransfer();
             fileList.forEach(file => newFileList.items.add(file));
             input.files = newFileList.files;
+
+            // Update original files
+            originalFiles[inputId] = originalFiles[inputId].filter(file => file.name !== fileName);
         }
 
         function deleteImage(imageId) {
-            if (confirm('Are you sure you want to remove this image?')) {
+            if (confirm('Are you sure you want to permanently remove this image?')) {
                 fetch(`{{ url('admin/project/image') }}/${imageId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    }).then(response => response.json())
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
                             location.reload();
@@ -324,13 +785,13 @@
         }
 
         function deleteVideo(videoId) {
-            if (confirm('Are you sure you want to remove this video?')) {
+            if (confirm('Are you sure you want to permanently remove this video?')) {
                 fetch(`{{ url('admin/project/video') }}/${videoId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    }).then(response => response.json())
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }).then(response => response.json())
                     .then(data => {
                         if (data.success) {
                             location.reload();
@@ -339,12 +800,27 @@
             }
         }
 
-        document.getElementById('imageInput').addEventListener('change', function(event) {
+        // Initialize file inputs
+        document.getElementById('imageInput')?.addEventListener('change', function(event) {
             handleFileSelect(event, 'imageInput', 'previewContainer', true);
         });
 
-        document.getElementById('videoInput').addEventListener('change', function(event) {
+        document.getElementById('videoInput')?.addEventListener('change', function(event) {
             handleFileSelect(event, 'videoInput', 'videoPreviewContainer', false);
+        });
+
+        // Load existing files into originalFiles on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('imageInput');
+            const videoInput = document.getElementById('videoInput');
+
+            if (imageInput && imageInput.files.length > 0) {
+                originalFiles.imageInput = Array.from(imageInput.files);
+            }
+
+            if (videoInput && videoInput.files.length > 0) {
+                originalFiles.videoInput = Array.from(videoInput.files);
+            }
         });
     </script>
 @endpush

@@ -67,7 +67,7 @@
                     </div>
 
                     <p class="fs-5 mb-4">
-                        I am a passionate <span class="fw-bold text-success">Full Stack Developer</span> with strong experience in building modern, scalable, and high-performance web applications. I specialize in both front-end and back-end development, delivering complete solutions for businesses and startups.
+                        {{$personal_info->bio ?? 'I am a passionate web developer with over 5 years of experience in creating dynamic and user-friendly websites. I specialize in both frontend and backend development, ensuring a seamless user experience across all platforms.'}}
                     </p>
 
                     <!-- Skills progress bars -->
@@ -111,15 +111,15 @@
                             <ul class="list-unstyled mb-0">
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-user-3-line text-success me-2 fs-5"></i>
-                                    <span><strong>Name:</strong> John Doe</span>
+                                    <span><strong>Name:</strong> {{$personal_info->fname ?? 'AL'}} {{$personal_info->lname ?? 'Mamon'}} </span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-mail-line text-success me-2 fs-5"></i>
-                                    <span><strong>Email:</strong> john.doe@example.com</span>
+                                    <span><strong>Email:</strong> {{$personal_info->email ?? ''}}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-phone-line text-success me-2 fs-5"></i>
-                                    <span><strong>Phone:</strong> +1 234 567 890</span>
+                                    <span><strong>Phone:</strong> {{$personal_info->phone ?? ''}}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-calendar-line text-success me-2 fs-5"></i>
@@ -133,19 +133,19 @@
                             <ul class="list-unstyled mb-0">
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-map-pin-line text-success me-2 fs-5"></i>
-                                    <span><strong>Address:</strong> 123 Main Street</span>
+                                    <span><strong>Address:</strong> {{$personal_info->address ?? ''}}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-flag-line text-success me-2 fs-5"></i>
-                                    <span><strong>Country:</strong> USA</span>
+                                    <span><strong>Country:</strong> {{$personal_info->country ?? ''}}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-briefcase-line text-success me-2 fs-5"></i>
-                                    <span><strong>Occupation:</strong> Full Stack Developer</span>
+                                    <span><strong>Occupation:</strong> {{$personal_info->occupation ?? ''}}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-center">
                                     <i class="ri-building-line text-success me-2 fs-5"></i>
-                                    <span><strong>Company:</strong> ABC Tech Inc.</span>
+                                    <span><strong>Company:</strong> {{$personal_info->company_name ?? ''}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -158,7 +158,7 @@
                             <i class="ri-arrow-right-line ms-2"></i>
                         </a>
                         <a href="#portfolio" class="btn btn-success btn-lg">
-                            <span>View Portfolio</span>
+                            <span>view Resume</span>
                             <i class="ri-image-line ms-2"></i>
                         </a>
                     </div>

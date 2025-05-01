@@ -54,12 +54,18 @@
     </section>
     <!-- end hero section -->
     @include('frontend.layout.about.index')
+      <!-- start Skill Process -->
+      @include('frontend.layout.skill.index')
+      <!-- end Skill Process -->
+
     <!-- start wallet -->
     @include('frontend.layout.service.index')<!-- end wallet -->
 
     <!-- start marketplace -->
    @include('frontend.layout.portfolio.index')
     <!-- end marketplace -->
+    <!-- start education -->
+    @include('frontend.layout.education.index')
     <!-- start candidates -->
     <section class="section bg-light" id="my-team">
         <div class="bg-overlay bg-overlay-pattern"></div>
@@ -258,8 +264,6 @@
     </section>
     <!-- end blog -->
 
-    <!-- start Skill Process -->
-    @include('frontend.layout.skill.index')
-   <!-- end Skill Process -->
+  
 
 @endsection

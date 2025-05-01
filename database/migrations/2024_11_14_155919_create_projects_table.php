@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('live_link')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
+            $table->string('thumbnail_image');
             $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
             $table->softDeletes();
             $table->timestamps();

@@ -68,24 +68,30 @@ class ProjectController extends Controller
     }
 
 
-    public function create()
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('backend.layout.Project.create');
     }
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|array',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg', // 5MB
+            'image' => 'required|array|max:10', // Max 10 images
+            'image.*' => [
+                'required',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:1048576' // 1GB in kilobytes (1024 * 1024)
+            ],
             'description' => 'required',
             'github_link' => 'nullable|url',
             'live_link' => 'nullable|url',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'video.*' => 'nullable|file|mimes:mp4,mov,avi,mkv', // 20MB
-            'category' => 'nullable|string|max:255',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'video' => 'nullable|array|max:3', // Max 3 videos
+            'video.*' => ['nullable', 'file', 'mimes:mp4,mov,avi,mkv', 'max:1048576'], // 1GB in kilobytes],
+            'category' => 'required|string|max:255',
             'repository' => 'nullable|in:private,public',
             'team_size' => 'nullable|integer|min:1',
 
@@ -154,13 +160,17 @@ class ProjectController extends Controller
             }
 
             // Save project technologies
+            // Save project technologies
             if ($request->has('technology_name')) {
                 foreach ($request->technology_name as $index => $techName) {
                     $iconPath = null;
 
-                    if (isset($request->file('icon')[$index])) {
+                    // Check if icon files exist and if current index has an icon
+                    if ($request->hasFile('icon') && isset($request->file('icon')[$index])) {
                         $icon = $request->file('icon')[$index];
-                        $iconPath = Helper::fileUpload($icon, 'projects/technologies', $icon->getClientOriginalName());
+                        if ($icon->isValid()) {
+                            $iconPath = Helper::fileUpload($icon, 'projects/technologies', $icon->getClientOriginalName());
+                        }
                     }
 
                     ProjectTechnology::create([
@@ -194,10 +204,11 @@ class ProjectController extends Controller
     public function edit($id)
     {
 
-        $data = Project::find($id);
+        $project = Project::with(['features', 'technologies', 'challenges'])
+            ->findOrFail($id);
         $projectImages = ProjectImage::where('project_id', $id)->get();
         $projectVideos = ProjectVideo::where('project_id', $id)->get();
-        return view('backend.layout.Project.edit', compact('data', 'projectImages', 'projectVideos'));
+        return view('backend.layout.Project.edit', compact('project', 'projectImages', 'projectVideos'));
     }
 
     public function update(Request $request, $id)
@@ -205,13 +216,25 @@ class ProjectController extends Controller
         // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'category' => 'required|string|max:255',
+            'repository' => 'required|in:private,public',
+            'team_size' => 'nullable|integer|min:1',
             'github_link' => 'nullable|url',
             'live_link' => 'nullable|url',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'description' => 'nullable|string',
-            'image.*' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:20040',
-            'video.*' => 'nullable|mimes:mp4,avi,mov,mkv|max:200480',
+            'description' => 'required|string',
+            'image' => 'nullable|array|max:10',
+            'video' => 'nullable|array|max:3',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1048576',
+            'video.*' => 'nullable|mimes:mp4,avi,mov,mkv|max:1048576',
+            'feature_name.*' => 'required|string|max:255',
+            'feature_description.*' => 'nullable|string',
+            'technology_name.*' => 'required|string|max:255',
+            'icon.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'challenge_name.*' => 'required|string|max:255',
+            'problem_description.*' => 'nullable|string',
+            'solution_description.*' => 'nullable|string',
         ]);
 
         // Find the project by ID
@@ -219,12 +242,15 @@ class ProjectController extends Controller
 
         // Update project details
         $project->update([
-            'name' => $request->input('name'),
-            'github_link' => $request->input('github_link'),
-            'live_link' => $request->input('live_link'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
-            'description' => $request->input('description'),
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'category' => $request->category,
+            'repository' => $request->repository,
+            'team_size' => $request->team_size,
+            'github_link' => $request->github_link,
+            'live_link' => $request->live_link,
+            'description' => $request->description,
         ]);
 
         // Handle image uploads
@@ -249,23 +275,97 @@ class ProjectController extends Controller
             }
         }
 
+        // Sync features - delete existing and create new ones
+        $project->features()->delete();
+        if ($request->feature_name) {
+            foreach ($request->feature_name as $index => $name) {
+                $project->features()->create([
+                    'feature_name' => $name,
+                    'feature_description' => $request->feature_description[$index] ?? null,
+                ]);
+            }
+        }
+
+        // Handle technology updates
+        if ($request->has('technology_name')) {
+            // First delete existing technologies if needed
+            $project->technologies()->delete();
+
+            foreach ($request->technology_name as $index => $techName) {
+                $iconPath = null;
+
+                // Check if new icon was uploaded for this technology
+                if ($request->hasFile('icon') && isset($request->file('icon')[$index])) {
+                    $icon = $request->file('icon')[$index];
+                    if ($icon->isValid()) {
+                        $iconPath = Helper::fileUpload($icon, 'projects/technologies', $icon->getClientOriginalName());
+                    }
+                }
+                // Alternatively, keep existing icon if no new one was uploaded
+                elseif (isset($request->existing_icon[$index])) {
+                    $iconPath = $request->existing_icon[$index];
+                }
+
+                ProjectTechnology::create([
+                    'project_id' => $project->id,
+                    'technology_name' => $techName,
+                    'icon' => $iconPath,
+                ]);
+            }
+        }
+
+
+        // Sync challenges - delete existing and create new ones
+        $project->challenges()->delete();
+        if ($request->challenge_name) {
+            foreach ($request->challenge_name as $index => $name) {
+                $project->challenges()->create([
+                    'challenge_name' => $name,
+                    'problem_description' => $request->problem_description[$index] ?? null,
+                    'solution_description' => $request->solution_description[$index] ?? null,
+                ]);
+            }
+        }
+
         // Redirect back with success message
         return redirect()->route('admin.project.index', $project->id)->with('success', 'Project updated successfully!');
     }
 
     public function destroy($id)
     {
-        $drill = Project::findOrFail($id);
-        if (!$drill) {
-            return response()->json(['t-success' => false, 'message' => 'Data not found.']);
+        $project = Project::findOrFail($id);
+        $project_chalenges = ProjectChallengesAndSolution::findOrFail($id);
+        $project_features = ProjectFeature::findOrFail($id);
+        $project_technologies = ProjectTechnology::findOrFail($id);
+
+        if($project_chalenges) {
+            $project_chalenges->delete();
         }
-        if ($drill->image) {
-            $oldImagePath = public_path($drill->image);
+
+        //delete project features
+        if($project_features) {
+            $project_features->delete();
+        }
+
+        //delete project technologies
+        if($project_technologies->icon) {
+            $oldImagePath = public_path($project_technologies->icon);
             if (file_exists($oldImagePath)) {
                 Helper::fileDelete($oldImagePath);
             }
         }
-        $drill->delete();
+        $project_technologies->delete();
+
+        if (!$project) {
+            return response()->json(['t-success' => false, 'message' => 'Data not found.']);
+        }
+        if ($project->image) {
+            $oldImagePath = public_path($project->image);
+            if (file_exists($oldImagePath)) {
+                Helper::fileDelete($oldImagePath);
+            }
+        }
+        $project->delete();
         return response()->json(['t-success' => true, 'message' => 'Deleted successfully.']);
     }
 
@@ -324,6 +424,11 @@ class ProjectController extends Controller
         $data = Project::where('id', $id)->first();
         $projectImages = ProjectImage::where('project_id', $id)->get();
         $projectVideos = ProjectVideo::where('project_id', $id)->get();
-        return view('backend.layout.Project.view', compact('data', 'projectImages', 'projectVideos'));
+        $projectFeatures = ProjectFeature::where('project_id', $id)->get();
+        $projectTechnologies = ProjectTechnology::where('project_id', $id)->get();
+        $projectChallenges = ProjectChallengesAndSolution::where('project_id', $id)->get();
+        return view('backend.layout.Project.view', compact('data', 'projectImages', 'projectVideos','projectTechnologies','projectChallenges','projectFeatures'));
     }
+
+
 }

@@ -18,7 +18,7 @@
 
 </head>
 
-<body style="background: #0ac7fb" data-bs-spy="scroll" data-bs-target="#navbar-example">
+<body  data-bs-spy="scroll" data-bs-target="#navbar-example">
 
 <!-- Begin page -->
 <div class="layout-wrapper landing">

@@ -1,4 +1,4 @@
-<section class="section bg-gradient text-light" id="skills">
+<section class="section text-light bg-light" id="skills">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
