@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Web\Backend\Project;
 
 use Exception;
+use App\Models\User;
 use App\Helpers\Helper;
 use App\Models\Project;
-use Illuminate\Support\Str;
 use App\Models\ProjectImage;
 use App\Models\ProjectVideo;
 use Illuminate\Http\Request;
@@ -19,6 +19,12 @@ use App\Models\ProjectChallengesAndSolution;
 
 class ProjectController extends Controller
 {
+    public function list()
+    {
+        $users = User::all();
+        return response()->json(['users' => $users]);
+    }
+    
 
     public function index(Request $request)
     {

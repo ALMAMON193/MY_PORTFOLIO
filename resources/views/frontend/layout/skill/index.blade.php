@@ -1,4 +1,4 @@
-<section class="section text-light bg-light" id="skills">
+<section class="section text-light bg-gradient" id="skills">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -9,7 +9,7 @@
             </div>
         </div><!-- end row -->
 
-        <div class="row" >
+        <div class="row">
             <!-- Skill 1: HTML5 -->
             <div class="col-lg-3 col-md-6">
                 <div class="card mb-4 ribbon-box ribbon-fill ribbon-sm skill-card">
@@ -294,7 +294,6 @@
     </div><!-- end container -->
 </section>
 
-<!-- Updated CSS with different background colors -->
 <style>
     /* New gradient background */
     .bg-gradient {
@@ -503,7 +502,6 @@
     }
 </style>
 
-<!-- JavaScript remains the same -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const loadMoreBtn = document.getElementById('load-more-btn');

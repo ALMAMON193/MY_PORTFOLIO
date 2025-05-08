@@ -167,7 +167,6 @@
         <!-- end container -->
     </section>
     <!-- end candidates -->
-
     <!-- start blog -->
     <section class="section" id="blogs">
         <div class="container">
@@ -263,7 +262,4 @@
         <!-- end container -->
     </section>
     <!-- end blog -->
-
-  
-
 @endsection
