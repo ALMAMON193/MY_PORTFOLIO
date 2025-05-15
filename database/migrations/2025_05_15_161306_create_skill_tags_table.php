@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('working_experiences', function (Blueprint $table) {
+        Schema::create('skill_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('period');
-            $table->text('job_description')->nullable();
+            $table->unsignedBigInteger('personal_information_id');
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('personal_information_id')->references('id')->on('personal_information')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('working_experiences');
+        Schema::dropIfExists('skill_tags');
     }
 };

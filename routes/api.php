@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AboutUsController;
 use App\Http\Controllers\Web\Backend\Project\ProjectController;
 
 /*
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/list', [ProjectController::class, 'list']);
+
+// User information about section
+Route::get('/user/about', [AboutUsController::class, 'about']);

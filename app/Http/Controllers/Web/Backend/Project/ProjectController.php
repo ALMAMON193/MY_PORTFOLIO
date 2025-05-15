@@ -24,8 +24,6 @@ class ProjectController extends Controller
         $users = User::all();
         return response()->json(['users' => $users]);
     }
-    
-
     public function index(Request $request)
     {
         try {

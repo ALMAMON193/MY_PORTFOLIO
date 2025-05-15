@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,21 +13,17 @@ return new class extends Migration
     {
         Schema::create('personal_information', function (Blueprint $table) {
             $table->id();
-            $table->string('fname')->nullable();
-            $table->string(column: 'lname')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->string('gender')->nullable();
-            $table->date('date_of_birth')->nullable();
             $table->string('phone')->nullable();
-            $table->string('nationality')->nullable();
+            $table >url('github');
+            $table->url('linkedin')->nullable();
+            $table->url('twitter')->nullable();
+            $table->url('facebook')->nullable();
             $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->string('country')->nullable();
             $table->string('occupation')->nullable();
             $table->string('company_name')->nullable();
             $table->text('bio')->nullable();
-            $table->string('emergency_contact_phone')->nullable();
             $table->timestamps();
         });
     }
